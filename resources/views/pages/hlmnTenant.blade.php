@@ -70,7 +70,7 @@
                                         @foreach($menus as $menu)
                                             <tr>
                                                 <td>
-                                                    <img src="{{ ($menu->foto) }}" alt="Menu Image" width="50" height="50">
+                                                    <img src="{{ asset('storage/' . $menu->foto) }}" alt="Menu Image" width="50" height="50">
                                                 </td>
                                                 <td>{{ $menu->nama }}</td>
                                                 <td>{{ $menu->harga }}</td>
