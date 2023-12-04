@@ -9,32 +9,33 @@
                     <div class="card-header pb-0">
                         <h1></h1>
                         <h6>Add Menu</h6>
-                        <form action="/insertmenu" method="post">
+                        <form action="{{ route('insertmenu') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Insert Food Picture</label>
-                                <input class="form-control" type="file" id="formFile" name="foodpic">
+                                <input class="form-control" type="file" id="formFile" name="foto">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
-                                <input class="form-control" type="text" id="" name="name">
+                                <input class="form-control" type="text" id="" name="nama">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Price</label>
-                                <input class="form-control" type="text" id="" name="price">
+                                <input class="form-control" type="text" id="" name="harga">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Kategori</label>
                                 <input class="form-control" type="text" id="" name="kategori">
                             </div>
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="description"></textarea>
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="deskripsi"></textarea>
                                 <label for="floatingTextarea2">Description</label>
                             </div>
                             <div class="mb-3 my-3">
                                 <button class="btn btn-primary" type="submit">Submit</button>
                             </div>
                         </form>
+                        
                     </div>
                 </div>
             </div>

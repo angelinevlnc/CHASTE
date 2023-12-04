@@ -25,13 +25,13 @@ class MenuController extends Controller
     $user = auth()->user();
 
     if ($user) {
-        $attributes['user_id'] = $user->id;
+        $attributes['user_id'] = 8;
 
-        $attributes['tenant_id'] = $user->tenant_id;
+        $attributes['tenant_id'] = 2;
 
         $attributes['status'] = 1;
 
-        $fotoPath = $attributes['foto']->store('foodpics', 'public');
+        $fotoPath = $attributes['foto']->store('menu', 'public');
         $attributes['foto'] = $fotoPath;
 
         $menu = Menu::create($attributes);
