@@ -1,7 +1,7 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.appTenant', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Food Tenant'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -51,11 +51,13 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Name</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Price</th>
+                                            Foto</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Description</th>
+                                            Nama</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Harga</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Deskripsi</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Status</th>
@@ -63,104 +65,21 @@
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        {{-- <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="/img/tenant1.jpg" class="avatar avatar-lg me-3"
-                                                        alt="tenant1">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Tenant 1</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-m font-weight-bold mb-0">Rp850.000</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-m font-weight-thin mb-0">Syalala</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Available</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
-                                            </a>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Delete user">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="/img/tenant2.jpg" class="avatar avatar-lg me-3"
-                                                        alt="tenant2">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Tenant 2</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-m font-weight-bold mb-0">Rp700.000</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Available</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
-                                            </a>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Delete user">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="/img/tenant3.jpg" class="avatar avatar-lg me-3"
-                                                        alt="tenant3">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Tenant 3</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-m font-weight-bold mb-0">Rp500.000</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-secondary">Unavailable</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
-                                            </a>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Delete user">
-                                                Delete
-                                            </a>
-                                        </td> --}}
-                                    </tr>
-                                </tbody>
+                                    <tbody>
+                                        @foreach($menus as $menu)
+                                            <tr>
+                                                <td>
+                                                    <img src="{{ ($menu->foto) }}" alt="Menu Image" width="50" height="50">
+                                                </td>
+                                                <td>{{ $menu->nama }}</td>
+                                                <td>{{ $menu->harga }}</td>
+                                                <td>{{ $menu->deskripsi }}</td>
+                                                <td>{{ $menu->status }}</td>
+                                                <td class="text-secondary opacity-7"></td>
+                                                <td class="text-secondary opacity-7"></td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                             </table>
                         </div>
                     </div>
