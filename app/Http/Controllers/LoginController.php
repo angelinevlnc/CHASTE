@@ -53,5 +53,4 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
-    //test push dari gaby yang kedua nih
 }
