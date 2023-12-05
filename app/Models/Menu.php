@@ -15,13 +15,8 @@ class Menu extends Model
     public $incrementing = true;
     public $timestamps = true;
 
-    protected $fillable = [
-        'nama',
-        'foto',
-        'harga',
-        'deskripsi',
-        'kategori',
-    ];
+    protected $fillable = ['nama', 'harga', 'kategori', 'deskripsi', 'foto', 'user_id', 'tenant_id', 'status'];
+
 
     public function dimiliki_user(){
         return $this->belongsTo('App\Models\User', 'user_id', 'user_id');

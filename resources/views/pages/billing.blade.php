@@ -52,7 +52,7 @@
                                 <h6 class="mb-0">Invoice Expenses</h6>
                             </div>
                             <div class="col-6 text-end">
-                                <button class="btn btn-outline-primary btn-sm mb-0">Add</button>
+                                <button class="btn btn-outline-primary btn-sm mb-0">All</button>
                             </div>
                         </div>
                     </div>
@@ -65,8 +65,6 @@
                                 </div>
                                 <div class="d-flex align-items-center text-sm">
                                     Rp2.000.000 <br> Pay Salary
-                                    <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
-                                            class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
@@ -76,8 +74,6 @@
                                 </div>
                                 <div class="d-flex align-items-center text-sm">
                                     Rp3.000.000 <br> Pay Electricity
-                                    <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
-                                            class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
                                 </div>
                             </li>
                         </ul>
@@ -103,12 +99,6 @@
                                     <span class="mb-2 text-xs">Date: <span
                                             class="text-dark ms-sm-2 font-weight-bold">18/11/2023</span></span>
                                 </div>
-                                <div class="ms-auto text-end">
-                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i
-                                            class="far fa-trash-alt me-2"></i>Delete</a>
-                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
-                                            class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                                </div>
                             </li>
                             <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                                 <div class="d-flex flex-column">
@@ -120,12 +110,6 @@
                                     <span class="mb-2 text-xs">Date: <span
                                             class="text-dark ms-sm-2 font-weight-bold">11/10/2023</span></span>
                                 </div>
-                                <div class="ms-auto text-end">
-                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i
-                                            class="far fa-trash-alt me-2"></i>Delete</a>
-                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
-                                            class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                                </div>
                             </li>
                             <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                                 <div class="d-flex flex-column">
@@ -136,12 +120,6 @@
                                             class="text-dark ms-sm-2 font-weight-bold">Sewa Kamar Kos</span></span>
                                     <span class="mb-2 text-xs">Date: <span
                                             class="text-dark ms-sm-2 font-weight-bold">01/10/2023</span></span>
-                                </div>
-                                <div class="ms-auto text-end">
-                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i
-                                            class="far fa-trash-alt me-2"></i>Delete</a>
-                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
-                                            class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                                 </div>
                             </li>
                         </ul>
