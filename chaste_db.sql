@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 01, 2023 at 06:37 AM
+-- Generation Time: Dec 08, 2023 at 11:03 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -182,10 +182,25 @@ CREATE TABLE `kamar` (
   `foto` varchar(255) NOT NULL,
   `harga` int(11) NOT NULL,
   `deskripsi` varchar(255) DEFAULT NULL COMMENT 'boleh NULL',
+  `AC` enum('AC','Non-AC') NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kamar`
+--
+
+INSERT INTO `kamar` (`kamar_id`, `user_id`, `penyewa_id`, `nama`, `foto`, `harga`, `deskripsi`, `AC`, `created_at`, `updated_at`, `status`) VALUES
+(1, 1, NULL, 'A-11', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the entrance door.', 'AC', '2023-12-08 09:45:30', '2023-12-08 09:14:45', 1),
+(2, 1, NULL, 'A-12', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the bathroom.', 'AC', '2023-12-08 09:20:22', '2023-12-08 09:14:45', 1),
+(3, 1, NULL, 'A-13', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the stairs to 2nd floor.', 'AC', '2023-12-08 09:21:53', '2023-12-08 09:14:45', 1),
+(4, 1, NULL, 'A-14', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the water dispenser.', 'AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1),
+(5, 1, NULL, 'B-21', 'kamar/kos2.webp', 900000, 'Second floor room without AC. Close to the stairs to 1st floor.', 'Non-AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1),
+(6, 1, NULL, 'B-22', 'kamar/kos2.webp', 900000, 'Second floor room without AC. Close to the bathroom.', 'Non-AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1),
+(7, 1, NULL, 'B-23', 'kamar/kos2.webp', 900000, 'Second floor room without AC. Close to the water dispenser.', 'Non-AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1),
+(8, 1, NULL, 'B-24', 'kamar/kos2.webp', 900000, 'Second floor room without AC. Close to the corner.', 'Non-AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1);
 
 -- --------------------------------------------------------
 
@@ -221,7 +236,8 @@ INSERT INTO `menu` (`menu_id`, `user_id`, `tenant_id`, `nama`, `foto`, `harga`, 
 (7, 10, 2, 'Bakso Polos', 'menu/polos.png', 15000, NULL, 'makanan', '2023-12-01 05:12:17', '2023-12-01 05:12:17', 1),
 (8, 11, 3, 'Nasi Ayam Geprek', 'menu/geprek.webp', 10000, NULL, 'makanan', '2023-12-01 05:13:14', '2023-12-01 05:13:14', 1),
 (9, 11, 3, 'Nasi Ayam Krispi', 'menu/krispi.png', 10000, NULL, 'makanan', '2023-12-01 05:13:14', '2023-12-01 05:13:14', 1),
-(10, 11, 3, 'Nasi Pecel Ayam', 'menu/pecel.jpg', 12000, NULL, 'makanan', '2023-12-01 05:13:50', '2023-12-01 05:13:50', 1);
+(10, 11, 3, 'Nasi Pecel Ayam', 'menu/pecel.jpg', 12000, NULL, 'makanan', '2023-12-01 05:13:50', '2023-12-01 05:13:50', 1),
+(11, 8, 2, 'Mie Goreng', 'menu/1QSwe9hs6oF1AJpiVDZqyZdrx0J0HzFf64642sCT.jpg', 10000, 'Mie Goreng ENAK.', 'makanan', '2023-12-04 19:34:05', '2023-12-04 19:34:05', 1);
 
 -- --------------------------------------------------------
 
@@ -311,6 +327,32 @@ INSERT INTO `tenant` (`tenant_id`, `user_id`, `penyewa_id`, `nama`, `foto`, `har
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `testimony`
+--
+
+DROP TABLE IF EXISTS `testimony`;
+CREATE TABLE `testimony` (
+  `testimony_id` int(11) NOT NULL,
+  `customer_id` int(11) DEFAULT NULL COMMENT 'Guest isi NULL',
+  `nama` varchar(255) NOT NULL DEFAULT 'Guest' COMMENT 'Default = Guest',
+  `isi` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `testimony`
+--
+
+INSERT INTO `testimony` (`testimony_id`, `customer_id`, `nama`, `isi`, `created_at`, `updated_at`, `status`) VALUES
+(1, 12, 'Fransisca', 'We found amazing food service with a superior staff! The cuisine was gorgeous! We recommend turkey dinners with desert  and hot chocolate!', '2023-12-08 08:40:58', '2023-12-08 08:40:58', 1),
+(2, 13, 'Arensa', 'From the moment I arrived, I felt like I was being treated like royalty. The front desk staff was incredibly friendly and helpful, and they went out of their way to make sure I had a smooth check-in process.', '2023-12-08 08:44:59', '2023-12-08 08:44:59', 1),
+(5, NULL, 'Guest', 'I met the owner who was very nice and helpful. The food was amazing and it’s well worth the money.', '2023-12-08 08:46:14', '2023-12-08 08:46:14', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -339,7 +381,9 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `nama`, `ktp`, `foto`, `r
 (8, 'kambing', '$2y$12$ULvL4yGraLsfmmP4OUQzd.9G8x2pFeCvdhtPh1rdhxF64LG4Enbre', NULL, NULL, NULL, '2', NULL, 'kambing@gmail.com', '2023-11-20 19:29:12', '2023-11-20 19:29:12', 1),
 (9, 'tenant1', '$2y$12$qb.sUYtoMyCvoMdhzFIM5e4kT/yFXjAkwIXZCK5RMCmXkNbh25jw6', NULL, NULL, NULL, '2', NULL, 'tenant1@gmail.com', '2023-11-30 21:20:15', '2023-11-30 21:20:15', 1),
 (10, 'tenant2', '$2y$12$rdlaBl2cS4DcdQ4cal3NguXm/mCs2VB20EgmsyDVXIdPizIwMiBJS', NULL, NULL, NULL, '2', NULL, 'tenant2@gmail.com', '2023-11-30 21:20:52', '2023-11-30 21:20:52', 1),
-(11, 'tenant3', '$2y$12$3RTDgM84.CbGa4qGSUFvs.NrMyfx3RusqoNqaAsshUQhMHW3Kf6pu', NULL, NULL, NULL, '2', NULL, 'tenant3@gmail.com', '2023-11-30 21:21:14', '2023-11-30 21:21:14', 1);
+(11, 'tenant3', '$2y$12$3RTDgM84.CbGa4qGSUFvs.NrMyfx3RusqoNqaAsshUQhMHW3Kf6pu', NULL, NULL, NULL, '2', NULL, 'tenant3@gmail.com', '2023-11-30 21:21:14', '2023-11-30 21:21:14', 1),
+(12, 'penyewa1', 'penyewa1', 'Fransisca', NULL, NULL, '3', NULL, 'penyewa1@gmail.com', '2023-12-08 08:35:12', '2023-12-08 08:35:12', 1),
+(13, 'penyewa2', 'penyewa2', 'Arensa', NULL, NULL, '3', NULL, 'penyewa2@gmail.com', '2023-12-08 08:35:42', '2023-12-08 08:35:42', 1);
 
 -- --------------------------------------------------------
 
@@ -484,6 +528,13 @@ ALTER TABLE `tenant`
   ADD KEY `user_id_2` (`user_id`);
 
 --
+-- Indexes for table `testimony`
+--
+ALTER TABLE `testimony`
+  ADD PRIMARY KEY (`testimony_id`),
+  ADD KEY `h_menu_ibfk_3` (`customer_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -558,13 +609,13 @@ ALTER TABLE `h_tenant`
 -- AUTO_INCREMENT for table `kamar`
 --
 ALTER TABLE `kamar`
-  MODIFY `kamar_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kamar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -585,10 +636,16 @@ ALTER TABLE `tenant`
   MODIFY `tenant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `testimony`
+--
+ALTER TABLE `testimony`
+  MODIFY `testimony_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -674,6 +731,12 @@ ALTER TABLE `menu`
 ALTER TABLE `tenant`
   ADD CONSTRAINT `tenant_ibfk_1` FOREIGN KEY (`penyewa_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `tenant_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `testimony`
+--
+ALTER TABLE `testimony`
+  ADD CONSTRAINT `testimony_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `user` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -66,6 +66,9 @@ class User extends Authenticatable
     public function memiliki_kamar_penyewa(){
         return $this->hasOne('App\Models\Kamar', 'penyewa_id', 'user_id');
     }
+    public function memiliki_testimony(){
+        return $this->hasOne('App\Models\Testimony', 'customer_id', 'user_id');
+    }
 
     public function memiliki_h_tenant(){
         return $this->hasMany('App\Models\H_Tenant', 'user_id', 'user_id');

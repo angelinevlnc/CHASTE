@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KosController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -30,21 +31,15 @@ use App\Http\Controllers\MenuController;
 Route::get('/', [FoodController::class, 'getLanding']);
 
 
-Route::get('/kos', function () {
-    return view('kos');
-});
-
-Route::get('/kos-detail', function () {
-    return view('kos-detail');
-});
-
-
+Route::get('/kos/AC', [KosController::class, 'getKamarAC']);
+Route::get('/kos/Non-AC', [KosController::class, 'getKamarNonAC']);
+Route::get('/kos-detail/{id}', [KosController::class, 'getKamarDetail']);
 Route::get('/kos-invoice', function () {
     return view('kos-invoice');
 });
 
-Route::get('/food', [FoodController::class, 'getFood']);
 
+Route::get('/food', [FoodController::class, 'getFood']);
 Route::get('/food-payment', function () {
     return view('food-payment');
 });
