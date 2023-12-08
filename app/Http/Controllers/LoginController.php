@@ -32,9 +32,9 @@ class LoginController extends Controller
             
             return redirect()->intended('dashboard');
         }
-        elseif (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role'=> 2])) {
+        elseif (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 2])) {
+            $user = Auth::user();
             $request->session()->regenerate();
-            
             return redirect()->intended('hlmnTenant');
         }
 
@@ -52,4 +52,5 @@ class LoginController extends Controller
 
         return redirect('/login');
     }
+
 }

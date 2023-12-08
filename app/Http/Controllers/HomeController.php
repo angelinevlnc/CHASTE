@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,6 +28,8 @@ class HomeController extends Controller
     }
     public function showtenant()
     {
-        return view('pages.hlmnTenant');
+        $menus = Menu::all();
+        return view('pages.hlmnTenant', compact('menus'));
+        // return view('pages.hlmnTenant');
     }
 }

@@ -1,5 +1,5 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
@@ -22,21 +22,6 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `chaste_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `chaste_db`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `d_bulan`
---
-
-DROP TABLE IF EXISTS `d_bulan`;
-CREATE TABLE `d_bulan` (
-  `d_bulan_id` int(11) NOT NULL,
-  `h_bulan_id` int(11) NOT NULL,
-  `keterangan` int(11) NOT NULL COMMENT 'biaya karyawan, listrik, air, dst',
-  `harga` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -415,13 +400,6 @@ CREATE TABLE `users` (
 --
 
 --
--- Indexes for table `d_bulan`
---
-ALTER TABLE `d_bulan`
-  ADD PRIMARY KEY (`d_bulan_id`),
-  ADD KEY `h_bulan_id` (`h_bulan_id`);
-
---
 -- Indexes for table `d_kamar`
 --
 ALTER TABLE `d_kamar`
@@ -539,13 +517,6 @@ ALTER TABLE `testimony`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
