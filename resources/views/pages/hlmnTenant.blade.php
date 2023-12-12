@@ -71,7 +71,6 @@
                                             Deskripsi</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                         <th class="text-secondary opacity-7">Edit</th>
-                                        <th class="text-secondary opacity-7">Delete</th>
                                     </tr>
                                 </thead>
                                     <tbody>
@@ -104,9 +103,6 @@
                                                         @method('PUT')
                                                         <button type="submit" class="btn btn-warning">Edit</button>
                                                     </form>
-                                                </td>
-                                                <td class="text-secondary opacity-7">
-                                                    
                                                 </td>
                                             </tr>
                                         @endforeach

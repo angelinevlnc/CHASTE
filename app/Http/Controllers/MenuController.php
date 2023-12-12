@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -41,8 +42,9 @@ class MenuController extends Controller
     public function showEditMenu($id)
     {
         $menu = Menu::find($id);
+        // dd($menu);
 
-        return view('pages.editMenu', compact('menu'));
+        return view("pages.editMenu", compact('menu'));
     }
 
     public function updateMenu(Request $request, $id)
