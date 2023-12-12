@@ -11,14 +11,15 @@ class FoodController extends Controller
 {
     //
     public function getLanding(){
-        $listTenant = Tenant::all();
+        $listTenant = Tenant::where('status', 1)->get();
+        $listTestimony = Testimony::where('status', 1)->orderby('created_at', 'desc')->get();
 
-        return view('landing', ['listTenant' => $listTenant]);
+        return view('landing', ['listTenant' => $listTenant, 'listTestimony' => $listTestimony]);
     }
 
     public function getFood(){
-        $listTenant = Tenant::all();
-        $listMenu = Menu::all();
+        $listTenant = Tenant::where('status', 1)->get();
+        $listMenu = Menu::where('status', 1)->get();
 
         return view('food', ['listTenant' => $listTenant, 'listMenu' => $listMenu]);
     }
