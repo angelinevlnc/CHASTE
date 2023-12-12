@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 08, 2023 at 11:03 AM
+-- Generation Time: Dec 12, 2023 at 02:25 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -22,6 +22,21 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `chaste_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `chaste_db`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `d_bulan`
+--
+
+DROP TABLE IF EXISTS `d_bulan`;
+CREATE TABLE `d_bulan` (
+  `d_bulan_id` int(11) NOT NULL,
+  `h_bulan_id` int(11) NOT NULL,
+  `keterangan` int(11) NOT NULL COMMENT 'biaya karyawan, listrik, air, dst',
+  `harga` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -178,7 +193,7 @@ CREATE TABLE `kamar` (
 --
 
 INSERT INTO `kamar` (`kamar_id`, `user_id`, `penyewa_id`, `nama`, `foto`, `harga`, `deskripsi`, `AC`, `created_at`, `updated_at`, `status`) VALUES
-(1, 1, NULL, 'A-11', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the entrance door.', 'AC', '2023-12-08 09:45:30', '2023-12-08 09:14:45', 1),
+(1, 1, NULL, 'A-11', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the entrance door.', 'AC', '2023-12-08 10:16:52', '2023-12-08 09:14:45', 1),
 (2, 1, NULL, 'A-12', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the bathroom.', 'AC', '2023-12-08 09:20:22', '2023-12-08 09:14:45', 1),
 (3, 1, NULL, 'A-13', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the stairs to 2nd floor.', 'AC', '2023-12-08 09:21:53', '2023-12-08 09:14:45', 1),
 (4, 1, NULL, 'A-14', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the water dispenser.', 'AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1),
@@ -400,6 +415,13 @@ CREATE TABLE `users` (
 --
 
 --
+-- Indexes for table `d_bulan`
+--
+ALTER TABLE `d_bulan`
+  ADD PRIMARY KEY (`d_bulan_id`),
+  ADD KEY `h_bulan_id` (`h_bulan_id`);
+
+--
 -- Indexes for table `d_kamar`
 --
 ALTER TABLE `d_kamar`
@@ -517,6 +539,13 @@ ALTER TABLE `testimony`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
