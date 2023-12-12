@@ -243,7 +243,7 @@
         <!-- Grid -->
         <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
           <!-- Card -->
-          <a class="group rounded-xl overflow-hidden " href="/kos">
+          <a class="group rounded-xl overflow-hidden " href="/kos/AC">
             <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
               <img class="w-full h-full absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/kos1.png" alt="Image Description">
               <span class="absolute top-0 end-0 rounded-se-xl rounded-es-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 ">
@@ -267,7 +267,7 @@
           <!-- End Card -->
 
           <!-- Card -->
-          <a class="group rounded-xl overflow-hidden" href="/kos">
+          <a class="group rounded-xl overflow-hidden" href="/kos/Non-AC">
             <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
               <img class="w-full h-full absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/kos2.webp" alt="Image Description">
             </div>
@@ -316,7 +316,12 @@
 
         <!-- Start FoodController -->
         <div class="space-y-6 lg:space-y-10"> 
-          @foreach ($listTenant as $tenant)
+          @foreach ($listTenant as $index=>$tenant)
+            @php
+                if($index==3){
+                  break;
+                }
+            @endphp
             <!-- Icon Block -->
             <div class="flex">
             <!-- Icon -->
@@ -354,65 +359,43 @@
         </div>
         <!-- Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Card -->
-        <div class="flex flex-col bg-white border border-gray-200 shadow-sm rounded-xl">
-            <div class="flex-auto p-4 md:p-6">
 
-            <p class="mt-3 sm:mt-6 text-base text-gray-800 md:text-xl"><em>
-                " I'm absolutely floored by the level of care and attention to detail the team at HS have put into this theme and for one can guarantee that I will be a return customer. "
-            </em></p>
-            </div>
+        <!-- Start listTestimony -->
+        @foreach ($listTestimony as $index=>$testimony)
+          @php
+            if($index==3){
+              break;
+            }
 
-            <div class="p-4 rounded-b-xl md:px-6">
-            <h3 class="text-sm font-semibold text-gray-800 sm:text-base">
-                Nicole Grazioso
-            </h3>
-            <p class="text-sm text-gray-500">
-                Director Payments & Risk | HubSpot
-            </p>
-            </div>
-        </div>
-        <!-- End Card -->
+            if($testimony->customer_id == NULL){
+              $deskripsi = "Beli Makan";
+            }
+            else{
+              $deskripsi = "Penyewa Kamar";
+            }
+          @endphp
+          <!-- Card -->
+          <div class="flex flex-col bg-white border border-gray-200 shadow-sm rounded-xl">
+              <div class="flex-auto p-4 md:p-6">
+  
+              <p class="mt-3 sm:mt-6 text-base text-gray-800 md:text-xl"><em>
+                  "{{$testimony->isi}}"
+              </em></p>
+              </div>
+  
+              <div class="p-4 rounded-b-xl md:px-6">
+              <h3 class="text-sm font-semibold text-gray-800 sm:text-base">
+                {{$testimony->nama}}
+              </h3>
+              <p class="text-sm text-gray-500">
+                  {{$deskripsi}}
+              </p>
+              </div>
+          </div>
+          <!-- End Card -->
+        @endforeach
+        <!-- End listTestimony -->
 
-        <!-- Card -->
-        <div class="flex flex-col bg-white border border-gray-200 shadow-sm rounded-xl">
-            <div class="flex-auto p-4 md:p-6">
-
-            <p class="mt-3 sm:mt-6 text-base text-gray-800 md:text-xl"><em>
-                " With Preline, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience. "
-            </em></p>
-            </div>
-
-            <div class="p-4 rounded-b-xl md:px-6">
-            <h3 class="text-sm font-semibold text-gray-800 sm:text-base">
-                Josh Tyson
-            </h3>
-            <p class="text-sm text-gray-500">
-                Product Manager | Capsule
-            </p>
-            </div>
-        </div>
-        <!-- End Card -->
-
-        <!-- Card -->
-        <div class="flex flex-col bg-white border border-gray-200 shadow-sm rounded-xl">
-            <div class="flex-auto p-4 md:p-6">
-
-            <p class="mt-3 sm:mt-6 text-base text-gray-800 md:text-xl"><em>
-                " In September, I will be using this theme for 2 years. I went through multiple updates and changes and I'm very glad to see the consistency and effort made by the team. "
-            </em></p>
-            </div>
-
-            <div class="p-4 rounded-b-xl md:px-6">
-            <h3 class="text-sm font-semibold text-gray-800 sm:text-base">
-                Luisa
-            </h3>
-            <p class="text-sm text-gray-500">
-                Senior Director of Operations | Fitbit
-            </p>
-            </div>
-        </div>
-        <!-- End Card -->
         </div>
         <!-- End Grid -->
     </div>

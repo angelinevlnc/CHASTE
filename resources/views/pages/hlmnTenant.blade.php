@@ -7,7 +7,6 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h1></h1>
                         <h6>Add Menu</h6>
                         <form action="{{ route('insertmenu') }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -24,8 +23,19 @@
                                 <input class="form-control" type="text" id="" name="harga">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Kategori</label>
-                                <input class="form-control" type="text" id="" name="kategori">
+                                <label class="form-label">Category</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="kategori" id="makanan" value="makanan" checked>
+                                    <label class="form-check-label" for="makanan">
+                                        Makanan
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="kategori" id="minuman" value="minuman">
+                                    <label class="form-check-label" for="minuman">
+                                        Minuman
+                                    </label>
+                                </div>
                             </div>
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="deskripsi"></textarea>
@@ -59,11 +69,9 @@
                                             Harga</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Deskripsi</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Status</th>
-                                        <th class="text-secondary opacity-7"></th>
-                                        <th class="text-secondary opacity-7"></th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                        <th class="text-secondary opacity-7">Edit</th>
+                                        <th class="text-secondary opacity-7">Delete</th>
                                     </tr>
                                 </thead>
                                     <tbody>
@@ -75,9 +83,25 @@
                                                 <td>{{ $menu->nama }}</td>
                                                 <td>{{ $menu->harga }}</td>
                                                 <td>{{ $menu->deskripsi }}</td>
-                                                <td>{{ $menu->status }}</td>
-                                                <td class="text-secondary opacity-7"></td>
-                                                <td class="text-secondary opacity-7"></td>
+                                                <td>@if ($menu->status == 1)
+                                                    Aktif
+                                                @else
+                                                    Nonaktif
+                                                @endif</td>
+                                                <td class="text-secondary opacity-7">
+                                                    <form action="{{ route('edit.menu', ['id' => $menu->menu_id]) }}" method="get">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-warning">Edit</button>
+                                                    </form>
+                                                </td>
+                                                <td class="text-secondary opacity-7">
+                                                    <form action="{{ route('delete.menu', ['id' => $menu->menu_id]) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
