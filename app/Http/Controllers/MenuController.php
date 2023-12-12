@@ -77,14 +77,16 @@ class MenuController extends Controller
         }
     }
 
-    public function deleteMenu($id)
+    public function updateStatusMenu($id, Request $request)
     {
+        $status = $request->input('status');
+
         $menu = Menu::find($id);
 
         if ($menu) {
-            $menu->delete();
+            $menu->update(['status' => $status]);
 
-            return redirect()->route('showtenant')->with('success', 'Menu deleted successfully');
+            return redirect()->route('showtenant')->with('success', 'Menu status updated successfully');
         } else {
             return redirect()->route('showtenant')->with('error', 'Menu not found');
         }

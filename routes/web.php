@@ -59,9 +59,8 @@ Route::get('/admin', function () {return redirect('/dashboard');})->middleware('
 	Route::get('/hlmnTenant', [HomeController::class, 'showtenant'])->name('showtenant')->middleware('auth');
 	Route::post('/insertmenu', [MenuController::class, 'insertmenu'])->name('insertmenu');
 	Route::get('/edit-menu/{id}', [MenuController::class, 'showEditMenu'])->name('edit.menu');
-	Route::put('/update-menu/{id}', [MenuController::class, 'updateMenu'])->name('update.menu');
-	Route::delete('/delete-menu/{id}', [MenuController::class, 'deleteMenu'])->name('delete.menu');
-Route::group(['middleware' => 'auth'], function () {
+	Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMenu'])->name('updateStatus.menu');
+Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMenu'])->name('updateStatus.menu');Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');

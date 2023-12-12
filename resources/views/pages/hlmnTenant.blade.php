@@ -81,13 +81,23 @@
                                                     <img src="{{ asset('storage/' . $menu->foto) }}" alt="Menu Image" width="50" height="50">
                                                 </td>
                                                 <td>{{ $menu->nama }}</td>
-                                                <td>{{ $menu->harga }}</td>
+                                                <td>Rp {{ number_format($menu->harga , 0, ',', '.');}}</td>
                                                 <td>{{ $menu->deskripsi }}</td>
-                                                <td>@if ($menu->status == 1)
-                                                    Aktif
-                                                @else
-                                                    Nonaktif
-                                                @endif</td>
+                                                <td>
+                                                    @if ($menu->status == 1)
+                                                        <form action="{{ route('updateStatus.menu', ['id' => $menu->menu_id]) }}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="status" value="0"> 
+                                                            <button class="btn btn-danger" type="submit">Nonaktif</button>
+                                                        </form>
+                                                    @else
+                                                        <form action="{{ route('updateStatus.menu', ['id' => $menu->menu_id]) }}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="status" value="1">
+                                                            <button class="btn btn-primary" type="submit">Aktif</button>
+                                                        </form>
+                                                    @endif
+                                                </td>
                                                 <td class="text-secondary opacity-7">
                                                     <form action="{{ route('edit.menu', ['id' => $menu->menu_id]) }}" method="get">
                                                         @csrf
@@ -96,11 +106,7 @@
                                                     </form>
                                                 </td>
                                                 <td class="text-secondary opacity-7">
-                                                    <form action="{{ route('delete.menu', ['id' => $menu->menu_id]) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger" type="submit">Delete</button>
-                                                    </form>
+                                                    
                                                 </td>
                                             </tr>
                                         @endforeach
