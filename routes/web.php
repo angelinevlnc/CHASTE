@@ -31,6 +31,7 @@ Route::get('/', function () {
 });
 
 
+
 Route::get('/kos', function () {
     return view('kos');
 });
@@ -57,6 +58,7 @@ Route::get('/food', function () {
 });
 
 Route::get('/user', [PageController::class, 'dashboard']);
+Route::get('/cart', [PageController::class, 'cart']);
 
 
 Route::get('/login', [LoginController::class, 'show'])->name('login');
