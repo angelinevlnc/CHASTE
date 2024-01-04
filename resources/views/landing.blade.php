@@ -306,16 +306,21 @@
                 Residents and visitors alike can effortlessly order their favorite meals and drinks through our website, connecting them to a selection of Food and Beverage options for a hassle-free dining experience.
             </p>
             <p class="mt-5">
-            <a class="inline-flex items-center gap-x-1 font-medium text-blue-600" href="/food">
-                Make orders
-                <svg class="flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
+
+            <!-- Buttons -->
+            <div class="mt-7 grid gap-3 w-full sm:inline-flex">
+                <a class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="/food">
+                Make Orders
+                <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+            </div>
+            <!-- End Buttons -->
             </p>
         </div>
         <!-- End Col -->
 
         <!-- Start FoodController -->
-        <div class="space-y-6 lg:space-y-10"> 
+        <div class="space-y-6 lg:space-y-10">
           @foreach ($listTenant as $index=>$tenant)
             @php
                 if($index==3){
@@ -339,7 +344,7 @@
             </div>
             <!-- End Icon Block -->
           @endforeach
-        </div> 
+        </div>
         <!-- End Col -->
         <!-- End FoodController -->
         </div>
@@ -377,12 +382,12 @@
           <!-- Card -->
           <div class="flex flex-col bg-white border border-gray-200 shadow-sm rounded-xl">
               <div class="flex-auto p-4 md:p-6">
-  
+
               <p class="mt-3 sm:mt-6 text-base text-gray-800 md:text-xl"><em>
                   "{{$testimony->isi}}"
               </em></p>
               </div>
-  
+
               <div class="p-4 rounded-b-xl md:px-6">
               <h3 class="text-sm font-semibold text-gray-800 sm:text-base">
                 {{$testimony->nama}}
