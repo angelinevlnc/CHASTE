@@ -45,9 +45,6 @@ Route::get('/food-payment', function () {
     return view('food-payment');
 });
 
-Route::get('/food', function () {
-    return view('food');
-});
 
 Route::get('/user', [PageController::class, 'dashboard']);
 Route::get('/cart', [PageController::class, 'cart']);
