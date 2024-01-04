@@ -7,9 +7,7 @@
   @vite('resources/js/app.js')
 </head>
 <body>
-  {{-- <h1 class="text-3xl text-emerald-400 font-bold underline">
-    Hello world!
-  </h1> --}}
+
   @include('template.navbar')
 
   @yield('content')
