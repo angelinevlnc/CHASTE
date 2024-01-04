@@ -28,6 +28,7 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\MenuController;
 
+
 Route::get('/', [FoodController::class, 'getLanding']);
 
 
@@ -49,6 +50,7 @@ Route::get('/food', function () {
 });
 
 Route::get('/user', [PageController::class, 'dashboard']);
+Route::get('/cart', [PageController::class, 'cart']);
 
 
 Route::get('/login', [LoginController::class, 'show'])->name('login');

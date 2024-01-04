@@ -58,4 +58,9 @@ class PageController extends Controller
     {
         return view("userDashboard");
     }
+
+    public function cart()
+    {
+        return view("cart");
+    }
 }
