@@ -1,40 +1,51 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.appTenant', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Food Tenant'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h1></h1>
                         <h6>Add Menu</h6>
-                        <form action="/insertmenu" method="post">
+                        <form action="{{ route('insertmenu') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Insert Food Picture</label>
-                                <input class="form-control" type="file" id="formFile" name="foodpic">
+                                <input class="form-control" type="file" id="formFile" name="foto">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
-                                <input class="form-control" type="text" id="" name="name">
+                                <input class="form-control" type="text" id="" name="nama">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Price</label>
-                                <input class="form-control" type="text" id="" name="price">
+                                <input class="form-control" type="text" id="" name="harga">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Kategori</label>
-                                <input class="form-control" type="text" id="" name="kategori">
+                                <label class="form-label">Category</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="kategori" id="makanan" value="makanan" checked>
+                                    <label class="form-check-label" for="makanan">
+                                        Makanan
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="kategori" id="minuman" value="minuman">
+                                    <label class="form-check-label" for="minuman">
+                                        Minuman
+                                    </label>
+                                </div>
                             </div>
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="description"></textarea>
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="deskripsi"></textarea>
                                 <label for="floatingTextarea2">Description</label>
                             </div>
                             <div class="mb-3 my-3">
                                 <button class="btn btn-primary" type="submit">Submit</button>
                             </div>
                         </form>
+                        
                     </div>
                 </div>
             </div>
@@ -51,116 +62,49 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Name</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Price</th>
+                                            Foto</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Description</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Status</th>
-                                        <th class="text-secondary opacity-7"></th>
-                                        <th class="text-secondary opacity-7"></th>
+                                            Nama</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Harga</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Deskripsi</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                        <th class="text-secondary opacity-7">Edit</th>
+                                        <th class="text-secondary opacity-7">Delete</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        {{-- <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="/img/tenant1.jpg" class="avatar avatar-lg me-3"
-                                                        alt="tenant1">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Tenant 1</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-m font-weight-bold mb-0">Rp850.000</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-m font-weight-thin mb-0">Syalala</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Available</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
-                                            </a>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Delete user">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="/img/tenant2.jpg" class="avatar avatar-lg me-3"
-                                                        alt="tenant2">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Tenant 2</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-m font-weight-bold mb-0">Rp700.000</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Available</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
-                                            </a>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Delete user">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="/img/tenant3.jpg" class="avatar avatar-lg me-3"
-                                                        alt="tenant3">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Tenant 3</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-m font-weight-bold mb-0">Rp500.000</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-secondary">Unavailable</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
-                                            </a>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Delete user">
-                                                Delete
-                                            </a>
-                                        </td> --}}
-                                    </tr>
-                                </tbody>
+                                    <tbody>
+                                        @foreach($menus as $menu)
+                                            <tr>
+                                                <td>
+                                                    <img src="{{ asset('storage/' . $menu->foto) }}" alt="Menu Image" width="50" height="50">
+                                                </td>
+                                                <td>{{ $menu->nama }}</td>
+                                                <td>{{ $menu->harga }}</td>
+                                                <td>{{ $menu->deskripsi }}</td>
+                                                <td>@if ($menu->status == 1)
+                                                    Aktif
+                                                @else
+                                                    Nonaktif
+                                                @endif</td>
+                                                <td class="text-secondary opacity-7">
+                                                    <form action="{{ route('edit.menu', ['id' => $menu->menu_id]) }}" method="get">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-warning">Edit</button>
+                                                    </form>
+                                                </td>
+                                                <td class="text-secondary opacity-7">
+                                                    <form action="{{ route('delete.menu', ['id' => $menu->menu_id]) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                             </table>
                         </div>
                     </div>
