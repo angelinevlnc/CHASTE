@@ -142,16 +142,15 @@
 
         <form method="POST" action="{{ route('register.perform') }}">
             @csrf
-
             <div class="mb-4">
-                <label for="" class="block text-sm font-medium"><span class="sr-only">Name</span></label>
-                <input type="name" name="name" id="" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="Name">
-                @error('name') <p style="color: red" class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                <label for="" class="block text-sm font-medium"><span class="sr-only">Nama</span></label>
+                <input type="text" name="nama" id="" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="Nama">
+                @error('nama') <p style="color: red" class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
             </div>
 
             <div class="mb-4">
                 <label for="" class="block text-sm font-medium"><span class="sr-only">Username</span></label>
-                <input type="username" name="username" id="" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="Username">
+                <input type="text" name="username" id="" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="Username">
                 @error('username') <p style="color: red" class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
             </div>
 
@@ -163,14 +162,14 @@
 
             <div class="mb-4">
                 <label for="hs-hero-email-2" class="block text-sm font-medium"><span class="sr-only">NO KTP / NIK</span></label>
-                <input type="nik" name="nik" id="hs-hero-nik-2" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="NIK">
-                @error('nik') <p style="color: red" class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                <input type="tezt" name="ktp" id="hs-hero-nik-2" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="KTP">
+                @error('ktp') <p style="color: red" class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
             </div>
 
             <div class="mb-4">
                 <label for="hs-hero-email-2" class="block text-sm font-medium"><span class="sr-only">Phone</span></label>
-                <input type="phone" name="phone" id="hs-hero-phone-2" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="Phone">
-                @error('phone') <p style="color: red" class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                <input type="text" name="no_telp" id="hs-hero-phone-2" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="Phone">
+                @error('no_telp') <p style="color: red" class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
             </div>
 
             <div class="mb-4">
