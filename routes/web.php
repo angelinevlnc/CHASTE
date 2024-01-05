@@ -1,4 +1,4 @@
-DD<?php
+<?php
 
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +28,7 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\MenuController;
 
+
 Route::get('/', [FoodController::class, 'getLanding']);
 
 
@@ -45,6 +46,15 @@ Route::get('/food-payment', function () {
 });
 
 
+Route::get('/user', [PageController::class, 'dashboard']);
+Route::get('/user/history/kamar', [PageController::class, 'user_history'])->name('search-history');
+Route::get('/user/history/kamar/{id}', [PageController::class, 'user_history_detail']);
+Route::get('/user/history/food', [PageController::class, 'user_history_food'])->name('search-history-food');
+Route::get('/user/history/food/{id}', [PageController::class, 'user_history_detail_food']);
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/cart', [PageController::class, 'cart']);
+
+
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
@@ -58,6 +68,9 @@ Route::get('/admin', function () {return redirect('/dashboard');})->middleware('
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 	Route::get('/hlmnTenant', [HomeController::class, 'showtenant'])->name('showtenant')->middleware('auth');
 	Route::post('/insertmenu', [MenuController::class, 'insertmenu'])->name('insertmenu');
+	Route::get('/edit-menu/{id}', [MenuController::class, 'showEditMenu'])->name('edit.menu');
+	Route::put('/update-menu/{id}', [MenuController::class, 'updateMenu'])->name('update.menu');
+	Route::delete('/delete-menu/{id}', [MenuController::class, 'deleteMenu'])->name('delete.menu');
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
