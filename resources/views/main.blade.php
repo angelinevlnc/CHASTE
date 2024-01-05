@@ -6,10 +6,13 @@
   @vite('resources/css/app.css')
   @vite('resources/js/app.js')
 </head>
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
 <body>
-  {{-- <h1 class="text-3xl text-emerald-400 font-bold underline">
-    Hello world!
-  </h1> --}}
+
   @include('template.navbar')
 
   @yield('content')
