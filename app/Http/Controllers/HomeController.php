@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\H_Menu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -39,6 +40,16 @@ class HomeController extends Controller
     {
         $activeUser = Auth::user();
         return view('pages.reportTenant');
+
+    }
+    public function showOrders()
+    {
+        $activeUser = Auth::user();
+        $tenantId = 1;
+        // $tenantId = $activeUser->tenant->tenant_id;
+
+        $orders = H_Menu::where('tenant_id', $tenantId)->get();
+        return view('pages.ordersTenant', compact('orders'));
 
     }
 }

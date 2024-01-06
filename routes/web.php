@@ -74,6 +74,7 @@ Route::get('/admin', function () {return redirect('/dashboard');})->middleware('
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 	Route::get('/hlmnTenant', [HomeController::class, 'showtenant'])->name('showtenant')->middleware('auth');
 	Route::get('/reportTenant', [HomeController::class, 'showReportTenant'])->name('showReportTenant')->middleware('auth');
+	Route::get('/ordersTenant', [HomeController::class, 'showOrders'])->name('showOrders')->middleware('auth');
 	Route::post('/insertmenu', [MenuController::class, 'insertmenu'])->name('insertmenu');
 	Route::get('/edit-menu/{id}', [MenuControlπler::class, 'showEditMenu'])->name('edit.menu');
 	Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMenu'])->name('updateStatus.menu');
