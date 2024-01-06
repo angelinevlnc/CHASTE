@@ -75,7 +75,7 @@ class PageController extends Controller
         ->first();
 
         $listKamar = Kamar::where('penyewa_id', Session::get('login_id'))->where('status', 2)->get();
-        
+
         return view("userDashboard", ['cekPembayaran' => $cekPembayaran, 'listKamar' => $listKamar]);
     }
 
@@ -108,7 +108,7 @@ class PageController extends Controller
         $HKamar = H_Kamar::where('h_kamar_id', $request->id)->first();
         $DKamar = D_Kamar::where('h_kamar_id', $request->id)->first();
         $Kamar = Kamar::where('kamar_id', $DKamar->kamar_id)->first();
-        
+
         return view("userHistoryDetail", ['HKamar' => $HKamar, 'DKamar' => $DKamar, 'Kamar'=>$Kamar]);
     }
 
@@ -142,10 +142,8 @@ class PageController extends Controller
         $arrayDMenu = $DMenu->pluck('menu_id')->toArray();
 
         $Menu = Menu::whereIn('menu_id', $arrayDMenu)->get();
-        
-        return view("userHistoryDetailFood", ['HMenu' => $HMenu, 'DMenu' => $DMenu, 'Tenant'=>$Tenant, 'Menu'=>$Menu]);
 
-        return view("userDashboard");
+        return view("userHistoryDetailFood", ['HMenu' => $HMenu, 'DMenu' => $DMenu, 'Tenant'=>$Tenant, 'Menu'=>$Menu]);
     }
 
     public function cart()
