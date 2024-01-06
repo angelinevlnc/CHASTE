@@ -1,4 +1,4 @@
-DD<?php
+<?php
 
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +47,13 @@ Route::get('/food-payment', function () {
 
 
 Route::get('/user', [PageController::class, 'dashboard']);
+
+Route::get('/user/history/kamar', [PageController::class, 'user_history'])->name('search-history');
+Route::get('/user/history/kamar/{id}', [PageController::class, 'user_history_detail']);
+Route::get('/user/history/food', [PageController::class, 'user_history_food'])->name('search-history-food');
+Route::get('/user/history/food/{id}', [PageController::class, 'user_history_detail_food']);
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::get('/cart', [PageController::class, 'cart']);
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 12, 2023 at 02:25 AM
+
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -53,6 +53,14 @@ CREATE TABLE `d_kamar` (
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `d_kamar`
+--
+
+INSERT INTO `d_kamar` (`d_kamar_id`, `h_kamar_id`, `kamar_id`, `harga`, `status`) VALUES
+(1, 1, 1, 1200000, 1),
+(2, 2, 1, 1200000, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -67,6 +75,15 @@ CREATE TABLE `d_menu` (
   `harga` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `d_menu`
+--
+
+INSERT INTO `d_menu` (`d_menu_id`, `h_menu_id`, `menu_id`, `harga`, `status`) VALUES
+(1, 1, 2, 5000, 1),
+(2, 1, 3, 5000, 1),
+(3, 2, 7, 15000, 1);
 
 -- --------------------------------------------------------
 
@@ -133,6 +150,14 @@ CREATE TABLE `h_kamar` (
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `h_kamar`
+--
+
+INSERT INTO `h_kamar` (`h_kamar_id`, `user_id`, `penyewa_id`, `total`, `created_at`, `updated_at`, `status`) VALUES
+(1, 1, 12, 1200000, '2024-01-05 08:50:19', '2024-01-05 08:50:19', 1),
+(2, 1, 12, 1200000, '2024-01-05 10:37:31', '2024-01-05 10:37:31', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -149,6 +174,14 @@ CREATE TABLE `h_menu` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `h_menu`
+--
+
+INSERT INTO `h_menu` (`h_menu_id`, `tenant_id`, `customer_id`, `total`, `created_at`, `updated_at`, `status`) VALUES
+(1, 1, 12, 10000, '2024-01-05 12:20:01', '2024-01-05 12:20:01', 1),
+(2, 2, 12, 15000, '2024-01-05 12:20:49', '2024-01-05 12:20:49', 1);
 
 -- --------------------------------------------------------
 
@@ -185,7 +218,7 @@ CREATE TABLE `kamar` (
   `AC` enum('AC','Non-AC') NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0 = Not Available | 1 = Available | 2 = Disewa'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -193,11 +226,13 @@ CREATE TABLE `kamar` (
 --
 
 INSERT INTO `kamar` (`kamar_id`, `user_id`, `penyewa_id`, `nama`, `foto`, `harga`, `deskripsi`, `AC`, `created_at`, `updated_at`, `status`) VALUES
-(1, 1, NULL, 'A-11', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the entrance door.', 'AC', '2023-12-08 10:16:52', '2023-12-08 09:14:45', 1),
+
+(1, 1, 12, 'A-11', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the entrance door.', 'AC', '2024-01-05 08:49:07', '2023-12-08 09:14:45', 2),
+
 (2, 1, NULL, 'A-12', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the bathroom.', 'AC', '2023-12-08 09:20:22', '2023-12-08 09:14:45', 1),
 (3, 1, NULL, 'A-13', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the stairs to 2nd floor.', 'AC', '2023-12-08 09:21:53', '2023-12-08 09:14:45', 1),
 (4, 1, NULL, 'A-14', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the water dispenser.', 'AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1),
-(5, 1, NULL, 'B-21', 'kamar/kos2.webp', 900000, 'Second floor room without AC. Close to the stairs to 1st floor.', 'Non-AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1),
+(5, 1, NULL, 'B-21', 'kamar/kos2.webp', 900000, 'Second floor room without AC. Close to the stairs to 1st floor.', 'Non-AC', '2024-01-05 09:14:21', '2023-12-08 09:14:45', 1),
 (6, 1, NULL, 'B-22', 'kamar/kos2.webp', 900000, 'Second floor room without AC. Close to the bathroom.', 'Non-AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1),
 (7, 1, NULL, 'B-23', 'kamar/kos2.webp', 900000, 'Second floor room without AC. Close to the water dispenser.', 'Non-AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1),
 (8, 1, NULL, 'B-24', 'kamar/kos2.webp', 900000, 'Second floor room without AC. Close to the corner.', 'Non-AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1);
@@ -382,8 +417,9 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `nama`, `ktp`, `foto`, `r
 (9, 'tenant1', '$2y$12$qb.sUYtoMyCvoMdhzFIM5e4kT/yFXjAkwIXZCK5RMCmXkNbh25jw6', NULL, NULL, NULL, '2', NULL, 'tenant1@gmail.com', '2023-11-30 21:20:15', '2023-11-30 21:20:15', 1),
 (10, 'tenant2', '$2y$12$rdlaBl2cS4DcdQ4cal3NguXm/mCs2VB20EgmsyDVXIdPizIwMiBJS', NULL, NULL, NULL, '2', NULL, 'tenant2@gmail.com', '2023-11-30 21:20:52', '2023-11-30 21:20:52', 1),
 (11, 'tenant3', '$2y$12$3RTDgM84.CbGa4qGSUFvs.NrMyfx3RusqoNqaAsshUQhMHW3Kf6pu', NULL, NULL, NULL, '2', NULL, 'tenant3@gmail.com', '2023-11-30 21:21:14', '2023-11-30 21:21:14', 1),
-(12, 'penyewa1', 'penyewa1', 'Fransisca', NULL, NULL, '3', NULL, 'penyewa1@gmail.com', '2023-12-08 08:35:12', '2023-12-08 08:35:12', 1),
-(13, 'penyewa2', 'penyewa2', 'Arensa', NULL, NULL, '3', NULL, 'penyewa2@gmail.com', '2023-12-08 08:35:42', '2023-12-08 08:35:42', 1);
+(12, 'penyewa1', '$2y$12$qHUhpB1g85ivRBlApk1QZu9X.Pqq1/t6WLoKwFZgq82MSspHDgEuW', 'Fransisca', NULL, NULL, '3', NULL, 'penyewa1@gmail.com', '2023-12-08 08:35:12', '2023-12-08 08:35:12', 1),
+(13, 'penyewa2', '$2y$12$TdkcU0z2tdtXXeU6kmKLw.9UvjS062Kzi4Kj67uhwH7MNKeWWlYZK', 'Arensa', NULL, NULL, '3', NULL, 'penyewa2@gmail.com', '2023-12-08 08:35:42', '2023-12-08 08:35:42', 1),
+(23, 'penyewa3', '$2y$12$Yd5DjCaT7YD/GwoUSNiY5u69LMuYwO17MeNOn4oJ.OoTrguVi.pxG', 'penyewa3', '1234567890123456', NULL, '3', '12345678', 'penyewa3@gmail.com', '2024-01-05 01:05:05', '2024-01-05 01:05:05', 1);
 
 -- --------------------------------------------------------
 
@@ -561,13 +597,13 @@ ALTER TABLE `d_bulan`
 -- AUTO_INCREMENT for table `d_kamar`
 --
 ALTER TABLE `d_kamar`
-  MODIFY `d_kamar_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `d_kamar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `d_menu`
 --
 ALTER TABLE `d_menu`
-  MODIFY `d_menu_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `d_menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `d_tenant`
@@ -591,13 +627,13 @@ ALTER TABLE `h_bulan`
 -- AUTO_INCREMENT for table `h_kamar`
 --
 ALTER TABLE `h_kamar`
-  MODIFY `h_kamar_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `h_kamar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `h_menu`
 --
 ALTER TABLE `h_menu`
-  MODIFY `h_menu_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `h_menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `h_tenant`
@@ -645,7 +681,7 @@ ALTER TABLE `testimony`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `users`

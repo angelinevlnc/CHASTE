@@ -6,6 +6,11 @@
   @vite('resources/css/app.css')
   @vite('resources/js/app.js')
 </head>
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
 <body>
 
   @include('template.navbar')

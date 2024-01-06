@@ -24,6 +24,8 @@ class RegisterController extends Controller
             'role' => "3",
             'terms' => 'required'
         ]);
+        $attributes['role'] = 3;
+
         $user = User::create($attributes);
         auth()->login($user);
 
