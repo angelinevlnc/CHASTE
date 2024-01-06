@@ -44,14 +44,14 @@
                                 </h3>
                                 {{-- deskripsii jika ada --}}
                                 <p class="mt-3 text-gray-500">
-                                    Rp. 
+                                    Rp.
                                     @php
                                         echo number_format($menu->harga , 0, ',', '.');
                                     @endphp
                                 </p>
                                 </div>
                                 <div class="mt-10 flex border-t border-gray-200 divide-x divide-gray-200">
-                                    <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" href="/food-payment">
+                                    <a href="/add-cart/{{$menu->menu_id}}" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" >
                                         Add To Cart
                                     </a>
                                     <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" href="/food-payment">

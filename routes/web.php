@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,7 +55,6 @@ Route::get('/user/history/food', [PageController::class, 'user_history_food'])->
 Route::get('/user/history/food/{id}', [PageController::class, 'user_history_detail_food']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/cart', [PageController::class, 'cart']);
 
 
 Route::get('/login', [LoginController::class, 'show'])->name('login');
@@ -87,3 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
+// Cart
+// Route::get('/cart', [PageController::class, 'cart']);
+Route::get('/cart', [CartController::class, 'cartView']);
+Route::get('/add-cart/{id}', [CartController::class, 'addFood']);
