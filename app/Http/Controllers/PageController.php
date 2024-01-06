@@ -144,6 +144,8 @@ class PageController extends Controller
         $Menu = Menu::whereIn('menu_id', $arrayDMenu)->get();
         
         return view("userHistoryDetailFood", ['HMenu' => $HMenu, 'DMenu' => $DMenu, 'Tenant'=>$Tenant, 'Menu'=>$Menu]);
+
+        return view("userDashboard");
     }
 
     public function cart()
