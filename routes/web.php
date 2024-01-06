@@ -32,6 +32,11 @@ use App\Http\Controllers\MenuController;
 
 Route::get('/', [FoodController::class, 'getLanding']);
 
+// Cart
+// Route::get('/cart', [PageController::class, 'cart']);
+Route::get('/cart', [CartController::class, 'cartView']);
+Route::get('/add-cart/{id}', [CartController::class, 'addFood']);
+
 
 Route::get('/kos/AC', [KosController::class, 'getKamarAC']);
 Route::get('/kos/Non-AC', [KosController::class, 'getKamarNonAC']);
@@ -53,7 +58,6 @@ Route::get('/user/history/kamar', [PageController::class, 'user_history'])->name
 Route::get('/user/history/kamar/{id}', [PageController::class, 'user_history_detail']);
 Route::get('/user/history/food', [PageController::class, 'user_history_food'])->name('search-history-food');
 Route::get('/user/history/food/{id}', [PageController::class, 'user_history_detail_food']);
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 
@@ -87,7 +91,3 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-// Cart
-// Route::get('/cart', [PageController::class, 'cart']);
-Route::get('/cart', [CartController::class, 'cartView']);
-Route::get('/add-cart/{id}', [CartController::class, 'addFood']);
