@@ -35,4 +35,10 @@ class HomeController extends Controller
         return view('pages.hlmnTenant', compact('menus'));
 
     }
+    public function showReportTenant()
+    {
+        $activeUser = Auth::user();
+        return view('pages.reportTenant');
+
+    }
 }
