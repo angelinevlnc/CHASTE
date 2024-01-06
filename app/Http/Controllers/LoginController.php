@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -36,6 +39,15 @@ class LoginController extends Controller
             $user = Auth::user();
             $request->session()->regenerate();
             return redirect()->intended('hlmnTenant');
+        }
+        elseif (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 3])) {
+            $user = Auth::user();
+            $request->session()->regenerate();
+
+            Session::put('login_username', $user->username);
+            Session::put('login_id', $user->user_id);
+
+            return redirect()->intended('user');
         }
 
         return back()->withErrors([

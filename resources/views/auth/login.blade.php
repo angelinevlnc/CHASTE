@@ -71,7 +71,7 @@
       <div class="md:pe-8 md:w-1/2 xl:pe-0 xl:w-5/12">
         <!-- Title -->
         <h1 class="text-3xl text-gray-800 font-bold md:text-4xl md:leading-tight lg:text-5xl lg:leading-tight ">
-          Solving problems for every <span class="text-blue-600" >team</span>
+          Login to your <span class="text-blue-600" >chaste</span> account
         </h1>
         <p class="mt-3 text-base text-gray-500">
           Built on standard web technology, teams use Preline to build beautiful cross-platform hybrid apps in a fraction of the time.
@@ -79,7 +79,7 @@
         <!-- End Title -->
 
 
-        <div class="py-6 flex items-center text-sm text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:me-6 after:flex-[1_1_0%] after:border-t after:ms-6">Or</div>
+        <div class="py-6 flex items-center text-sm text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:me-6 after:flex-[1_1_0%] after:border-t after:ms-6"></div>
 
         <!-- Form -->
         <form role="form" method="POST" action="{{ route('login.perform') }}">
@@ -89,17 +89,21 @@
             <div class="mb-4">
                 <label for="hs-hero-email-2" class="block text-sm font-medium"><span class="sr-only">Email address</span></label>
                 <input type="email" name="email" id="hs-hero-email-2" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="Email address">
-                @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                @error('email') <p style="color: red" class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
             </div>
 
             <div class="mb-4">
                 <label for="hs-hero-password-2" class="block text-sm font-medium"><span class="sr-only">Password</span></label>
                 <input type="password" name="password" id="hs-hero-password-2" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none " placeholder="Password">
-                @error('password') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                @error('password') <p style="color: red" class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
             </div>
 
             <div class="grid">
                 <button type="submit" class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Log In</button>
+            </div>
+
+            <div class="grid">
+                <a class="mt-5 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md transition-all text-sm" href="{{ url('/register') }}" aria-current="page">Doesn't have an account? <span class="text-blue-600 hover:text-gray-400" >Sign In</span></a>
             </div>
         </form>
         <!-- End Form -->

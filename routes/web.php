@@ -1,5 +1,6 @@
-DD<?php
+<?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +29,13 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\MenuController;
 
+
 Route::get('/', [FoodController::class, 'getLanding']);
+
+// Cart
+// Route::get('/cart', [PageController::class, 'cart']);
+Route::get('/cart', [CartController::class, 'cartView']);
+Route::get('/add-cart/{id}', [CartController::class, 'addFood']);
 
 
 Route::get('/kos/AC', [KosController::class, 'getKamarAC']);
@@ -43,6 +50,15 @@ Route::get('/food', [FoodController::class, 'getFood']);
 Route::get('/food-payment', function () {
     return view('food-payment');
 });
+
+
+Route::get('/user', [PageController::class, 'dashboard']);
+
+Route::get('/user/history/kamar', [PageController::class, 'user_history'])->name('search-history');
+Route::get('/user/history/kamar/{id}', [PageController::class, 'user_history_detail']);
+Route::get('/user/history/food', [PageController::class, 'user_history_food'])->name('search-history-food');
+Route::get('/user/history/food/{id}', [PageController::class, 'user_history_detail_food']);
+
 
 
 Route::get('/login', [LoginController::class, 'show'])->name('login');
