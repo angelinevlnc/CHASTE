@@ -97,6 +97,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('editTenant', [TenantController::class, 'changeTenant'])->name('edit-tenant');
 	Route::get('/tenant/edit/{id}', [TenantController::class, 'editTenant'])->name('editTenant');
 	Route::get('/tenant/delete/{id}', [TenantController::class, 'deleteTenant']);
+
+	Route::post('addKos', [KosController::class, 'addKos'])->name('add-kos');
+	Route::post('editKos', [KosController::class, 'changeKos'])->name('edit-kos');
+	Route::get('/kos/edit/{id}', [KosController::class, 'editKos'])->name('editKos');
+	Route::get('/kos/delete/{id}', [KosController::class, 'deleteKos']);
 });
 
 
