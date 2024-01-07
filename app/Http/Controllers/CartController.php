@@ -51,6 +51,7 @@ class CartController extends Controller
 
     }
 
+    //ini untuk ke payment dari cart
     public function paymentCart(){
         return view('food-payment', [
             'data' => Session::get('cart')
