@@ -21,24 +21,29 @@ class MidtransController extends Controller
 {
     public function payment(Request $request)
     {
-        Config::$serverKey = config('services.midtrans.server_key');
-        Config::$clientKey = config('services.midtrans.client_key');
-        Config::$isProduction = config('services.midtrans.is_production');
-        Config::$isSanitized = config('services.midtrans.is_sanitized');
-        Config::$is3ds = config('services.midtrans.is_3ds');
-
-        $kamar = Kamar::where('kamar_id', $request->id)->first();
-        Session::put('kamar_id', $request->id);
-        Session::put('kamar_harga', $kamar->harga);
-        
-        $transactionDetails = [
-            'order_id' => 'ORDER-' . time(),
-            'gross_amount' => $kamar->harga
-        ];
-        
-        $snapToken = Snap::getSnapToken(['transaction_details' => $transactionDetails]);
-
-        return view('payment', ['snapToken' => $snapToken, 'kamar'=>$kamar]);
+        if(Session::get('login_id')){
+            Config::$serverKey = config('services.midtrans.server_key');
+            Config::$clientKey = config('services.midtrans.client_key');
+            Config::$isProduction = config('services.midtrans.is_production');
+            Config::$isSanitized = config('services.midtrans.is_sanitized');
+            Config::$is3ds = config('services.midtrans.is_3ds');
+    
+            $kamar = Kamar::where('kamar_id', $request->id)->first();
+            Session::put('kamar_id', $request->id);
+            Session::put('kamar_harga', $kamar->harga);
+            
+            $transactionDetails = [
+                'order_id' => 'ORDER-' . time(),
+                'gross_amount' => $kamar->harga
+            ];
+            
+            $snapToken = Snap::getSnapToken(['transaction_details' => $transactionDetails]);
+    
+            return view('payment', ['snapToken' => $snapToken, 'kamar'=>$kamar]);
+        }
+        else{
+            return redirect('/login');
+        }
     }
 
     public function payment_success(Request $request)
