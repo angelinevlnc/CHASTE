@@ -58,7 +58,7 @@
                                     </td>
                                     @endif
                                     <td class="align-middle">
-                                        <button style="background-color: red;" class="btn btn-primary"><a href="" style="text-decoration: none;color: inherit;">Remove Account</a></button>
+                                        <button style="background-color: red;" class="btn btn-primary"><a href="/user-management/delete/{{$isi->user_id}}" style="text-decoration: none;color: inherit;">Remove Account</a></button>
                                     </td>
                                 </tr>
                                 @endforeach
