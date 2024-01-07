@@ -35,6 +35,10 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
+                    @php
+                        use App\Models\Tenant;
+                        $listTenant = Tenant::where('status', 1)->get();
+                    @endphp
                     <div class="card-header pb-0">
                         <h6>List Tenant</h6>
                     </div>
@@ -47,107 +51,35 @@
                                             Name</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Price</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Status</th>
                                         <th class="text-secondary opacity-7"></th>
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($listTenant as $key=>$d)
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="/img/tenant1.jpg" class="avatar avatar-lg me-3"
+                                                    <img src="{{ Storage::url("$d->foto") }}" class="avatar avatar-lg me-3"
                                                         alt="tenant1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Tenant 1</h6>
+                                                    <h6 class="mb-0 text-sm">{{ $d->nama }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-m font-weight-bold mb-0">Rp850.000</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Available</span>
+                                            <p class="text-m font-weight-bold mb-0">{{ $d->harga }}</p>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
-                                            </a>
+                                            <button class="btn btn-primary">Edit</button>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Delete user">
-                                                Delete
-                                            </a>
+                                            <button style="background-color: red;" class="btn btn-primary">Delete</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="/img/tenant2.jpg" class="avatar avatar-lg me-3"
-                                                        alt="tenant2">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Tenant 2</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-m font-weight-bold mb-0">Rp700.000</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Available</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
-                                            </a>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Delete user">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="/img/tenant3.jpg" class="avatar avatar-lg me-3"
-                                                        alt="tenant3">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Tenant 3</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-m font-weight-bold mb-0">Rp500.000</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-secondary">Unavailable</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
-                                            </a>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Delete user">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
