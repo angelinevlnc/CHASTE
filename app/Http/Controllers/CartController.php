@@ -50,4 +50,11 @@ class CartController extends Controller
     public function deleteCart(){
 
     }
+
+    //ini untuk ke payment dari cart
+    public function paymentCart(){
+        return view('food-payment', [
+            'data' => Session::get('cart')
+        ]);
+    }
 }
