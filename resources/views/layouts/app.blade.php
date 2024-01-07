@@ -21,6 +21,14 @@
     <link id="pagestyle" href="assets/css/argon-dashboard.css" rel="stylesheet" />
 </head>
 
+<style>
+    /* Biar scrollbar di master transparent */
+    ::-webkit-scrollbar {
+        width: 8px; /* Width of the scrollbar */
+        background-color: transparent; /* Make scrollbar background transparent */
+    }
+</style>
+
 <body class="{{ $class ?? '' }}">
 
     @guest

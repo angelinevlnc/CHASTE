@@ -29,7 +29,7 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MidtransController;
-
+use App\Http\Controllers\TenantController;
 
 Route::get('/', [FoodController::class, 'getLanding']);
 
@@ -93,6 +93,15 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static');
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+	Route::post('addTenant', [TenantController::class, 'addTenant'])->name('add-tenant');
+	Route::post('editTenant', [TenantController::class, 'changeTenant'])->name('edit-tenant');
+	Route::get('/tenant/edit/{id}', [TenantController::class, 'editTenant'])->name('editTenant');
+	Route::get('/tenant/delete/{id}', [TenantController::class, 'deleteTenant']);
+
+	Route::post('addKos', [KosController::class, 'addKos'])->name('add-kos');
+	Route::post('editKos', [KosController::class, 'changeKos'])->name('edit-kos');
+	Route::get('/kos/edit/{id}', [KosController::class, 'editKos'])->name('editKos');
+	Route::get('/kos/delete/{id}', [KosController::class, 'deleteKos']);
 });
 
 
