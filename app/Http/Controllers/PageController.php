@@ -63,20 +63,35 @@ class PageController extends Controller
         return view("pages.sign-up-static");
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         $currentDate = now();
         $month = $currentDate->month;
         $year = $currentDate->year;
 
-        $cekPembayaran = H_Kamar::where('penyewa_id', Session::get('login_id'))->where('status', 1)
+        $listKamar = Kamar::where('penyewa_id', Session::get('login_id'))->where('status', 2)->get();
+        $arrayKamar = $listKamar->pluck('kamar_id')->toArray();
+
+        $listDKamar = D_Kamar::whereIn('kamar_id', $arrayKamar)->get();
+        $arrayDKamar = $listDKamar->pluck('h_kamar_id')->toArray();
+
+        $listHKamar = H_Kamar::whereIn('h_kamar_id', $arrayDKamar)
+        ->where('status', 1)
         ->whereMonth('created_at', $month)
         ->whereYear('created_at', $year)
-        ->first();
+        ->get();
+        $arrayHKamar = $listHKamar->pluck('h_kamar_id')->toArray();
 
-        $listKamar = Kamar::where('penyewa_id', Session::get('login_id'))->where('status', 2)->get();
+        $listPembayaran = D_Kamar::whereIn('h_kamar_id', $arrayHKamar)->get();
 
-        return view("userDashboard", ['cekPembayaran' => $cekPembayaran, 'listKamar' => $listKamar]);
+        if($listPembayaran){
+            $cekPembayaran = 1;
+        }
+        else{
+            $cekPembayaran = null;
+        }
+
+        return view("userDashboard", ['listPembayaran'=>$listPembayaran, 'cekPembayaran' => $cekPembayaran, 'listKamar' => $listKamar]);
     }
 
     public function user_history(Request $request)

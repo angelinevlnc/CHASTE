@@ -28,6 +28,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\MidtransController;
 
 
 Route::get('/', [FoodController::class, 'getLanding']);
@@ -52,15 +53,19 @@ Route::get('/food-payment', function () {
 });
 
 
-Route::get('/user', [PageController::class, 'dashboard']);
+Route::get('/user', [PageController::class, 'dashboard'])->name('user');
 
 Route::get('/user/history/kamar', [PageController::class, 'user_history'])->name('search-history');
 Route::get('/user/history/kamar/{id}', [PageController::class, 'user_history_detail']);
 Route::get('/user/history/food', [PageController::class, 'user_history_food'])->name('search-history-food');
 Route::get('/user/history/food/{id}', [PageController::class, 'user_history_detail_food']);
 
+Route::post('/payment', [MidtransController::class, 'payment'])->name('payment');
+Route::get('/payment/success', [MidtransController::class, 'payment_success']);
+Route::get('/payment/failed', [MidtransController::class, 'payment_fail']);
+// Route::post('/payment-notif', [MidtransController::class, 'payment_notif'])->name('payment-notif');
 
-
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout'); //Ini tolong jangan dipindah, aku tahu double. Tp kalo nggak ada ini, gamau jalan logout di user.
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
 Route::get('/register', [RegisterController::class, 'create'])->name('register');

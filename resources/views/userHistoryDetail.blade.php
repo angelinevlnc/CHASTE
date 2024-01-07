@@ -73,7 +73,7 @@
             <ul class="mt-3 flex flex-col">
               <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg ">
                 <div class="flex items-center justify-between w-full">
-                  <span>Monthly Rent Payment</span>
+                  <span>Rent Payment</span>
                   <span>Rp {{number_format($DKamar->harga, 0, ',', '.')}}</span>
                 </div>
               </li>
