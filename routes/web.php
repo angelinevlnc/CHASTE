@@ -29,7 +29,7 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MidtransController;
-
+use App\Http\Controllers\TenantController;
 
 Route::get('/', [FoodController::class, 'getLanding']);
 
@@ -93,6 +93,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static');
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+	Route::post('addTenant', [TenantController::class, 'addTenant'])->name('add-tenant');
 });
 
 

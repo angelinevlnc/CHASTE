@@ -9,25 +9,28 @@
                     <div class="card-header pb-0">
                         <h1></h1>
                         <h6>Add Tenant</h6>
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">Insert Stand Picture</label>
-                            <input class="form-control" type="file" id="formFile">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Name</label>
-                            <input class="form-control" type="text" id="">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Price</label>
-                            <input class="form-control" type="text" id="">
-                        </div>
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                            <label for="floatingTextarea2">Description</label>
-                        </div>
-                        <div class="mb-3 my-3">
-                            <button class="btn btn-primary">Submit</button>
-                        </div>
+                        <form action="{{ route('add-tenant') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Insert Tenant Logo</label>
+                                <input class="form-control" type="file" id="formFile" name="photo[]">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Name</label>
+                                <input class="form-control" type="text" id="" name="name">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Price</label>
+                                <input class="form-control" type="text" id="" name="price">
+                            </div>
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a description here" name="desc" id="floatingTextarea2" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Description</label>
+                            </div>
+                            <div class="mb-3 my-3">
+                                <button class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
