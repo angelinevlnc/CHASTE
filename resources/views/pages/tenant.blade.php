@@ -3,39 +3,7 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Tenant'])
     <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <h1></h1>
-                        <h6>Add Tenant</h6>
-                        <form action="{{ route('add-tenant') }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Insert Tenant Logo</label>
-                                <input class="form-control" type="file" id="formFile" name="photo[]">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Name</label>
-                                <input class="form-control" type="text" id="" name="name">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Price</label>
-                                <input class="form-control" type="text" id="" name="price">
-                            </div>
-                            <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a description here" name="desc" id="floatingTextarea2" style="height: 100px"></textarea>
-                                <label for="floatingTextarea2">Description</label>
-                            </div>
-                            <div class="mb-3 my-3">
-                                <button class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
+    <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
                     @php
@@ -45,7 +13,7 @@
                     <div class="card-header pb-0">
                         <h6>List Tenant</h6>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
+                    <div class="card-body px-0 pt-0 pb-2 " style="height: 300px; overflow-y: auto;">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -74,7 +42,9 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-m font-weight-bold mb-0">{{ $d->harga }}</p>
+                                            <p class="text-m font-weight-bold mb-0">
+                                                Rp{{ number_format($d->harga, 0, ',', '.') }}
+                                            </p>
                                         </td>
                                         <td class="align-middle text-center">
                                             <button class="btn btn-primary"><a href="/tenant/edit/{{$d->tenant_id}}" style="text-decoration: none;color: inherit;">Edit</a></button>
@@ -88,6 +58,38 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h1></h1>
+                        <h6>Add Tenant</h6>
+                        <form action="{{ route('add-tenant') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Insert Tenant Logo</label>
+                                <input class="form-control" type="file" id="formFile" name="photo[]">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Name</label>
+                                <input class="form-control" type="text" id="" name="name">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Price</label>
+                                <input class="form-control" type="text" id="" name="price">
+                            </div>
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a description here" name="desc" id="floatingTextarea2" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Description</label>
+                            </div>
+                            <div class="mb-3 my-3">
+                                <button class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
