@@ -104,6 +104,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('editKos', [KosController::class, 'changeKos'])->name('edit-kos');
 	Route::get('/kos/edit/{id}', [KosController::class, 'editKos'])->name('editKos');
 	Route::get('/kos/delete/{id}', [KosController::class, 'deleteKos']);
+	Route::get('/user-management/delete/{id}', [UserProfileController::class, 'deleteUser']);
 });
 
 
