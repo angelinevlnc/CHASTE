@@ -34,9 +34,9 @@ use App\Http\Controllers\TenantController;
 Route::get('/', [FoodController::class, 'getLanding']);
 
 // Cart
-// Route::get('/cart', [PageController::class, 'cart']);
 Route::get('/cart', [CartController::class, 'cartView']);
 Route::get('/add-cart/{id}', [CartController::class, 'addFood']);
+Route::get('/payCart', [CartController::class, 'paymentCart']);
 
 
 Route::get('/kos/AC', [KosController::class, 'getKamarAC']);
@@ -48,9 +48,11 @@ Route::get('/kos-invoice', function () {
 
 
 Route::get('/food', [FoodController::class, 'getFood']);
-Route::get('/food-payment', function () {
-    return view('food-payment');
-});
+// Route::get('/food-payment', function () {
+//     return view('food-payment');
+// });
+Route::get('/pay-food/{id}', [FoodController::class, 'foodPayment']);
+
 
 
 Route::get('/user', [PageController::class, 'dashboard'])->name('user');

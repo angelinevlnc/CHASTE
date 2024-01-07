@@ -22,8 +22,7 @@
           </label>
 
           <div class="mt-2 space-y-3">
-            <input id="af-payment-billing-contact" type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="First Name">
-            <input type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Last Name">
+            <input id="af-payment-billing-contact" type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Name">
             <input type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Phone Number">
           </div>
         </div>
@@ -34,15 +33,28 @@
         <!-- Section -->
         <div class="mt-5 py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 ">
           <label for="af-payment-payment-method" class="inline-block text-sm font-medium ">
-            Subtotal
+            Your Orders :
           </label>
 
-          <div class="mt-2 space-y-3">
-            <input id="af-payment-payment-method" type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="blalba">
-            <input type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="balalb">
+        @foreach ($data as $menu)
+        <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
+          <img src="{{ Storage::url("$menu->foto") }}" alt="product-image" class="w-full rounded-lg sm:w-40" />
+          <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+            <div class="mt-5 sm:mt-0">
+              <h2 class="text-lg font-bold text-gray-900">{{ $menu->nama }}</h2>
+              <p class="mt-1 text-xs text-gray-700">Rp. {{ number_format($menu->harga) }}</p>            </div>
+            <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-2">
+                <div class="flex items-center border-gray-100 ml-7">
+                    <p class="w-20 text-center">Qty : {{$menu->qty}}</p>
 
+                </div>
+              <div class="">
+                <p class="text-sm">Subtotal : Rp. {{number_format($menu->subtotal)}}</p>
+              </div>
+            </div>
           </div>
-          <p>10.000</p>
+        </div>
+        @endforeach
 
         </div>
         <!-- End Section -->
