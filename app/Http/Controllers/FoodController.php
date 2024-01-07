@@ -32,8 +32,13 @@ class FoodController extends Controller
         $collection = [];
         $collection[] = $menu;
 
+        $total = $menu->subtotal;
+
         return view('food-payment', [
-            'data' => $collection
+            'data' => $collection,
+            'total' => $total,
+            'tax' => $total * 0.1,
+            'grandtotal' => $total + ($total * 0.1)
         ]);
     }
 
