@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class UserProfileController extends Controller
@@ -38,5 +40,12 @@ class UserProfileController extends Controller
             'about' => $request->get('about')
         ]);
         return back()->with('succes', 'Profile succesfully updated');
+    }
+
+    public function deleteUser(Request $request){
+        $user = User::where('user_id', $request->id)->first();
+        DB::table('user')->where('user_id', '=', $user->user_id)->delete();
+
+        return redirect('/user-management');
     }
 }
