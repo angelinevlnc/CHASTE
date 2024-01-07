@@ -94,6 +94,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 	Route::post('addTenant', [TenantController::class, 'addTenant'])->name('add-tenant');
+	Route::post('editTenant', [TenantController::class, 'changeTenant'])->name('edit-tenant');
+	Route::get('/tenant/edit/{id}', [TenantController::class, 'editTenant'])->name('editTenant');
+	Route::get('/tenant/delete/{id}', [TenantController::class, 'deleteTenant']);
 });
 
 

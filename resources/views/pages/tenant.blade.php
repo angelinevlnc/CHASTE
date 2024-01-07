@@ -60,6 +60,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($listTenant as $key=>$d)
+                                    @if ($d->status == 1)
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
@@ -76,12 +77,13 @@
                                             <p class="text-m font-weight-bold mb-0">{{ $d->harga }}</p>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <button class="btn btn-primary">Edit</button>
+                                            <button class="btn btn-primary"><a href="/tenant/edit/{{$d->tenant_id}}" style="text-decoration: none;color: inherit;">Edit</a></button>
                                         </td>
                                         <td class="align-middle">
-                                            <button style="background-color: red;" class="btn btn-primary">Delete</button>
+                                            <button style="background-color: red;" class="btn btn-primary"><a href="/tenant/delete/{{$d->tenant_id}}" style="text-decoration: none;color: inherit;">Delete</a></button>
                                         </td>
                                     </tr>
+                                    @endif
                                     @endforeach
                                 </tbody>
                             </table>
