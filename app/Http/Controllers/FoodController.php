@@ -23,4 +23,23 @@ class FoodController extends Controller
 
         return view('food', ['listTenant' => $listTenant, 'listMenu' => $listMenu]);
     }
+
+    public function foodPayment($id){
+        $menu = Menu::find($id);
+        $menu->qty = 1;
+        $menu->subtotal = $menu->qty * $menu->harga;
+
+        $collection = [];
+        $collection[] = $menu;
+
+        $total = $menu->subtotal;
+
+        return view('food-payment', [
+            'data' => $collection,
+            'total' => $total,
+            'tax' => $total * 0.1,
+            'grandtotal' => $total + ($total * 0.1)
+        ]);
+    }
+
 }

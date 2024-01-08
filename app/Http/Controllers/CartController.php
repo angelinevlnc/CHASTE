@@ -50,4 +50,24 @@ class CartController extends Controller
     public function deleteCart(){
 
     }
+
+    //ini untuk ke payment dari cart
+    public function paymentCart(){
+        $cart = Session::get('cart') ?? [];
+        $total = 0;
+        foreach ($cart as $key => $value) {
+            $total += $value->subtotal;
+        }
+
+        return view('food-payment', [
+            'data' => Session::get('cart'),
+            'total' => $total,
+            'tax' => $total * 0.1,
+            'grandtotal' => $total + ($total * 0.1)
+        ]);
+
+        // return view('food-payment', [
+        //     'data' => Session::get('cart')
+        // ]);
+    }
 }

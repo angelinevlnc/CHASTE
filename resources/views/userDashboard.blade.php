@@ -1,16 +1,27 @@
 @extends('main')
 @section('content')
 
-<!-- Announcement Banner -->
+{{-- If Payment Failed --}}
+@if(session('payment_failed'))
+    <script>
+        Swal.fire({
+            title: "Payment Failed",
+            text: "Your payment has failed. Please try again or contact one of our staff.",
+            icon: "error",
+            confirmButtonText: "OK"
+        });
+    </script>
+@endif
 
+<!-- Announcement Banner -->
 @php
     $currentDate = now();
-    $showNotif = $currentDate->day >= 25 && $currentDate->day <= $currentDate->daysInMonth;
+    $showNotif = $currentDate->day >= 5 && $currentDate->day <= $currentDate->daysInMonth;
 
     $month = $currentDate->format('F');
     $year = $currentDate->year;
 
-    if($showNotif && !$cekPembayaran){
+    if($showNotif && !$cekPembayaran && $listKamar){
       echo 
       '<div class="bg-gradient-to-r from-red-500 via-purple-400 to-blue-500">
         <div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 mx-auto">
@@ -25,12 +36,6 @@
               </p>
             </div>
             <!-- End Col -->
-
-            <div class="mt-3 text-center md:text-start md:flex md:justify-end md:items-center">
-              <a class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">
-                Bayar Sekarang
-              </a>
-            </div>
             <!-- End Col -->
           </div>
           <!-- End Grid -->
@@ -45,36 +50,6 @@
     <div class="mb-5 pb-5 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
         <div>
         <h2 class="text-4xl font-semibold text-gray-800">Hello, {{Session::get('login_username')}}</h2>
-
-<div class="bg-gradient-to-r from-red-500 via-purple-400 to-blue-500">
-    <div class="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 mx-auto">
-      <!-- Grid -->
-      <div class="grid justify-center md:grid-cols-2 md:justify-between md:items-center gap-2">
-        <div class="text-center md:text-start">
-          <p class="text-xs text-white/[.8] uppercase tracking-wider">
-            Pemberitahuan!
-          </p>
-          <p class="mt-1 text-white font-medium">
-            Anda belum melakukan pembayaran kos periode Januari 2024
-          </p>
-        </div>
-        <!-- End Col -->
-
-        <div class="mt-3 text-center md:text-start md:flex md:justify-end md:items-center">
-          <a class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">
-            Bayar Sekarang
-          </a>
-        </div>
-        <!-- End Col -->
-      </div>
-      <!-- End Grid -->
-    </div>
-  </div>
-  <!-- End Announcement Banner -->
-  <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto my-4 sm:my-10">
-    <div class="mb-5 pb-5 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
-        <div>
-        <h2 class="text-4xl font-semibold text-gray-800">Hello, User</h2>
         </div>
     </div>
 
@@ -92,23 +67,35 @@
               </p>
             </blockquote>
 
-
-            @foreach ($listKamar as $kamar)
-              <figure>
-                <img class=" object-cover rounded-xl" src="{{ Storage::url("$kamar->foto") }}" alt="Image Description">
-                <figcaption class="mt-3 text-sm text-center text-gray-500">
-                  Room {{$kamar->nama}}
-                </figcaption>
-              </figure>
-            @endforeach
-
-            <figure>
-              <img class=" object-cover rounded-xl" src="/kos1.png" alt="Image Description">
-              <figcaption class="mt-3 text-sm text-center text-gray-500">
-                Room A-12
-              </figcaption>
-            </figure>
-
+            <form action="{{ route('payment') }}" method="post">
+              @csrf
+              @foreach ($listKamar as $kamar)
+                <figure>
+                  <img class=" object-cover rounded-xl" src="{{ Storage::url("$kamar->foto") }}" alt="Image Description">
+                  <figcaption class="mt-3 text-sm text-center text-gray-500">
+                    Room {{$kamar->nama}} 
+                    @php
+                      if($showNotif && !$cekPembayaran && $listKamar){
+                        $cek = 0;
+                        foreach ($listPembayaran as $DKamar) {
+                          if($DKamar->kamar_id == $kamar->kamar_id){
+                            $cek = 1;
+                          }
+                        }
+                        if($cek==0){
+                          echo '&nbsp;
+                                <button type="submit" name="id" value="'.$kamar->kamar_id.'" class="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-black bg-red-500 text-white shadow-sm hover:bg-red-900 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                  Bayar
+                                  <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                                </button>';
+                        }
+                      }
+                    @endphp
+                  </figcaption>
+                </figure>
+                <br>
+              @endforeach
+            </form>
         </div>
       </div>
       <!-- End Blog Article -->
@@ -117,3 +104,4 @@
 
 
 @endsection
+

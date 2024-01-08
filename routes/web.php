@@ -28,14 +28,15 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\MenuController;
-
+use App\Http\Controllers\MidtransController;
+use App\Http\Controllers\TenantController;
 
 Route::get('/', [FoodController::class, 'getLanding']);
 
 // Cart
-// Route::get('/cart', [PageController::class, 'cart']);
 Route::get('/cart', [CartController::class, 'cartView']);
 Route::get('/add-cart/{id}', [CartController::class, 'addFood']);
+Route::get('/payCart', [CartController::class, 'paymentCart']);
 
 
 Route::get('/kos/AC', [KosController::class, 'getKamarAC']);
@@ -47,20 +48,26 @@ Route::get('/kos-invoice', function () {
 
 
 Route::get('/food', [FoodController::class, 'getFood']);
-Route::get('/food-payment', function () {
-    return view('food-payment');
-});
+// Route::get('/food-payment', function () {
+//     return view('food-payment');
+// });
+Route::get('/pay-food/{id}', [FoodController::class, 'foodPayment']);
 
 
-Route::get('/user', [PageController::class, 'dashboard']);
+
+Route::get('/user', [PageController::class, 'dashboard'])->name('user');
 
 Route::get('/user/history/kamar', [PageController::class, 'user_history'])->name('search-history');
 Route::get('/user/history/kamar/{id}', [PageController::class, 'user_history_detail']);
 Route::get('/user/history/food', [PageController::class, 'user_history_food'])->name('search-history-food');
 Route::get('/user/history/food/{id}', [PageController::class, 'user_history_detail_food']);
 
+Route::post('/payment', [MidtransController::class, 'payment'])->name('payment');
+Route::get('/payment/success', [MidtransController::class, 'payment_success']);
+Route::get('/payment/failed', [MidtransController::class, 'payment_fail']);
+// Route::post('/payment-notif', [MidtransController::class, 'payment_notif'])->name('payment-notif');
 
-
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout'); //Ini tolong jangan dipindah, aku tahu double. Tp kalo nggak ada ini, gamau jalan logout di user.
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
@@ -90,6 +97,16 @@ Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMen
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static');
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+	Route::post('addTenant', [TenantController::class, 'addTenant'])->name('add-tenant');
+	Route::post('editTenant', [TenantController::class, 'changeTenant'])->name('edit-tenant');
+	Route::get('/tenant/edit/{id}', [TenantController::class, 'editTenant'])->name('editTenant');
+	Route::get('/tenant/delete/{id}', [TenantController::class, 'deleteTenant']);
+
+	Route::post('addKos', [KosController::class, 'addKos'])->name('add-kos');
+	Route::post('editKos', [KosController::class, 'changeKos'])->name('edit-kos');
+	Route::get('/kos/edit/{id}', [KosController::class, 'editKos'])->name('editKos');
+	Route::get('/kos/delete/{id}', [KosController::class, 'deleteKos']);
+	Route::get('/user-management/delete/{id}', [UserProfileController::class, 'deleteUser']);
 });
 
 
