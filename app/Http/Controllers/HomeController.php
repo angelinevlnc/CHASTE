@@ -42,14 +42,51 @@ class HomeController extends Controller
         return view('pages.reportTenant');
 
     }
-    public function showOrders()
+    public function showOrders(Request $request)
     {
         $activeUser = Auth::user();
-        $tenantId = 1;
-        // $tenantId = $activeUser->tenant->tenant_id;
+        $user_id = $activeUser->user_id;
+        $tenantId = $this->getTenantId($user_id);
 
-        $orders = H_Menu::where('tenant_id', $tenantId)->get();
+        $tanggal = $request->input('tanggal', now()->toDateString());
+        $orders = H_Menu::where('tenant_id', $tenantId);
+
+        if (!empty($tanggal)) {
+            $orders->whereDate('created_at', $tanggal);
+        }
+
+        $orders = $orders->get();
+
         return view('pages.ordersTenant', compact('orders'));
 
+    }
+    public function filter(Request $request)
+    {
+        $activeUser = Auth::user();
+        $user_id = $activeUser->user_id;
+        $tenantId = $this->getTenantId($user_id);
+
+        $tanggal = $request->input('tanggal');
+
+        $orders = H_Menu::where('tenant_id', $tenantId);
+
+        if (!empty($tanggal)) {
+            $orders->whereDate('created_at', $tanggal);
+        }
+
+        $orders = $orders->get();
+
+        return view('pages.ordersTenant', compact('orders'));
+    }
+
+    private function getTenantId($user_id)
+    {
+        if ($user_id == 9) {
+            return 1;
+        } elseif ($user_id == 10) {
+            return 2;
+        } elseif ($user_id == 11) {
+            return 3;
+        }
     }
 }
