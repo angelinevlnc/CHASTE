@@ -56,7 +56,7 @@
         </div>
         @endforeach
 
-        <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+        <div class="mt-6 w- full h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 ">
             <div class="mb-2 flex justify-between">
               <p class="text-gray-700">Subtotal</p>
               <p class="text-gray-700">
