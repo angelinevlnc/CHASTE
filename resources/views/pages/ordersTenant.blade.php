@@ -8,7 +8,7 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <h6>List Pesanan</h6>
-                        <form action="{{ route('orders.filter') }}" method="GET" class="form-inline">
+                        <form action="{{ route('orders.filter') }}" method="post" class="form-inline">
                             @csrf
                             <div class="form-group mx-sm-3 mb-2">
                                 <label for="tanggal" class="sr-only">Tanggal</label>
