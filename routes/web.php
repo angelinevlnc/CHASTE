@@ -47,6 +47,8 @@ Route::get('/food-midtrans/failed', [MidtransController::class, 'food_payment_fa
 
 Route::get('/cart', [CartController::class, 'cartView']);
 Route::get('/add-cart/{id}', [CartController::class, 'addFood']);
+Route::get('/minus-cart/{id}', [CartController::class, 'minusFood']);
+Route::get('/remove-cart/{id}', [CartController::class, 'deleteFood']);
 Route::get('/payCart', [CartController::class, 'paymentCart']);
 
 Route::get('/food', [FoodController::class, 'getFood']);

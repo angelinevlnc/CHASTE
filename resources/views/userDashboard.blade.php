@@ -16,11 +16,11 @@
 <!-- Announcement Banner -->
 @php
     $currentDate = now();
-    $showNotif = $currentDate->day >= 5 && $currentDate->day <= $currentDate->daysInMonth;
+    $showNotif = $currentDate->day >= 5 && $currentDate->day <= $currentDate->daysInMonth; //Harusnya mulai tgl 25, tp mulai tgl 5 aja spy bisa demo saat presentasi
 
     $month = $currentDate->format('F');
     $year = $currentDate->year;
-
+    
     if($showNotif && !$cekPembayaran && $listKamar){
       echo 
       '<div class="bg-gradient-to-r from-red-500 via-purple-400 to-blue-500">

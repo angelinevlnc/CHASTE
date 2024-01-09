@@ -113,8 +113,8 @@ class PageController extends Controller
         $arrayHKamar = $listHKamar->pluck('h_kamar_id')->toArray();
 
         $listPembayaran = D_Kamar::whereIn('h_kamar_id', $arrayHKamar)->get();
-
-        if($listPembayaran){
+        
+        if($listPembayaran->isNotEmpty()){
             $cekPembayaran = 1;
         }
         else{
@@ -188,7 +188,7 @@ class PageController extends Controller
 
         $Menu = Menu::whereIn('menu_id', $arrayDMenu)->get();
 
-        return view("userHistoryDetailFood", ['HMenu' => $HMenu, 'DMenu' => $DMenu, 'Tenant'=>$Tenant, 'Menu'=>$Menu]);
+        return view("userHistoryDetailFood", ['toggle'=>0, 'HMenu' => $HMenu, 'DMenu' => $DMenu, 'Tenant'=>$Tenant, 'Menu'=>$Menu]);
     }
 
     public function cart()
