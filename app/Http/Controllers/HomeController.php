@@ -37,21 +37,32 @@ class HomeController extends Controller
         return view('pages.hlmnTenant', compact('menus'));
 
     }
-    public function showReportTenant()
+    public function showReportTenant(Request $request)
     {
         $activeUser = Auth::user();
         $user_id = $activeUser->user_id;
         $tenantId = $this->getTenantId($user_id);
-        $pengeluaran = H_Bulan::where('user_id', $user_id)->where('status', 3)->get();
+        
+        $bulan = $request->input('bulan', date('n'));
+        $tahun = $request->input('tahun', date('Y'));
+        
+        $result = $this->kalkulasiduit($tenantId, $bulan, $tahun);
 
-        $result = $this->kalkulasiduit($tenantId);
+
+        $pengeluaran = H_Bulan::where('user_id', $user_id)
+        ->where('status', 3)
+        ->whereMonth('created_at', $bulan)
+        ->whereYear('created_at', $tahun)
+        ->get();
 
         $pendapatan = H_Menu::where('tenant_id', $tenantId)
         ->where('status', 2)
+        ->whereMonth('created_at', $bulan)
+        ->whereYear('created_at', $tahun)
         ->select('created_at', 'total')
         ->get();
 
-        return view('pages.reportTenant', compact('pendapatan','result','pengeluaran'));
+        return view('pages.reportTenant', compact('pendapatan','result','pengeluaran', 'bulan', 'tahun'));
 
     }
 
@@ -75,17 +86,22 @@ class HomeController extends Controller
         return redirect()->route('report.tenant')->with('success', 'Pengeluaran berhasil ditambahkan.');
     }
 
-    public function kalkulasiduit($tenantId)
+    public function kalkulasiduit($tenantId, $bulan, $tahun)
     {
         $user_id = Auth::id(); 
+        
         $totalPengeluaran = H_Bulan::where('user_id', $user_id)
-        ->where('status',3)
+        ->where('status', 3)
+        ->whereMonth('created_at', $bulan)
+        ->whereYear('created_at', $tahun)
         ->sum('total');
 
         $totalPendapatan = H_Menu::where('tenant_id', $tenantId)
-            ->where('status', 2)
-            ->sum('total');
-
+        ->where('status', 2)
+        ->whereMonth('created_at', $bulan)
+        ->whereYear('created_at', $tahun)
+        ->sum('total');
+        
         $totalKerugian = $totalPengeluaran-$totalPendapatan;
 
 

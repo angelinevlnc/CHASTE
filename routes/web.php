@@ -87,7 +87,7 @@ Route::get('/admin', function () {return redirect('/dashboard');})->middleware('
 	Route::post('/orders/tolak/{id}', [HomeController::class, 'tolakOrder'])->name('orders.tolak');
 	Route::get('/pengeluaran', [HomeController::class, 'showPengeluaran'])->name('pengeluaran.show');
 	Route::post('/pengeluaran/store', [HomeController::class, 'storePengeluaran'])->name('pengeluaran.store');
-	Route::get('/report/tenant', [HomeController::class, 'showReportTenant'])->name('report.tenant')->middleware('auth');
+	Route::post('/report/tenant', [HomeController::class, 'showReportTenant'])->name('report.tenant')->middleware('auth');
 	Route::post('/insertmenu', [MenuController::class, 'insertmenu'])->name('insertmenu');
 	Route::get('/edit-menu/{id}', [MenuControlπler::class, 'showEditMenu'])->name('edit.menu');
 	Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMenu'])->name('updateStatus.menu');
