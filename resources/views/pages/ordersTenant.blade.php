@@ -39,10 +39,30 @@
                                                     {{ $dMenu->dimiliki_menu->nama }}<br>
                                                 @endforeach</td>
                                                 <td>Rp {{ number_format($order->total , 0, ',', '.')}}</td>
-                                                <td>{{ $order->status }}</td>
                                                 <td>
-                                                    <button class="btn btn-primary">Terima</button>
-                                                    <button class="btn btn-danger">Tolak</button>
+                                                    @if($order->status == 2)
+                                                        Pesanan diterima
+                                                    @elseif($order->status == 1)
+                                                        Pesanan menunggu respons penjual
+                                                    @elseif($order->status == 0)
+                                                        Pesanan ditolak
+                                                    @else
+                                                        {{ $order->status }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($order->status == 2 || $order->status == 0)
+                                                    @else
+                                                        <form action="{{ route('orders.terima', ['id' => $order->h_menu_id]) }}" method="post">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-primary">Terima</button>
+                                                        </form>
+                                                    
+                                                        <form action="{{ route('orders.tolak', ['id' => $order->h_menu_id]) }}" method="post">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-danger">Tolak</button>
+                                                        </form>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

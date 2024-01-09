@@ -53,6 +53,36 @@ class PageController extends Controller
         return view("pages.profileTenant", compact('user'));
     }
 
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'email' => 'required|email',
+            'nama' => 'required',
+            'telephone' => 'required',
+            'password' => 'nullable|min:6',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $user->nama = $request->input('nama');
+        $user->email = $request->input('email');
+        $user->no_telp = $request->input('telephone');
+        
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
+        if ($request->hasFile('foto')) {
+            $path = $request->file('foto')->store('fotoprofil','public');
+    
+            $user->foto = $path;
+        }
+
+        $user->save();
+
+        return view("pages.profileTenant", compact('user'));    
+    }
+
     public function signin()
     {
         return view("pages.sign-in-static");

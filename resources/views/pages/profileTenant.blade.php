@@ -7,13 +7,17 @@
             <div class="row gx-4">
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        <img src="/img/Admin.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                        @if ($user->foto)
+                            <img src="{{ asset('storage/' . $user->foto) }}" alt="profile_image" class="w-100 h-100 border-radius-lg shadow-sm">
+                        @else
+                            <img src="/img/Admin.jpg" alt="default_profile_image" class="w-100 border-radius-lg shadow-sm">
+                        @endif
                     </div>
                 </div>
                 <div class="col-auto my-auto">
                     <div class="h-100">
                         <h5 class="mb-1">
-                            {{$user -> username}}
+                            {{$user -> nama}}
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
                             Hai aku  {{$user -> username}}
@@ -34,71 +38,50 @@
                     </div>
                     <div class="card-body">
                         <p class="text-uppercase text-sm">User Information</p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Username</label>
-                                    <input class="form-control" type="text">
+                        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="username" class="form-control-label">Username</label>
+                                        <input id="username" name="username" class="form-control" type="text" value="{{ $user->username }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name" class="form-control-label">Name</label>
+                                        <input id="nama" name="nama" class="form-control" type="text" value="{{ $user->nama }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email" class="form-control-label">Email address</label>
+                                        <input id="email" name="email" class="form-control" type="email" value="{{ $user->email }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="telephone" class="form-control-label">Telephone Number</label>
+                                        <input id="telephone" name="telephone" class="form-control" type="text" value="{{ $user->no_telp }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="password" class="form-control-label">Password</label>
+                                        <input id="password" name="password" class="form-control" type="password" placeholder="Enter new password">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="profile_picture" class="form-control-label">Profile Picture</label>
+                                        <input id="profile_picture" name="foto" class="form-control" type="file">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Email address</label>
-                                    <input class="form-control" type="email">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">First name</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Last name</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="horizontal dark">
-                        <p class="text-uppercase text-sm">Contact Information</p>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Address</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">City</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Country</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Postal code</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="horizontal dark">
-                        <p class="text-uppercase text-sm">About me</p>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">About me</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary btn-sm ms-auto">Save Changes</button>
+                            <hr class="horizontal dark">
+                            <button type="submit" class="btn btn-primary btn-sm ms-auto">Save Changes</button>
+                        </form>                        
                     </div>
                 </div>
             </div>
