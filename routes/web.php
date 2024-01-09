@@ -29,6 +29,7 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MidtransController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TenantController;
 
 Route::get('/', [FoodController::class, 'getLanding']);
@@ -120,6 +121,9 @@ Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMen
 	Route::get('/kos/edit/{id}', [KosController::class, 'editKos'])->name('editKos');
 	Route::get('/kos/delete/{id}', [KosController::class, 'deleteKos']);
 	Route::get('/user-management/delete/{id}', [UserProfileController::class, 'deleteUser']);
+
+	Route::post('addExpenses', [ReportController::class, 'addExpense'])->name('add-expense');
+	
 });
 
 
