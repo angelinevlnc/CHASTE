@@ -6,6 +6,7 @@ use App\Models\Menu;
 use App\Models\Tenant;
 use App\Models\Testimony;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FoodController extends Controller
 {
@@ -24,15 +25,21 @@ class FoodController extends Controller
         return view('food', ['listTenant' => $listTenant, 'listMenu' => $listMenu]);
     }
 
+    //payment dari button purchase now
     public function foodPayment($id){
+
+        $pnow = Session::get('pnow') ?? [];
         $menu = Menu::find($id);
-        $menu->qty = 1;
-        $menu->subtotal = $menu->qty * $menu->harga;
+        $total = $menu->harga;
 
         $collection = [];
         $collection[] = $menu;
 
-        $total = $menu->subtotal;
+        Session::put('pnow', $menu);
+
+        // dd($pnow);
+        // dd(Session::get('pnow')->harga);
+
 
         return view('food-payment', [
             'data' => $collection,

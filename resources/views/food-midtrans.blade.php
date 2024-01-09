@@ -14,7 +14,7 @@
 
 <div class="center">
     <p class="mt-1 text-black font-medium">
-        Bayar Rp{{number_format($kamar->harga , 0, ',', '.')}} untuk kamar kos {{$kamar->nama}}?
+        Bayar Rp{{number_format($grandtotal , 0, ',', '.')}} ?
     </p>
     <button type="submit" id="payButton" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-black bg-red-500 text-white shadow-sm hover:bg-red-900 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
         Bayar
@@ -29,7 +29,7 @@
             onSuccess: function (result) {
             /* You may add your own implementation here */
             alert("payment success!"); console.log(result);
-            window.location.href = '/payment/success';
+            window.location.href = '/food-midtrans/success';
             },
             onPending: function (result) {
             /* You may add your own implementation here */
@@ -38,7 +38,7 @@
             onError: function (result) {
             /* You may add your own implementation here */
             alert("payment failed!"); console.log(result);
-            window.location.href = '/payment/failed';
+            window.location.href = '/food-midtrans/failed';
             },
             onClose: function () {
             /* You may add your own implementation here */
