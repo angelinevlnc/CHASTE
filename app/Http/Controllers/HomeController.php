@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use App\Models\H_Menu;
+use App\Models\H_Bulan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -39,9 +40,65 @@ class HomeController extends Controller
     public function showReportTenant()
     {
         $activeUser = Auth::user();
-        return view('pages.reportTenant');
+        $user_id = $activeUser->user_id;
+        $tenantId = $this->getTenantId($user_id);
+        $pengeluaran = H_Bulan::where('user_id', $user_id)->where('status', 3)->get();
+
+        $result = $this->kalkulasiduit($tenantId);
+
+        $pendapatan = H_Menu::where('tenant_id', $tenantId)
+        ->where('status', 2)
+        ->select('created_at', 'total')
+        ->get();
+
+        return view('pages.reportTenant', compact('pendapatan','result','pengeluaran'));
 
     }
+
+    public function storePengeluaran(Request $request)
+    {
+        $request->validate([
+            'keterangan' => 'required|string',
+            'nominal' => 'required|numeric',
+        ]);
+
+        $activeUser = Auth::user();
+        $user_id = $activeUser->user_id;
+
+        H_Bulan::create([
+            'user_id' => $user_id,
+            'keterangan' => $request->keterangan,
+            'total' => $request->nominal,
+            'status' => 3,
+        ]);
+
+        return redirect()->route('report.tenant')->with('success', 'Pengeluaran berhasil ditambahkan.');
+    }
+
+    public function kalkulasiduit($tenantId)
+    {
+        $user_id = Auth::id(); 
+        $totalPengeluaran = H_Bulan::where('user_id', $user_id)
+        ->where('status',3)
+        ->sum('total');
+
+        $totalPendapatan = H_Menu::where('tenant_id', $tenantId)
+            ->where('status', 2)
+            ->sum('total');
+
+        $totalKerugian = $totalPengeluaran-$totalPendapatan;
+
+
+        $totalKeuntungan = $totalPendapatan-$totalKerugian;
+
+        return [
+            'totalKerugian' => $totalKerugian,
+            'totalPendapatan' => $totalPendapatan,
+            'totalKeuntungan' => max(0, $totalKeuntungan),
+            'totalPengeluaran' => $totalPengeluaran,
+        ];
+    }
+
     public function showOrders(Request $request)
     {
         $activeUser = Auth::user();
@@ -89,4 +146,39 @@ class HomeController extends Controller
             return 3;
         }
     }
+
+    public function terimaOrder($id)
+    {
+        $menu = H_Menu::find($id);
+        $activeUser = Auth::user();
+        $user_id = $activeUser->user_id;
+        $tenantId = $this->getTenantId($user_id);
+        $orders = H_Menu::where('tenant_id', $tenantId);
+        if ($menu) {
+            $menu->status = 2;
+            $menu->save();
+
+        }
+
+        return view('pages.ordersTenant', compact('orders'));
+    }
+
+    public function tolakOrder($id)
+    {
+        $menu = H_Menu::find($id);
+        $activeUser = Auth::user();
+        $user_id = $activeUser->user_id;
+        $tenantId = $this->getTenantId($user_id);
+        $orders = H_Menu::where('tenant_id', $tenantId);
+        if ($menu) {
+            $menu->status = 0;
+            $menu->save();
+
+            
+        }
+        return view('pages.ordersTenant', compact('orders'));
+
+    }
+
+    
 }
