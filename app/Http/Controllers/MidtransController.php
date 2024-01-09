@@ -180,7 +180,7 @@ class MidtransController extends Controller
                 'menu_id' => Session::get('pnow')->menu_id,
                 'qty' => 1,
                 'harga' => Session::get('pnow')->harga,
-                'status' => 1
+                'status' => 1 
             ]);
 
             //GET
