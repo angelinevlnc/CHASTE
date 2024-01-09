@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
-
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Waktu pembuatan: 09 Jan 2024 pada 06.30
+-- Versi server: 10.4.27-MariaDB
+-- Versi PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,7 @@ USE `chaste_db`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `d_bulan`
+-- Struktur dari tabel `d_bulan`
 --
 
 DROP TABLE IF EXISTS `d_bulan`;
@@ -36,12 +36,12 @@ CREATE TABLE `d_bulan` (
   `keterangan` int(11) NOT NULL COMMENT 'biaya karyawan, listrik, air, dst',
   `harga` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `d_kamar`
+-- Struktur dari tabel `d_kamar`
 --
 
 DROP TABLE IF EXISTS `d_kamar`;
@@ -51,10 +51,10 @@ CREATE TABLE `d_kamar` (
   `kamar_id` int(11) NOT NULL,
   `harga` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `d_kamar`
+-- Dumping data untuk tabel `d_kamar`
 --
 
 INSERT INTO `d_kamar` (`d_kamar_id`, `h_kamar_id`, `kamar_id`, `harga`, `status`) VALUES
@@ -64,7 +64,7 @@ INSERT INTO `d_kamar` (`d_kamar_id`, `h_kamar_id`, `kamar_id`, `harga`, `status`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `d_menu`
+-- Struktur dari tabel `d_menu`
 --
 
 DROP TABLE IF EXISTS `d_menu`;
@@ -74,10 +74,10 @@ CREATE TABLE `d_menu` (
   `menu_id` int(11) NOT NULL,
   `harga` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `d_menu`
+-- Dumping data untuk tabel `d_menu`
 --
 
 INSERT INTO `d_menu` (`d_menu_id`, `h_menu_id`, `menu_id`, `harga`, `status`) VALUES
@@ -88,7 +88,7 @@ INSERT INTO `d_menu` (`d_menu_id`, `h_menu_id`, `menu_id`, `harga`, `status`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `d_tenant`
+-- Struktur dari tabel `d_tenant`
 --
 
 DROP TABLE IF EXISTS `d_tenant`;
@@ -98,29 +98,29 @@ CREATE TABLE `d_tenant` (
   `tenant_id` int(11) NOT NULL,
   `harga` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `failed_jobs`
+-- Struktur dari tabel `failed_jobs`
 --
 
 DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `h_bulan`
+-- Struktur dari tabel `h_bulan`
 --
 
 DROP TABLE IF EXISTS `h_bulan`;
@@ -130,13 +130,22 @@ CREATE TABLE `h_bulan` (
   `total` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `keterangan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `h_bulan`
+--
+
+INSERT INTO `h_bulan` (`h_bulan_id`, `user_id`, `total`, `created_at`, `updated_at`, `status`, `keterangan`) VALUES
+(1, 9, 1000000, '2024-01-08 21:53:40', '2024-01-08 21:53:40', 3, 'Sewa Bulanan'),
+(7, 9, 14, '2024-01-08 22:14:17', '2024-01-08 22:14:17', 3, 'Grosiran Pop Ice');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `h_kamar`
+-- Struktur dari tabel `h_kamar`
 --
 
 DROP TABLE IF EXISTS `h_kamar`;
@@ -148,10 +157,10 @@ CREATE TABLE `h_kamar` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `h_kamar`
+-- Dumping data untuk tabel `h_kamar`
 --
 
 INSERT INTO `h_kamar` (`h_kamar_id`, `user_id`, `penyewa_id`, `total`, `created_at`, `updated_at`, `status`) VALUES
@@ -161,7 +170,7 @@ INSERT INTO `h_kamar` (`h_kamar_id`, `user_id`, `penyewa_id`, `total`, `created_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `h_menu`
+-- Struktur dari tabel `h_menu`
 --
 
 DROP TABLE IF EXISTS `h_menu`;
@@ -173,20 +182,20 @@ CREATE TABLE `h_menu` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `h_menu`
+-- Dumping data untuk tabel `h_menu`
 --
 
 INSERT INTO `h_menu` (`h_menu_id`, `tenant_id`, `customer_id`, `total`, `created_at`, `updated_at`, `status`) VALUES
-(1, 1, 12, 10000, '2024-01-05 12:20:01', '2024-01-05 12:20:01', 1),
+(1, 1, 12, 10000, '2024-01-05 12:20:01', '2024-01-08 20:53:21', 2),
 (2, 2, 12, 15000, '2024-01-05 12:20:49', '2024-01-05 12:20:49', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `h_tenant`
+-- Struktur dari tabel `h_tenant`
 --
 
 DROP TABLE IF EXISTS `h_tenant`;
@@ -198,12 +207,12 @@ CREATE TABLE `h_tenant` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kamar`
+-- Struktur dari tabel `kamar`
 --
 
 DROP TABLE IF EXISTS `kamar`;
@@ -219,16 +228,14 @@ CREATE TABLE `kamar` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0 = Not Available | 1 = Available | 2 = Disewa'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `kamar`
+-- Dumping data untuk tabel `kamar`
 --
 
 INSERT INTO `kamar` (`kamar_id`, `user_id`, `penyewa_id`, `nama`, `foto`, `harga`, `deskripsi`, `AC`, `created_at`, `updated_at`, `status`) VALUES
-
 (1, 1, 12, 'A-11', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the entrance door.', 'AC', '2024-01-05 08:49:07', '2023-12-08 09:14:45', 2),
-
 (2, 1, NULL, 'A-12', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the bathroom.', 'AC', '2023-12-08 09:20:22', '2023-12-08 09:14:45', 1),
 (3, 1, NULL, 'A-13', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the stairs to 2nd floor.', 'AC', '2023-12-08 09:21:53', '2023-12-08 09:14:45', 1),
 (4, 1, NULL, 'A-14', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the water dispenser.', 'AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1),
@@ -240,7 +247,7 @@ INSERT INTO `kamar` (`kamar_id`, `user_id`, `penyewa_id`, `nama`, `foto`, `harga
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menu`
+-- Struktur dari tabel `menu`
 --
 
 DROP TABLE IF EXISTS `menu`;
@@ -256,14 +263,14 @@ CREATE TABLE `menu` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `menu`
+-- Dumping data untuk tabel `menu`
 --
 
 INSERT INTO `menu` (`menu_id`, `user_id`, `tenant_id`, `nama`, `foto`, `harga`, `deskripsi`, `kategori`, `created_at`, `updated_at`, `status`) VALUES
-(2, 9, 1, 'Pop Ice', 'menu/popes.jpeg', 5000, NULL, 'minuman', '2023-12-01 05:09:01', '2023-12-01 05:09:01', 1),
+(2, 9, 1, 'Pop Ice', 'menu/popes.jpeg', 5000, NULL, 'minuman', '2023-12-01 05:09:01', '2024-01-07 21:01:32', 1),
 (3, 9, 1, 'Nutrisari', 'menu/nutrisari.jpg', 5000, NULL, 'minuman', '2023-12-01 05:09:58', '2023-12-01 05:09:58', 1),
 (4, 9, 1, 'Es Teh', 'menu/esteh.jpg', 5000, NULL, 'minuman', '2023-12-01 05:10:50', '2023-12-01 05:10:50', 1),
 (5, 9, 1, 'Aqua 600ml', 'menu/aqua.webp', 5000, NULL, 'minuman', '2023-12-01 05:10:50', '2023-12-01 05:10:50', 1),
@@ -277,18 +284,18 @@ INSERT INTO `menu` (`menu_id`, `user_id`, `tenant_id`, `nama`, `foto`, `harga`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Struktur dari tabel `migrations`
 --
 
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data untuk tabel `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -300,30 +307,30 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_reset_tokens`
+-- Struktur dari tabel `password_reset_tokens`
 --
 
 DROP TABLE IF EXISTS `password_reset_tokens`;
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_access_tokens`
+-- Struktur dari tabel `personal_access_tokens`
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -333,7 +340,7 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tenant`
+-- Struktur dari tabel `tenant`
 --
 
 DROP TABLE IF EXISTS `tenant`;
@@ -348,10 +355,10 @@ CREATE TABLE `tenant` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tenant`
+-- Dumping data untuk tabel `tenant`
 --
 
 INSERT INTO `tenant` (`tenant_id`, `user_id`, `penyewa_id`, `nama`, `foto`, `harga`, `deskripsi`, `created_at`, `updated_at`, `status`) VALUES
@@ -362,7 +369,7 @@ INSERT INTO `tenant` (`tenant_id`, `user_id`, `penyewa_id`, `nama`, `foto`, `har
 -- --------------------------------------------------------
 
 --
--- Table structure for table `testimony`
+-- Struktur dari tabel `testimony`
 --
 
 DROP TABLE IF EXISTS `testimony`;
@@ -374,10 +381,10 @@ CREATE TABLE `testimony` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `testimony`
+-- Dumping data untuk tabel `testimony`
 --
 
 INSERT INTO `testimony` (`testimony_id`, `customer_id`, `nama`, `isi`, `created_at`, `updated_at`, `status`) VALUES
@@ -388,7 +395,7 @@ INSERT INTO `testimony` (`testimony_id`, `customer_id`, `nama`, `isi`, `created_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -405,10 +412,10 @@ CREATE TABLE `user` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `nama`, `ktp`, `foto`, `role`, `no_telp`, `email`, `created_at`, `updated_at`, `status`) VALUES
@@ -418,30 +425,29 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `nama`, `ktp`, `foto`, `r
 (10, 'tenant2', '$2y$12$rdlaBl2cS4DcdQ4cal3NguXm/mCs2VB20EgmsyDVXIdPizIwMiBJS', NULL, NULL, NULL, '2', NULL, 'tenant2@gmail.com', '2023-11-30 21:20:52', '2023-11-30 21:20:52', 1),
 (11, 'tenant3', '$2y$12$3RTDgM84.CbGa4qGSUFvs.NrMyfx3RusqoNqaAsshUQhMHW3Kf6pu', NULL, NULL, NULL, '2', NULL, 'tenant3@gmail.com', '2023-11-30 21:21:14', '2023-11-30 21:21:14', 1),
 (12, 'penyewa1', '$2y$12$qHUhpB1g85ivRBlApk1QZu9X.Pqq1/t6WLoKwFZgq82MSspHDgEuW', 'Fransisca', NULL, NULL, '3', NULL, 'penyewa1@gmail.com', '2023-12-08 08:35:12', '2023-12-08 08:35:12', 1),
-(13, 'penyewa2', '$2y$12$TdkcU0z2tdtXXeU6kmKLw.9UvjS062Kzi4Kj67uhwH7MNKeWWlYZK', 'Arensa', NULL, NULL, '3', NULL, 'penyewa2@gmail.com', '2023-12-08 08:35:42', '2023-12-08 08:35:42', 1),
-(23, 'penyewa3', '$2y$12$Yd5DjCaT7YD/GwoUSNiY5u69LMuYwO17MeNOn4oJ.OoTrguVi.pxG', 'penyewa3', '1234567890123456', NULL, '3', '12345678', 'penyewa3@gmail.com', '2024-01-05 01:05:05', '2024-01-05 01:05:05', 1);
+(13, 'penyewa2', '$2y$12$TdkcU0z2tdtXXeU6kmKLw.9UvjS062Kzi4Kj67uhwH7MNKeWWlYZK', 'Arensa', NULL, NULL, '3', NULL, 'penyewa2@gmail.com', '2023-12-08 08:35:42', '2023-12-08 08:35:42', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `firstname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lastname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `about` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `postal` varchar(255) DEFAULT NULL,
+  `about` text DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -451,14 +457,14 @@ CREATE TABLE `users` (
 --
 
 --
--- Indexes for table `d_bulan`
+-- Indeks untuk tabel `d_bulan`
 --
 ALTER TABLE `d_bulan`
   ADD PRIMARY KEY (`d_bulan_id`),
   ADD KEY `h_bulan_id` (`h_bulan_id`);
 
 --
--- Indexes for table `d_kamar`
+-- Indeks untuk tabel `d_kamar`
 --
 ALTER TABLE `d_kamar`
   ADD PRIMARY KEY (`d_kamar_id`),
@@ -466,7 +472,7 @@ ALTER TABLE `d_kamar`
   ADD KEY `kamar_id` (`kamar_id`);
 
 --
--- Indexes for table `d_menu`
+-- Indeks untuk tabel `d_menu`
 --
 ALTER TABLE `d_menu`
   ADD PRIMARY KEY (`d_menu_id`),
@@ -474,7 +480,7 @@ ALTER TABLE `d_menu`
   ADD KEY `h_menu_id` (`h_menu_id`);
 
 --
--- Indexes for table `d_tenant`
+-- Indeks untuk tabel `d_tenant`
 --
 ALTER TABLE `d_tenant`
   ADD PRIMARY KEY (`d_tenant_id`),
@@ -482,21 +488,21 @@ ALTER TABLE `d_tenant`
   ADD KEY `tenant_id` (`tenant_id`);
 
 --
--- Indexes for table `failed_jobs`
+-- Indeks untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indexes for table `h_bulan`
+-- Indeks untuk tabel `h_bulan`
 --
 ALTER TABLE `h_bulan`
   ADD PRIMARY KEY (`h_bulan_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `h_kamar`
+-- Indeks untuk tabel `h_kamar`
 --
 ALTER TABLE `h_kamar`
   ADD PRIMARY KEY (`h_kamar_id`),
@@ -504,7 +510,7 @@ ALTER TABLE `h_kamar`
   ADD KEY `penyewa_id` (`penyewa_id`);
 
 --
--- Indexes for table `h_menu`
+-- Indeks untuk tabel `h_menu`
 --
 ALTER TABLE `h_menu`
   ADD PRIMARY KEY (`h_menu_id`),
@@ -512,7 +518,7 @@ ALTER TABLE `h_menu`
   ADD KEY `h_menu_ibfk_3` (`customer_id`);
 
 --
--- Indexes for table `h_tenant`
+-- Indeks untuk tabel `h_tenant`
 --
 ALTER TABLE `h_tenant`
   ADD PRIMARY KEY (`h_tenant_id`),
@@ -520,7 +526,7 @@ ALTER TABLE `h_tenant`
   ADD KEY `penyewa_id` (`penyewa_id`);
 
 --
--- Indexes for table `kamar`
+-- Indeks untuk tabel `kamar`
 --
 ALTER TABLE `kamar`
   ADD PRIMARY KEY (`kamar_id`),
@@ -528,7 +534,7 @@ ALTER TABLE `kamar`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `menu`
+-- Indeks untuk tabel `menu`
 --
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`menu_id`),
@@ -536,19 +542,19 @@ ALTER TABLE `menu`
   ADD KEY `tenant_id` (`tenant_id`);
 
 --
--- Indexes for table `migrations`
+-- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `password_reset_tokens`
+-- Indeks untuk tabel `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indexes for table `personal_access_tokens`
+-- Indeks untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -556,7 +562,7 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `tenant`
+-- Indeks untuk tabel `tenant`
 --
 ALTER TABLE `tenant`
   ADD PRIMARY KEY (`tenant_id`),
@@ -564,212 +570,212 @@ ALTER TABLE `tenant`
   ADD KEY `user_id_2` (`user_id`);
 
 --
--- Indexes for table `testimony`
+-- Indeks untuk tabel `testimony`
 --
 ALTER TABLE `testimony`
   ADD PRIMARY KEY (`testimony_id`),
   ADD KEY `h_menu_ibfk_3` (`customer_id`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `d_bulan`
+-- AUTO_INCREMENT untuk tabel `d_bulan`
 --
 ALTER TABLE `d_bulan`
   MODIFY `d_bulan_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `d_kamar`
+-- AUTO_INCREMENT untuk tabel `d_kamar`
 --
 ALTER TABLE `d_kamar`
   MODIFY `d_kamar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `d_menu`
+-- AUTO_INCREMENT untuk tabel `d_menu`
 --
 ALTER TABLE `d_menu`
   MODIFY `d_menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `d_tenant`
+-- AUTO_INCREMENT untuk tabel `d_tenant`
 --
 ALTER TABLE `d_tenant`
   MODIFY `d_tenant_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `failed_jobs`
+-- AUTO_INCREMENT untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `h_bulan`
+-- AUTO_INCREMENT untuk tabel `h_bulan`
 --
 ALTER TABLE `h_bulan`
-  MODIFY `h_bulan_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `h_bulan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `h_kamar`
+-- AUTO_INCREMENT untuk tabel `h_kamar`
 --
 ALTER TABLE `h_kamar`
   MODIFY `h_kamar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `h_menu`
+-- AUTO_INCREMENT untuk tabel `h_menu`
 --
 ALTER TABLE `h_menu`
   MODIFY `h_menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `h_tenant`
+-- AUTO_INCREMENT untuk tabel `h_tenant`
 --
 ALTER TABLE `h_tenant`
   MODIFY `h_tenant_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `kamar`
+-- AUTO_INCREMENT untuk tabel `kamar`
 --
 ALTER TABLE `kamar`
   MODIFY `kamar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `menu`
+-- AUTO_INCREMENT untuk tabel `menu`
 --
 ALTER TABLE `menu`
   MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `personal_access_tokens`
+-- AUTO_INCREMENT untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tenant`
+-- AUTO_INCREMENT untuk tabel `tenant`
 --
 ALTER TABLE `tenant`
   MODIFY `tenant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `testimony`
+-- AUTO_INCREMENT untuk tabel `testimony`
 --
 ALTER TABLE `testimony`
   MODIFY `testimony_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `d_bulan`
+-- Ketidakleluasaan untuk tabel `d_bulan`
 --
 ALTER TABLE `d_bulan`
   ADD CONSTRAINT `d_bulan_ibfk_1` FOREIGN KEY (`h_bulan_id`) REFERENCES `h_bulan` (`h_bulan_id`);
 
 --
--- Constraints for table `d_kamar`
+-- Ketidakleluasaan untuk tabel `d_kamar`
 --
 ALTER TABLE `d_kamar`
   ADD CONSTRAINT `d_kamar_ibfk_1` FOREIGN KEY (`h_kamar_id`) REFERENCES `h_kamar` (`h_kamar_id`),
   ADD CONSTRAINT `d_kamar_ibfk_2` FOREIGN KEY (`kamar_id`) REFERENCES `kamar` (`kamar_id`);
 
 --
--- Constraints for table `d_menu`
+-- Ketidakleluasaan untuk tabel `d_menu`
 --
 ALTER TABLE `d_menu`
   ADD CONSTRAINT `d_menu_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`),
   ADD CONSTRAINT `d_menu_ibfk_3` FOREIGN KEY (`h_menu_id`) REFERENCES `h_menu` (`h_menu_id`);
 
 --
--- Constraints for table `d_tenant`
+-- Ketidakleluasaan untuk tabel `d_tenant`
 --
 ALTER TABLE `d_tenant`
   ADD CONSTRAINT `d_tenant_ibfk_1` FOREIGN KEY (`h_tenant_id`) REFERENCES `h_tenant` (`h_tenant_id`),
   ADD CONSTRAINT `d_tenant_ibfk_2` FOREIGN KEY (`tenant_id`) REFERENCES `tenant` (`tenant_id`);
 
 --
--- Constraints for table `h_bulan`
+-- Ketidakleluasaan untuk tabel `h_bulan`
 --
 ALTER TABLE `h_bulan`
   ADD CONSTRAINT `h_bulan_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
--- Constraints for table `h_kamar`
+-- Ketidakleluasaan untuk tabel `h_kamar`
 --
 ALTER TABLE `h_kamar`
   ADD CONSTRAINT `h_kamar_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `h_kamar_ibfk_2` FOREIGN KEY (`penyewa_id`) REFERENCES `user` (`user_id`);
 
 --
--- Constraints for table `h_menu`
+-- Ketidakleluasaan untuk tabel `h_menu`
 --
 ALTER TABLE `h_menu`
   ADD CONSTRAINT `h_menu_ibfk_2` FOREIGN KEY (`tenant_id`) REFERENCES `tenant` (`tenant_id`),
   ADD CONSTRAINT `h_menu_ibfk_3` FOREIGN KEY (`customer_id`) REFERENCES `user` (`user_id`);
 
 --
--- Constraints for table `h_tenant`
+-- Ketidakleluasaan untuk tabel `h_tenant`
 --
 ALTER TABLE `h_tenant`
   ADD CONSTRAINT `h_tenant_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `h_tenant_ibfk_2` FOREIGN KEY (`penyewa_id`) REFERENCES `user` (`user_id`);
 
 --
--- Constraints for table `kamar`
+-- Ketidakleluasaan untuk tabel `kamar`
 --
 ALTER TABLE `kamar`
   ADD CONSTRAINT `kamar_ibfk_1` FOREIGN KEY (`penyewa_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `kamar_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
--- Constraints for table `menu`
+-- Ketidakleluasaan untuk tabel `menu`
 --
 ALTER TABLE `menu`
   ADD CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `menu_ibfk_2` FOREIGN KEY (`tenant_id`) REFERENCES `tenant` (`tenant_id`);
 
 --
--- Constraints for table `tenant`
+-- Ketidakleluasaan untuk tabel `tenant`
 --
 ALTER TABLE `tenant`
   ADD CONSTRAINT `tenant_ibfk_1` FOREIGN KEY (`penyewa_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `tenant_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
--- Constraints for table `testimony`
+-- Ketidakleluasaan untuk tabel `testimony`
 --
 ALTER TABLE `testimony`
   ADD CONSTRAINT `testimony_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `user` (`user_id`);
