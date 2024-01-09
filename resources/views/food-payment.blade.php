@@ -88,14 +88,21 @@
         <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none ">
           Cancel
         </button>
-        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none ">
-          Make Order
-        </button>
+
+        <form action="{{ route('food-midtrans') }}" method="post">
+            @csrf
+            <button type="submit" name="pay" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none ">
+                Make Order
+            </button>
+        </form>
+
       </div>
     </div>
     <!-- End Card -->
   </div>
   <!-- End Card Section -->
+
+
 
 @endsection
 

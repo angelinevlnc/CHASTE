@@ -53,6 +53,8 @@ class CartController extends Controller
 
     //ini untuk ke payment dari cart
     public function paymentCart(){
+        Session::forget('pnow');
+
         $cart = Session::get('cart') ?? [];
         $total = 0;
         foreach ($cart as $key => $value) {
@@ -66,8 +68,5 @@ class CartController extends Controller
             'grandtotal' => $total + ($total * 0.1)
         ]);
 
-        // return view('food-payment', [
-        //     'data' => Session::get('cart')
-        // ]);
     }
 }

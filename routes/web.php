@@ -34,9 +34,22 @@ use App\Http\Controllers\TenantController;
 Route::get('/', [FoodController::class, 'getLanding']);
 
 // Cart
+
+// Route::get('/food-midtrans', function () {
+//     return view('food-midtrans');
+// });
+// Route::post('/payment', [MidtransController::class, 'payment'])->name('payment');
+
+Route::post('/food-midtrans', [MidtransController::class, 'foodMidtrans'])->name('food-midtrans');
+Route::get('/food-midtrans/success', [MidtransController::class, 'food_payment_success']);
+Route::get('/food-midtrans/failed', [MidtransController::class, 'food_payment_fail']);
+
 Route::get('/cart', [CartController::class, 'cartView']);
 Route::get('/add-cart/{id}', [CartController::class, 'addFood']);
 Route::get('/payCart', [CartController::class, 'paymentCart']);
+
+Route::get('/food', [FoodController::class, 'getFood']);
+Route::get('/pay-food/{id}', [FoodController::class, 'foodPayment']);
 
 
 Route::get('/kos/AC', [KosController::class, 'getKamarAC']);
@@ -45,13 +58,6 @@ Route::get('/kos-detail/{id}', [KosController::class, 'getKamarDetail']);
 Route::get('/kos-invoice', function () {
     return view('kos-invoice');
 });
-
-
-Route::get('/food', [FoodController::class, 'getFood']);
-// Route::get('/food-payment', function () {
-//     return view('food-payment');
-// });
-Route::get('/pay-food/{id}', [FoodController::class, 'foodPayment']);
 
 
 
@@ -89,7 +95,7 @@ Route::get('/admin', function () {return redirect('/dashboard');})->middleware('
 	Route::post('/pengeluaran/store', [HomeController::class, 'storePengeluaran'])->name('pengeluaran.store');
 	Route::post('/report/tenant', [HomeController::class, 'showReportTenant'])->name('report.tenant');
 	Route::post('/insertmenu', [MenuController::class, 'insertmenu'])->name('insertmenu');
-	Route::get('/edit-menu/{id}', [MenuControlπler::class, 'showEditMenu'])->name('edit.menu');
+	Route::get('/edit-menu/{id}', [MenuController::class, 'showEditMenu'])->name('edit.menu');
 	Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMenu'])->name('updateStatus.menu');
 	Route::put('/update-menu/{id}', [MenuController::class, 'updateMenu'])->name('update.menu');
 Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMenu'])->name('updateStatus.menu');Route::group(['middleware' => 'auth'], function () {
