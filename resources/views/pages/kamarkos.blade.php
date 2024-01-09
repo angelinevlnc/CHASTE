@@ -4,7 +4,7 @@
     @include('layouts.navbars.auth.topnav', ['title' => 'Kamar Kos'])
     <div class="container-fluid py-4">
     <div class="row">
-            <div class="col-12">
+            <div class="col-7">
                 <div class="card mb-4">
                     @php
                         use App\Models\Kamar;
@@ -13,7 +13,7 @@
                     <div class="card-header pb-0">
                         <h6>List Kamar</h6>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2"  style="height: 300px; overflow-y: auto;">
+                    <div class="card-body px-0 pt-0 pb-2"  style="height: 530px; overflow-y: auto;">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -91,9 +91,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
+            <div class="col-5">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <h6>Add Kamar Kos</h6>
