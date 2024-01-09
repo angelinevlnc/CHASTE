@@ -180,15 +180,23 @@ class MidtransController extends Controller
                 'menu_id' => Session::get('pnow')->menu_id,
                 'qty' => 1,
                 'harga' => Session::get('pnow')->harga,
-                'status' => 1
+                'status' => 1 
             ]);
 
             //GET
-            // $Kamar = Kamar::where('kamar_id', $DKamar->kamar_id)->first();
-            $HMenu = H_Menu::latest()->first();
-            $DMenu = D_Menu::where('h_menu_id', $HMenu->h_menu_id)->first();
-            $Menu = Menu::where('menu_id', $DMenu->menu_id)->first();
+
+            // $HMenu = H_Menu::latest()->first();
+            // $DMenu = D_Menu::where('h_menu_id', $HMenu->h_menu_id)->first();
+            // $Menu = Menu::where('menu_id', $DMenu->menu_id)->first();
             // $Tenant = Tenant::where('tenant_id', $HMenu->tenant_id)->first();
+
+            $HMenu = H_Menu::latest()->first();
+            $DMenu = D_Menu::where('h_menu_id', $HMenu->h_menu_id)->get();
+            $arrayDMenu = $DMenu->pluck('menu_id')->toArray();
+
+            // dd($DMenu);
+
+            $Menu = Menu::whereIn('menu_id', $arrayDMenu)->get();
 
             return view("userHistoryDetailFood", ['HMenu' => $HMenu, 'DMenu' => $DMenu, 'Menu'=>$Menu]);
         }
@@ -217,19 +225,30 @@ class MidtransController extends Controller
                 $h_menu = H_Menu::latest()->first();
                 DB::table('d_menu')->insert([
                     'h_menu_id' => $h_menu->h_menu_id,
-                    'menu_id' => Session::get('cart')->menu_id,
-                    'qty' => Session::get('cart')->qty,
-                    'harga' => Session::get('cart')->subtotal,
+                    'menu_id' => $c->menu_id,
+                    'qty' => $c->qty,
+                    'harga' => $c->subtotal,
                     'status' => 1
                 ]);
             }
 
             //GET
-            // $Kamar = Kamar::where('kamar_id', $DKamar->kamar_id)->first();
-            $HMenu = H_Menu::latest()->first();
-            $DMenu = D_Menu::where('h_menu_id', $HMenu->h_menu_id)->first();
-            $Menu = Menu::where('menu_id', $DMenu->menu_id)->first();
+            // $HMenu = H_Menu::latest()->first();
+            // // dd($HMenu);
+            // $DMenu = D_Menu::where('h_menu_id', $HMenu->h_menu_id)->first();
+            // // dd($DMenu);
+            // $Menu = Menu::where('menu_id', $DMenu->menu_id)->get();
+            // dd($Menu);
             // $Tenant = Tenant::where('tenant_id', $HMenu->tenant_id)->first();
+
+            $HMenu = H_Menu::latest()->first();
+            $DMenu = D_Menu::where('h_menu_id', $HMenu->h_menu_id)->get();
+            $arrayDMenu = $DMenu->pluck('menu_id')->toArray();
+
+            // dd($DMenu);
+
+            $Menu = Menu::whereIn('menu_id', $arrayDMenu)->get();
+
 
             return view("userHistoryDetailFood", ['HMenu' => $HMenu, 'DMenu' => $DMenu, 'Menu'=>$Menu]);
 

@@ -71,21 +71,21 @@
             <h4 class="text-xs font-semibold uppercase text-gray-800 ">Summary</h4>
 
             <ul class="mt-3 flex flex-col">
-              {{-- @foreach  ($Menu as $key => $m)
+              @foreach  ($Menu as $key => $m)
                 <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg ">
                   <div class="flex items-center justify-between w-full">
                     <p>{{ $m->nama }}</p>
                     <p>Rp {{number_format($m->harga, 0, ',', '.')}}</p>
                   </div>
                 </li>
-              @endforeach --}}
+              @endforeach
 
-              <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg ">
+              {{-- <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg ">
                 <div class="flex items-center justify-between w-full">
                   <p>{{ $Menu->nama }}</p>
                   <p>Rp {{number_format($Menu->harga, 0, ',', '.')}}</p>
                 </div>
-              </li>
+              </li> --}}
               {{-- <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg ">
                 <div class="flex items-center justify-between w-full">
                   <span>Tax fee</span>
