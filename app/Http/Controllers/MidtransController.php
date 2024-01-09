@@ -164,37 +164,76 @@ class MidtransController extends Controller
 
     public function food_payment_success(Request $request)
     {
-        //INSERT
-        DB::table('h_menu')->insert([
-            'tenant_id' => Session::get('pnow')->tenant_id,
-            'customer_id' => null,
-            'total' => Session::get('pnow')->harga,
-            'created_at' => now(),
-            'updated_at' => now(),
-            'status' => 1
-        ]);
+        if (Session::has('pnow')) {
+            //INSERT
+            DB::table('h_menu')->insert([
+                'customer_id' => null,
+                'total' => Session::get('pnow')->harga,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'status' => 1
+            ]);
 
-        $h_menu = H_Menu::latest()->first();
-        DB::table('d_menu')->insert([
-            'h_menu_id' => $h_menu->h_menu_id,
-            'menu_id' => Session::get('pnow')->menu_id,
-            'harga' => Session::get('pnow')->harga,
-            'status' => 1
-        ]);
+            $h_menu = H_Menu::latest()->first();
+            DB::table('d_menu')->insert([
+                'h_menu_id' => $h_menu->h_menu_id,
+                'menu_id' => Session::get('pnow')->menu_id,
+                'qty' => 1,
+                'harga' => Session::get('pnow')->harga,
+                'status' => 1
+            ]);
 
-        //GET
-        $HMenu = H_Menu::latest()->first();
-        $DMenu = D_Kamar::where('h_menu_id', $HMenu->h_menu_id)->first();
-        $Menu = Menu::where('menu_id', $DMenu->menu_id)->first();
+            //GET
+            // $Kamar = Kamar::where('kamar_id', $DKamar->kamar_id)->first();
+            $HMenu = H_Menu::latest()->first();
+            $DMenu = D_Menu::where('h_menu_id', $HMenu->h_menu_id)->first();
+            $Menu = Menu::where('menu_id', $DMenu->menu_id)->first();
+            // $Tenant = Tenant::where('tenant_id', $HMenu->tenant_id)->first();
 
-        //UPDATE (apabila sewa pertama kali)
-        // if($Kamar->status==1){
-        //     DB::table('kamar')->where('kamar_id', '=', $Kamar->kamar_id)->update([
-        //         'penyewa_id' => Session::get('login_id'),
-        //         'status' => 2 //DISEWA
-        //     ]);
-        // }
+            return view("userHistoryDetailFood", ['HMenu' => $HMenu, 'DMenu' => $DMenu, 'Menu'=>$Menu]);
+        }
 
-        return view("userHistoryDetailFood", ['HMenu' => $HMenu, 'DMenu' => $DMenu, 'Menu'=>$Menu]);
+        elseif (Session::has('cart')) {
+
+            // Ambil data dari session "cart"
+            $cart = Session::get('cart') ?? [];
+            $total = 0;
+            foreach ($cart as $key => $value) {
+                $total += $value->subtotal;
+            }
+
+            //INSERT
+            DB::table('h_menu')->insert([
+                'customer_id' => null,
+                'total' => $total,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'status' => 1
+            ]);
+
+            foreach ($cart as $c) {
+                # code...
+                // dd($cart->menu_id);
+                $h_menu = H_Menu::latest()->first();
+                DB::table('d_menu')->insert([
+                    'h_menu_id' => $h_menu->h_menu_id,
+                    'menu_id' => Session::get('cart')->menu_id,
+                    'qty' => Session::get('cart')->qty,
+                    'harga' => Session::get('cart')->subtotal,
+                    'status' => 1
+                ]);
+            }
+
+            //GET
+            // $Kamar = Kamar::where('kamar_id', $DKamar->kamar_id)->first();
+            $HMenu = H_Menu::latest()->first();
+            $DMenu = D_Menu::where('h_menu_id', $HMenu->h_menu_id)->first();
+            $Menu = Menu::where('menu_id', $DMenu->menu_id)->first();
+            // $Tenant = Tenant::where('tenant_id', $HMenu->tenant_id)->first();
+
+            return view("userHistoryDetailFood", ['HMenu' => $HMenu, 'DMenu' => $DMenu, 'Menu'=>$Menu]);
+
+
+        }
     }
 }
