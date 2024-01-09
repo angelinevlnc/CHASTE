@@ -43,9 +43,13 @@ class UserProfileController extends Controller
     }
 
     public function deleteUser(Request $request){
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         $user = User::where('user_id', $request->id)->first();
-        DB::table('user')->where('user_id', '=', $user->user_id)->delete();
-
+    
+        if ($user) {
+            $user->delete();
+        }
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
         return redirect('/user-management');
     }
 }
