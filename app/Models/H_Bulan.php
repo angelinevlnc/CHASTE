@@ -15,6 +15,8 @@ class H_Bulan extends Model
     public $incrementing = true;
     public $timestamps = true;
 
+    protected $fillable = ['user_id', 'keterangan', 'total','status'];
+
     public function memiliki_d_bulan(){
         return $this->hasMany('App\Models\D_Bulan', 'h_bulan_id', 'h_bulan_id');
     }

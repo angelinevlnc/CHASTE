@@ -86,17 +86,26 @@ Route::get('/admin', function () {return redirect('/dashboard');})->middleware('
 	Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 	Route::get('/hlmnTenant', [HomeController::class, 'showtenant'])->name('showtenant')->middleware('auth');
+	Route::get('/reportTenant', [HomeController::class, 'showReportTenant'])->name('showReportTenant')->middleware('auth');
+	Route::get('/ordersTenant', [HomeController::class, 'showOrders'])->name('showOrders')->middleware('auth');
+	Route::post('/orders/filter', [HomeController::class, 'filter'])->name('orders.filter')->middleware('auth');
+	Route::post('/orders/terima/{id}', [HomeController::class, 'terimaOrder'])->name('orders.terima');
+	Route::post('/orders/tolak/{id}', [HomeController::class, 'tolakOrder'])->name('orders.tolak');
+	Route::get('/pengeluaran', [HomeController::class, 'showPengeluaran'])->name('pengeluaran.show');
+	Route::post('/pengeluaran/store', [HomeController::class, 'storePengeluaran'])->name('pengeluaran.store');
+	Route::post('/report/tenant', [HomeController::class, 'showReportTenant'])->name('report.tenant');
 	Route::post('/insertmenu', [MenuController::class, 'insertmenu'])->name('insertmenu');
-	Route::get('/edit-menu/{id}', [MenuController::class, 'showEditMenu'])->name('edit.menu');
+	Route::get('/edit-menu/{id}', [MenuControlπler::class, 'showEditMenu'])->name('edit.menu');
+	Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMenu'])->name('updateStatus.menu');
 	Route::put('/update-menu/{id}', [MenuController::class, 'updateMenu'])->name('update.menu');
-	Route::delete('/delete-menu/{id}', [MenuController::class, 'deleteMenu'])->name('delete.menu');
-Route::group(['middleware' => 'auth'], function () {
+Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMenu'])->name('updateStatus.menu');Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
 	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static');
 	Route::get('/profileTenant', [PageController::class, 'profileTenant'])->name('profileTenant');
+	Route::put('/update', [PageController::class, 'update'])->name('profile.update');
 	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static');
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');

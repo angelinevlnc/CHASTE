@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Menu extends Model
 {
     use HasFactory;
-    // use SoftDeletes;
+    //use SoftDeletes;
     protected $table = "menu";
     protected $primaryKey = "menu_id";
     public $incrementing = true;
     public $timestamps = true;
+    //protected $dates = ['deleted_at'];
 
     protected $fillable = ['nama', 'harga', 'kategori', 'deskripsi', 'foto', 'user_id', 'tenant_id', 'status'];
 
