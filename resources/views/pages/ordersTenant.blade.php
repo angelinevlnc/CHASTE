@@ -36,7 +36,7 @@
                                                 <td>{{ $order->h_menu_id }}</td>
                                                 <td>{{ $order->dimiliki_customer->nama }}</td>
                                                 <td>@foreach($order->memiliki_d_menu as $dMenu)
-                                                    {{ $dMenu->dimiliki_menu->nama }}<br>
+                                                    {{ $dMenu->qty }}{{ $dMenu->dimiliki_menu->nama }}<br>
                                                 @endforeach</td>
                                                 <td>Rp {{ number_format($order->total , 0, ',', '.')}}</td>
                                                 <td>

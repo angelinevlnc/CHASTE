@@ -53,6 +53,7 @@
                                         <th style="color: red">No</th>
                                         <th style="color: red">Keterangan</th>
                                         <th style="color: red">Nominal Pengeluaran</th>
+                                        <th style="color: red">Action</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -64,6 +65,14 @@
                                             <td>{{ $counter++ }}</td>
                                             <td>{{ $item->keterangan }}</td>
                                             <td>Rp {{ number_format($item->total, 0, ',', '.') }}</td>
+                                            <td>
+                                                <a href="{{ route('pengeluaran.edit', ['id' => $item->h_bulan_id]) }}" class="btn btn-secondary">Edit</a>
+                                                <form action="{{ route('pengeluaran.delete', ['id' => $item->h_bulan_id]) }}" method="post" style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -99,13 +108,21 @@
                             <br>
                             <br>
                             <br>
-                            <h5 style="color: red">Total Kerugian: Rp {{ number_format($result['totalKerugian'],0,',','.') }}</h5>
+                            <h5 style="color: red">
+                                @if ($result['totalKerugian'] > 0)
+                                    Total Kerugian: Rp {{ number_format($result['totalKerugian'], 0, ',', '.') }}
+                                @else
+                                    Total Kerugian: Rp 0
+                                @endif
+                            </h5>
                             <br>
-                            <h5 style="color: green">Total Keuntungan: Rp {{ number_format($result['totalKeuntungan'],0,',','.') }}</h5>
-                            @if ($result['totalKeuntungan'] > 0)
-                                <br>
-                                <h5 style="color: green">Total Keuntungan: Rp {{ number_format($result['totalKeuntungan'],0,',','.') }}</h5>
-                            @endif
+                            <h5 style="color: green">
+                                @if ($result['totalKeuntungan'] > 0)
+                                    Total Keuntungan: Rp {{ number_format($result['totalKeuntungan'], 0, ',', '.') }}
+                                @else
+                                    Total Keuntungan: Rp 0
+                                @endif
+                            </h5>
                         </div>
                     @else
                         <h5 style="color: green">Belum ada data</h5>

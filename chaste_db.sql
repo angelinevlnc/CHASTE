@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 09, 2024 at 12:00 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Host: localhost
+-- Generation Time: Jan 09, 2024 at 06:53 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -72,6 +72,7 @@ CREATE TABLE `d_menu` (
   `d_menu_id` int(11) NOT NULL,
   `h_menu_id` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
   `harga` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -80,10 +81,14 @@ CREATE TABLE `d_menu` (
 -- Dumping data for table `d_menu`
 --
 
-INSERT INTO `d_menu` (`d_menu_id`, `h_menu_id`, `menu_id`, `harga`, `status`) VALUES
-(1, 1, 2, 5000, 1),
-(2, 1, 3, 5000, 1),
-(3, 2, 7, 15000, 1);
+INSERT INTO `d_menu` (`d_menu_id`, `h_menu_id`, `menu_id`, `qty`, `harga`, `status`) VALUES
+(1, 1, 2, 1, 5000, 1),
+(2, 1, 3, 1, 5000, 1),
+(3, 2, 7, 1, 15000, 1),
+(33, 43, 2, 2, 10000, 1),
+(34, 43, 3, 1, 5000, 1),
+(35, 44, 6, 1, 15000, 1),
+(36, 45, 8, 1, 10000, 1);
 
 -- --------------------------------------------------------
 
@@ -190,7 +195,10 @@ CREATE TABLE `h_menu` (
 
 INSERT INTO `h_menu` (`h_menu_id`, `tenant_id`, `customer_id`, `total`, `created_at`, `updated_at`, `status`) VALUES
 (1, 1, 12, 10000, '2024-01-05 12:20:01', '2024-01-08 20:53:21', 2),
-(2, 2, 12, 15000, '2024-01-05 12:20:49', '2024-01-05 12:20:49', 1);
+(2, 2, 12, 15000, '2024-01-05 12:20:49', '2024-01-05 12:20:49', 1),
+(43, 1, 12, 15000, '2024-01-09 10:40:00', '2024-01-09 10:40:00', 1),
+(44, 2, 12, 15000, '2024-01-09 10:40:00', '2024-01-09 10:40:00', 1),
+(45, 3, 12, 10000, '2024-01-09 10:40:00', '2024-01-09 10:40:00', 1);
 
 -- --------------------------------------------------------
 
@@ -235,7 +243,7 @@ CREATE TABLE `kamar` (
 --
 
 INSERT INTO `kamar` (`kamar_id`, `user_id`, `penyewa_id`, `nama`, `foto`, `harga`, `deskripsi`, `AC`, `created_at`, `updated_at`, `status`) VALUES
-(1, 1, 12, 'A-11', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the entrance door.', 'AC', '2024-01-05 08:49:07', '2023-12-08 09:14:45', 2),
+(1, 1, 12, 'A-11', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the entrance door.', 'AC', '2024-01-09 17:52:00', '2023-12-08 09:14:45', 2),
 (2, 1, NULL, 'A-12', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the bathroom.', 'AC', '2023-12-08 09:20:22', '2023-12-08 09:14:45', 1),
 (3, 1, NULL, 'A-13', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the stairs to 2nd floor.', 'AC', '2023-12-08 09:21:53', '2023-12-08 09:14:45', 1),
 (4, 1, NULL, 'A-14', 'kamar/kos1.png', 1200000, 'First floor room with AC. Close to the water dispenser.', 'AC', '2023-12-08 09:22:37', '2023-12-08 09:14:45', 1),
@@ -609,7 +617,7 @@ ALTER TABLE `d_kamar`
 -- AUTO_INCREMENT for table `d_menu`
 --
 ALTER TABLE `d_menu`
-  MODIFY `d_menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `d_menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `d_tenant`
@@ -639,7 +647,7 @@ ALTER TABLE `h_kamar`
 -- AUTO_INCREMENT for table `h_menu`
 --
 ALTER TABLE `h_menu`
-  MODIFY `h_menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `h_menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `h_tenant`

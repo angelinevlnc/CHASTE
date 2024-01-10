@@ -95,6 +95,9 @@ Route::get('/admin', function () {return redirect('/dashboard');})->middleware('
 	Route::get('/pengeluaran', [HomeController::class, 'showPengeluaran'])->name('pengeluaran.show');
 	Route::post('/pengeluaran/store', [HomeController::class, 'storePengeluaran'])->name('pengeluaran.store');
 	Route::post('/report/tenant', [HomeController::class, 'showReportTenant'])->name('report.tenant');
+	Route::get('/edit-pengeluaran/{id}', [HomeController::class, 'editPengeluaran'])->name('pengeluaran.edit');
+	Route::put('/update-pengeluaran/{id}', [HomeController::class, 'updatePengeluaran'])->name('pengeluaran.update');
+	Route::delete('/delete-pengeluaran/{id}', [HomeController::class, 'deletePengeluaran'])->name('pengeluaran.delete');
 	Route::post('/insertmenu', [MenuController::class, 'insertmenu'])->name('insertmenu');
 	Route::get('/edit-menu/{id}', [MenuController::class, 'showEditMenu'])->name('edit.menu');
 	Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMenu'])->name('updateStatus.menu');
