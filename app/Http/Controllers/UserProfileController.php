@@ -52,4 +52,30 @@ class UserProfileController extends Controller
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
         return redirect('/user-management');
     }
+
+    public function editRole(Request $request){
+        return redirect('/editRole?user_id=' . ($request->id));
+    }
+
+    public function changeRole(Request $request){
+        $request->validate(
+            [
+                "exampleRadio" => "required",
+            ],
+            [
+                "required" => "Fill the blank",
+            ]
+        );
+        $id = $request->id;
+        if($request->exampleRadio == "2"){
+            DB::table('user')->where('user_id', '=', $id)->update([
+                'role' => 2,
+            ]);
+        }else{
+            DB::table('user')->where('user_id', '=', $id)->update([
+                'role' => 3,
+            ]);
+        }
+        return redirect('/user-management');
+    }
 }
