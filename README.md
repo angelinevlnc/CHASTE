@@ -1,4 +1,4 @@
-<p align="center"><a href="git_img/C.png" target="_blank"><img src="git_img/C (Billboard (Landscape)).png" width="800" alt="Laravel Logo"></a></p>
+<p align="center"><a href="git_img/C.png" target="_blank"><img src="git_img/C (Billboard (Landscape)).png" width="1000" alt="Chaste Logo"></a></p>
 
 ## About Chaste
 <p>
