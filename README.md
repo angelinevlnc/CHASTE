@@ -1,65 +1,61 @@
-<p align="center"><a href="git_img/C.png" target="_blank"><img src="git_img/C.png" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="git_img/C.png" target="_blank"><img src="git_img/C.png" width="800" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About Chaste
+<p>
+Web Chaste dikembangkan untuk memperbaiki pengalaman mahasiswa di sekitar kampus ISTTS, fokus pada efisiensi pemesanan makanan di Chaste Mini Food Court. Dengan antarmuka yang mudah, mahasiswa dapat dengan cepat memesan dan membayar makanan secara elektronik. Tujuan lainnya adalah penyederhanaan proses pemesanan kamar kost dan integrasi antara sistem pemesanan makanan dan kost. Chaste Mini Food Court and Kost, yang strategis di depan kampus, menawarkan beragam kuliner untuk mahasiswa. Keseluruhan, aplikasi ini bertujuan meningkatkan keseluruhan pengalaman pengguna dengan antarmuka yang ramah, responsif, dan notifikasi yang tepat waktu. Tujuan akhirnya adalah memberikan kontribusi positif terhadap kualitas hidup mahasiswa di sekitar kampus ISTTS.</p>
 
-## About Laravel
+## Quick Start // Access link 
+To compile the dist files you need Node.js/npm, clone/download the repo then:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+npm install (install npm deps)<br>
+Optional: npm run dev (developer mode, autocompile with browsersync support for live demo) <br><br>
+npm run production (compile css/js files)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Documentation
+Web chaste terdiri dari beberapa fitur yang dikhususkan berdasarkan role pengguna web yaitu Pengguna(User), Tenant dan juga Admin 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### User Feature
+<p>Landing Page</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_171417_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
-## Learning Laravel
+<p>Foodcourt Menu</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_171542_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<p>Foodcourt Cart</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_17168_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<p>Food Payment Confirmation</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_171920_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<p>Kost Catalogue</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_171436_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
-## Laravel Sponsors
+<p>Kost Detail</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_171449_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+<p>Midtrans</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_171651_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
-### Premium Partners
+<p>Food and Kost Payment Invoice</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_172440_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+<p>User Dahboard</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_17277_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
-## Contributing
+<p>User History</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_172718_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<p>Login</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_171512_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
-## Code of Conduct
+<p>Register</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_171523_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+### Admin Feature
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Tenant Feature
+
 
 ## License
 
