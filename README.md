@@ -82,7 +82,7 @@ Web chaste terdiri dari beberapa fitur yang dikhususkan berdasarkan role penggun
 <p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_18440_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
 <p>Order</p>
-<p><a href="git_img/C.png" target="_blank"><img src="git_img/.jpeg" width="600" alt=""></a></p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Screenshot 2024-01-10 at 19.32.06.png" width="600" alt=""></a></p>
 
 <p>Laporan Laba Rugi</p>
 <p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_18646_127.0.0.1.jpeg" width="600" alt=""></a></p>
