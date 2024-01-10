@@ -53,6 +53,29 @@ Web chaste terdiri dari beberapa fitur yang dikhususkan berdasarkan role penggun
 
 
 ### Admin Feature
+<p>Dahboard Admin</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/.jpeg" width="600" alt=""></a></p>
+
+<p>Laporan Pengeluaran</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/.jpeg" width="600" alt=""></a></p>
+
+<p>Laporan Penjualan</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/.jpeg" width="600" alt=""></a></p>
+
+<p>Tenant</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_173027_127.0.0.1.jpeg" width="600" alt=""></a></p>
+
+<p>Edit Tenant</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_173046_127.0.0.1.jpeg" width="600" alt=""></a></p>
+
+<p>Kos</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_173056_127.0.0.1.jpeg" width="600" alt=""></a></p>
+
+<p>Edit Kos</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_17315_127.0.0.1.jpeg" width="600" alt=""></a></p>
+
+<p>User Management</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_173133_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
 ### Tenant Feature
 
