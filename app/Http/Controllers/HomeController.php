@@ -7,6 +7,7 @@ use App\Models\H_Menu;
 use App\Models\H_Bulan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -83,7 +84,7 @@ class HomeController extends Controller
             'status' => 3,
         ]);
 
-        //return view('pages.reporttenant');    
+        return redirect('/reportTenant');   
     }
 
     public function kalkulasiduit($tenantId, $bulan, $tahun)
