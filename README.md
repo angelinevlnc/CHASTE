@@ -78,6 +78,21 @@ Web chaste terdiri dari beberapa fitur yang dikhususkan berdasarkan role penggun
 <p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_173133_127.0.0.1.jpeg" width="600" alt=""></a></p>
 
 ### Tenant Feature
+<p>Dahboard Tenant</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_18440_127.0.0.1.jpeg" width="600" alt=""></a></p>
+
+<p>Order</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/.jpeg" width="600" alt=""></a></p>
+
+<p>Laporan Laba Rugi</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_18646_127.0.0.1.jpeg" width="600" alt=""></a></p>
+
+<p>Edit Menu</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_18822_127.0.0.1.jpeg" width="600" alt=""></a></p>
+
+<p>Profile</p>
+<p><a href="git_img/C.png" target="_blank"><img src="git_img/Web capture_10-1-2024_18552_127.0.0.1.jpeg" width="600" alt=""></a></p>
+
 
 
 ## License
