@@ -75,7 +75,7 @@
                     <div class="card-body pt-4 p-3" style="height: 300px; overflow-y: auto;">
                         @foreach($listSewaTenant as $key=>$d)
                             @php
-                                $listUser= User::where('user_id', $d->user_id)->get();
+                                $listUser= User::where('user_id', $d->penyewa_id)->get();
                                 $timestamp = $d->updated_at;
                                 $dateTime = new DateTime($timestamp);
                                 $date = $dateTime->format("d-m-Y");
