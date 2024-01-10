@@ -125,7 +125,7 @@ class MidtransController extends Controller
 
             $transactionDetails = [
                 'order_id' => 'ORDER-' . time(),
-                'gross_amount' => $total
+                'gross_amount' => $total+$total/10
             ];
 
 
@@ -148,7 +148,7 @@ class MidtransController extends Controller
 
             $transactionDetails = [
                 'order_id' => 'ORDER-' . time(),
-                'gross_amount' => $total
+                'gross_amount' => $total+$total/10
             ];
 
             $snapToken = Snap::getSnapToken(['transaction_details' => $transactionDetails]);
@@ -167,7 +167,8 @@ class MidtransController extends Controller
         if (Session::has('pnow')) {
             //INSERT
             DB::table('h_menu')->insert([
-                'customer_id' => null,
+                'tenant_id' => Session::get('pnow')->tenant_id,
+                'customer_id' => Session::get('login_id') ?? null,
                 'total' => Session::get('pnow')->harga,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -184,21 +185,15 @@ class MidtransController extends Controller
             ]);
 
             //GET
-
-            // $HMenu = H_Menu::latest()->first();
-            // $DMenu = D_Menu::where('h_menu_id', $HMenu->h_menu_id)->first();
-            // $Menu = Menu::where('menu_id', $DMenu->menu_id)->first();
-            // $Tenant = Tenant::where('tenant_id', $HMenu->tenant_id)->first();
-
-            $HMenu = H_Menu::latest()->first();
-            $DMenu = D_Menu::where('h_menu_id', $HMenu->h_menu_id)->get();
+            $HMenu = H_Menu::where('h_menu_id', $h_menu->h_menu_id)->first();
+            $Tenant = Tenant::where('tenant_id', $HMenu->tenant_id)->first();
+            $DMenu = D_Menu::where('h_menu_id', $h_menu->h_menu_id)->get();
             $arrayDMenu = $DMenu->pluck('menu_id')->toArray();
-
-            // dd($DMenu);
-
             $Menu = Menu::whereIn('menu_id', $arrayDMenu)->get();
 
-            return view("userHistoryDetailFood", ['HMenu' => $HMenu, 'DMenu' => $DMenu, 'Menu'=>$Menu]);
+            Session::forget('pnow');
+
+            $toggle = 0;
         }
 
         elseif (Session::has('cart')) {
@@ -211,48 +206,80 @@ class MidtransController extends Controller
             }
 
             //INSERT
-            DB::table('h_menu')->insert([
-                'customer_id' => null,
-                'total' => $total,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'status' => 1
-            ]);
 
+            $tenant = null;
+            $cek = 0;
+            foreach ($cart as $key => $value) {
+                if($tenant){
+                    foreach ($tenant as $k => $t) {
+                        if($value->tenant_id == $t){
+                            $cek = $k;
+                        }
+                    }
+                }
+                if($key == 0){
+                    $tenant[] = $value->tenant_id;
+                    DB::table('h_menu')->insert([
+                        'tenant_id' => $value->tenant_id,
+                        'customer_id' => Session::get('login_id') ?? null,
+                        'total' => 0,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                        'status' => 1
+                    ]);
+                }
+                else if($value->tenant_id != $tenant[$cek]){
+                    $tenant[] = $value->tenant_id;
+                    DB::table('h_menu')->insert([
+                        'tenant_id' => $value->tenant_id,
+                        'customer_id' => Session::get('login_id') ?? null,
+                        'total' => 0,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                        'status' => 1
+                    ]);
+                }
+            }
+
+            $cek = 0;
+            $h_menu = H_Menu::orderBy('h_menu_id', 'DESC')->latest()->first();
+            $h_menu_id = $h_menu->h_menu_id;
             foreach ($cart as $c) {
-                # code...
-                // dd($cart->menu_id);
-                $h_menu = H_Menu::latest()->first();
-                DB::table('d_menu')->insert([
-                    'h_menu_id' => $h_menu->h_menu_id,
-                    'menu_id' => $c->menu_id,
-                    'qty' => $c->qty,
-                    'harga' => $c->subtotal,
-                    'status' => 1
-                ]);
+                foreach ($tenant as $k => $t) {
+                    if($c->tenant_id == $t){
+                        $id = $h_menu_id - (sizeOf($tenant)-1 - $k);
+                        DB::table('d_menu')->insert([
+                            'h_menu_id' => $id,
+                            'menu_id' => $c->menu_id,
+                            'qty' => $c->qty,
+                            'harga' => $c->subtotal,
+                            'status' => 1
+                        ]);
+
+                        //UPDATE total di H_Menu
+                        $total = H_Menu::where('h_menu_id', '=', $id)->first()->total;
+                        DB::table('h_menu')->where('h_menu_id', '=', $id)->update([
+                            'total' => $total + $c->subtotal
+                        ]);
+                    }
+                }
             }
 
             //GET
-            // $HMenu = H_Menu::latest()->first();
-            // // dd($HMenu);
-            // $DMenu = D_Menu::where('h_menu_id', $HMenu->h_menu_id)->first();
-            // // dd($DMenu);
-            // $Menu = Menu::where('menu_id', $DMenu->menu_id)->get();
-            // dd($Menu);
-            // $Tenant = Tenant::where('tenant_id', $HMenu->tenant_id)->first();
+            foreach ($tenant as $key => $value) {
+                $id = $h_menu_id - (sizeOf($tenant)-1 - $key);
+                $HMenu[] = H_Menu::where('h_menu_id', $id)->first();
+                $Tenant[] = Tenant::where('tenant_id', $HMenu[$key]->tenant_id)->first();
+                $DMenu[] = D_Menu::where('h_menu_id', $id)->get();
+                $arrayDMenu = $DMenu[$key]->pluck('menu_id')->toArray();
+                $Menu[] = Menu::whereIn('menu_id', $arrayDMenu)->get();
+            }
 
-            $HMenu = H_Menu::latest()->first();
-            $DMenu = D_Menu::where('h_menu_id', $HMenu->h_menu_id)->get();
-            $arrayDMenu = $DMenu->pluck('menu_id')->toArray();
+            Session::forget('cart');
 
-            // dd($DMenu);
-
-            $Menu = Menu::whereIn('menu_id', $arrayDMenu)->get();
-
-
-            return view("userHistoryDetailFood", ['HMenu' => $HMenu, 'DMenu' => $DMenu, 'Menu'=>$Menu]);
-
-
+            $toggle = sizeOf($tenant)-1;
         }
+        
+        return view("userHistoryDetailFood", ['toggle'=>$toggle, 'HMenu' => $HMenu, 'DMenu' => $DMenu,'Tenant'=>$Tenant, 'Menu'=>$Menu]);
     }
 }

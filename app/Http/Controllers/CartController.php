@@ -47,8 +47,46 @@ class CartController extends Controller
         ]);
     }
 
-    public function deleteCart(){
+    public function minusFood($id){
+        $cart = Session::get('cart') ?? [];
+        $menu = Menu::find($id);
+        $cek = -1;
 
+        foreach ($cart as $key => $value) {
+            if ($value->menu_id == $menu->menu_id) {
+                $value->qty -= 1;
+                $value->subtotal = $value->harga * $value->qty;
+                
+                if($value->qty == 0){
+                    $cek = $key;
+                }
+            }
+        }
+
+        //HAPUS jika qty = 0
+        if($cek>-1){
+            unset($cart[$cek]);
+        }
+        
+        Session::put('cart', $cart);
+        return redirect('/cart');
+    }
+
+    public function deleteFood($id){
+        $cart = Session::get('cart') ?? [];
+        $menu = Menu::find($id);
+        $cek = null;
+
+        // check cart sudah ada menu lama belum
+        foreach ($cart as $key => $value) {
+            if ($value->menu_id == $menu->menu_id) {
+                $cek = $key;
+            }
+        }
+        unset($cart[$cek]);
+
+        Session::put('cart', $cart);
+        return redirect('/cart');
     }
 
     //ini untuk ke payment dari cart

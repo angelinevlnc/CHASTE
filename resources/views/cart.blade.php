@@ -18,11 +18,11 @@
             <div class="mt-5 sm:mt-0">
               <h2 class="text-lg font-bold text-gray-900">{{ $c->nama }}</h2>
               <p class="mt-1 text-xs text-gray-700">Rp. {{ number_format($c->harga) }}</p>
-              <p class="mt-16 text-base text-red-700 hover:underline">Remove</p>
+              <a href="/remove-cart/{{$c->menu_id}}"><p class="mt-16 text-base text-red-700 hover:underline">Remove</p></a>
             </div>
             <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-2">
                 <div class="flex items-center border-gray-100 ml-7">
-                    <span class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"> - </span>
+                    <a href="/minus-cart/{{$c->menu_id}}"><span class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"> - </span></a>
                     <span class="w-5 text-center">{{$c->qty}}</span>
                     <a href="/add-cart/{{$c->menu_id}}"><span class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50">+</span></a>
 
