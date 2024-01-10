@@ -128,7 +128,12 @@ Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMen
 	Route::get('/user-management/delete/{id}', [UserProfileController::class, 'deleteUser']);
 
 	Route::post('addExpenses', [ReportController::class, 'addExpense'])->name('add-expense');
-	
+	Route::post('addExpenses', [ReportController::class, 'addExpense'])->name('add-expense');
+
+	Route::post('editExpense', [ReportController::class, 'editExpense'])->name('editExpense');
+	Route::get('/pengeluaranOwner/edit/{id}', [ReportController::class, 'changeExpense'])->name('edit-expense');
+	Route::get('/pengeluaranOwner/delete/{id}', [ReportController::class, 'deleteExpense']);
+
 });
 
 
