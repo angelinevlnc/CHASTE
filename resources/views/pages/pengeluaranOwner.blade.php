@@ -4,14 +4,17 @@
     @include('layouts.navbars.auth.topnav', ['title' => 'Laporan Keuangan'])
     <div class="container-fluid py-4">
         <div class="row">
-            <div class="col-7"">
+            <div class="col-12"">
                 <div class="card">
                     <div class="card-header pb-0 px-3">
                         <h6 class="mb-0">Expense Information</h6>
                     </div>
                     @php
                         use App\Models\H_Bulan;
+                        use App\Models\User;
                         $listPengeluaran = H_Bulan::where('status', 0)->get();
+                        $listUser= User::where('role', 2)->get();
+                        $listPenyewaKost= User::where('role', 3)->get();
                     @endphp
                     <div class="card-body pt-4 p-3 " style="height: 300px; overflow-y: auto;">
                         @foreach($listPengeluaran as $key=>$d)
@@ -38,7 +41,65 @@
                     </div>
                 </div>
             </div>
-            <div class="col-5">
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-6">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h1></h1>
+                        <h6>Add Income</h6>
+                        <form action="{{ route('add-income') }}" method="post">
+                        @csrf
+                            <div class="mb-3">
+                                <label class="form-label">Total Payment</label>
+                                <input class="form-control" type="number" id="" name="total">
+                            </div>
+                            <!-- <div class="mb-3">
+                                <label>Date</label>
+                                <input  class="form-control" type="date" name="date" id="">
+                            </div> -->
+                            <div class="mb-3 my-3 d-flex">
+                                <label class="form-label">Source</label>&nbsp;&nbsp;
+                                <div class="form-check mx-3">
+                                    <input class="form-check-input" type="radio" name="exampleRadio" id="radioOption1" value="1">
+                                    <label class="form-check-label" for="radioOption1">
+                                        Kamar Kost
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadio" id="radioOption2" value="2">
+                                    <label class="form-check-label" for="radioOption2">
+                                        Tenant
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3" id="tenantOwnerSelect" style="display: none;">
+                                <label class="form-label">Tenant Owner</label>
+                                <select class="form-select" aria-label="Default select example" name="penyewa2">
+                                    <option>Select tenant owner</option>
+                                    @foreach ($listUser as $key=>$isi)
+                                    <option value="{{$isi->user_id}}">{{$isi->username}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3" id="kostOwnerSelect" style="display: none;">
+                                <label class="form-label">Kost Owner</label>
+                                <select class="form-select" aria-label="Default select example" name="penyewa">
+                                    <option>Select kost owner</option>
+                                    @foreach ($listPenyewaKost as $key=>$isi)
+                                    <option value="{{$isi->user_id}}">{{$isi->username}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3 my-3">
+                                <button class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <h1></h1>
@@ -69,7 +130,6 @@
                     </div>
                     @php
                         use App\Models\H_Tenant;
-                        use App\Models\User;
                         $listSewaTenant= H_Tenant::get();
                     @endphp
                     <div class="card-body pt-4 p-3" style="height: 300px; overflow-y: auto;">
@@ -132,6 +192,19 @@
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(function() {
+                $('input[name="exampleRadio"]').change(function() {
+                    if ($(this).val() == "2") {
+                        $('#kostOwnerSelect').hide();
+                        $('#tenantOwnerSelect').show();
+                    } else {
+                        $('#tenantOwnerSelect').hide();
+                        $('#kostOwnerSelect').show();
+                    }
+                });
+            });
+        </script>
         @include('layouts.footers.auth.footer')
     </div>
 @endsection

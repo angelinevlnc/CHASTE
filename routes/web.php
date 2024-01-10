@@ -130,7 +130,7 @@ Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMen
 	Route::post('editRole', [UserProfileController::class, 'changeRole'])->name('edit-role');
 
 	Route::post('addExpenses', [ReportController::class, 'addExpense'])->name('add-expense');
-	Route::post('addExpenses', [ReportController::class, 'addExpense'])->name('add-expense');
+	Route::post('addIncome', [ReportController::class, 'addIncome'])->name('add-income');
 
 	Route::post('editExpense', [ReportController::class, 'editExpense'])->name('editExpense');
 	Route::get('/pengeluaranOwner/edit/{id}', [ReportController::class, 'changeExpense'])->name('edit-expense');

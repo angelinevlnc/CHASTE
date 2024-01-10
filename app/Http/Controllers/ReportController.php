@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\H_Bulan;
+use App\Models\H_Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,28 @@ class ReportController extends Controller
             'status' => 0,
             'keterangan' => $request->desc
         ]);
+
+        return redirect('/pengeluaranOwner');
+    }
+
+    public function addIncome(Request $request){
+        if($request->exampleRadio == 1){
+            DB::table('h_kamar')->insert([
+                'user_id' => 1,
+                'penyewa_id' => $request->penyewa,
+                'total' => $request->total,
+                'status' => 1
+                //status 1 sudah dibayar
+            ]);
+        }else{
+            DB::table('h_tenant')->insert([
+                'user_id' => 1,
+                'penyewa_id' => $request->penyewa2,
+                'total' => $request->total,
+                'status' => 1
+                //status 1 sudah dibayar
+            ]);
+        }
 
         return redirect('/pengeluaranOwner');
     }
