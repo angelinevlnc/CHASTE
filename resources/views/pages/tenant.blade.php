@@ -4,7 +4,7 @@
     @include('layouts.navbars.auth.topnav', ['title' => 'Tenant'])
     <div class="container-fluid py-4">
     <div class="row">
-            <div class="col-7">
+            <div class="col-8">
                 <div class="card mb-4">
                     @php
                         use App\Models\Tenant;
@@ -28,7 +28,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($listTenant as $key=>$d)
-                                    @if ($d->status == 1)
+                                    @if ($d->status == 1 && $d->penyewa_id == NULL)
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
@@ -46,6 +46,37 @@
                                                 Rp{{ number_format($d->harga, 0, ',', '.') }}
                                             </p>
                                         </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="badge badge-sm bg-gradient-success">Available</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <button class="btn btn-primary"><a href="/tenant/edit/{{$d->tenant_id}}" style="text-decoration: none;color: inherit;">Edit</a></button>
+                                        </td>
+                                        <td class="align-middle">
+                                            <button style="background-color: red;" class="btn btn-primary"><a href="/tenant/delete/{{$d->tenant_id}}" style="text-decoration: none;color: inherit;">Delete</a></button>
+                                        </td>
+                                    </tr>
+                                    @else
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <img src="{{ Storage::url("$d->foto") }}" class="avatar avatar-lg me-3"
+                                                        alt="tenant1">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $d->nama }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-m font-weight-bold mb-0">
+                                                Rp{{ number_format($d->harga, 0, ',', '.') }}
+                                            </p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="badge badge-sm bg-gradient-secondary">Unavailable</span>
+                                        </td>
                                         <td class="align-middle text-center">
                                             <button class="btn btn-primary"><a href="/tenant/edit/{{$d->tenant_id}}" style="text-decoration: none;color: inherit;">Edit</a></button>
                                         </td>
@@ -61,7 +92,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <h1></h1>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 09, 2024 at 06:53 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Host: 127.0.0.1
+-- Generation Time: Jan 10, 2024 at 04:32 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,6 +37,15 @@ CREATE TABLE `d_bulan` (
   `harga` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `d_bulan`
+--
+
+INSERT INTO `d_bulan` (`d_bulan_id`, `h_bulan_id`, `keterangan`, `harga`, `status`) VALUES
+(1, 8, 'buat stand minuman chaste', 10000, 0),
+(2, 9, 'buat stand minuman chaste', 10000, 0),
+(3, 10, 'Bayar kurir', 20000, 0);
 
 -- --------------------------------------------------------
 
@@ -105,6 +114,13 @@ CREATE TABLE `d_tenant` (
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `d_tenant`
+--
+
+INSERT INTO `d_tenant` (`d_tenant_id`, `h_tenant_id`, `tenant_id`, `harga`, `status`) VALUES
+(1, 1, 5, 700000, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -145,7 +161,10 @@ CREATE TABLE `h_bulan` (
 
 INSERT INTO `h_bulan` (`h_bulan_id`, `user_id`, `total`, `created_at`, `updated_at`, `status`, `keterangan`) VALUES
 (1, 9, 1000000, '2024-01-08 21:53:40', '2024-01-08 21:53:40', 3, 'Sewa Bulanan'),
-(7, 9, 14, '2024-01-08 22:14:17', '2024-01-08 22:14:17', 3, 'Grosiran Pop Ice');
+(7, 9, 14, '2024-01-08 22:14:17', '2024-01-08 22:14:17', 3, 'Grosiran Pop Ice'),
+(8, 1, 10000, '2024-01-10 10:21:58', '2024-01-10 10:21:58', 0, 'buat stand minuman chaste'),
+(9, 1, 10000, '2024-01-10 10:22:02', '2024-01-10 10:22:02', 4, 'buat stand minuman chaste'),
+(10, 1, 10000, '2024-01-10 11:29:54', '2024-01-10 11:29:54', 0, 'Bayar kurir');
 
 -- --------------------------------------------------------
 
@@ -170,7 +189,13 @@ CREATE TABLE `h_kamar` (
 
 INSERT INTO `h_kamar` (`h_kamar_id`, `user_id`, `penyewa_id`, `total`, `created_at`, `updated_at`, `status`) VALUES
 (1, 1, 12, 1200000, '2024-01-05 08:50:19', '2024-01-05 08:50:19', 1),
-(2, 1, 12, 1200000, '2024-01-05 10:37:31', '2024-01-05 10:37:31', 1);
+(2, 1, 12, 1200000, '2024-01-05 10:37:31', '2024-01-05 10:37:31', 1),
+(3, 1, 13, 700000, '2024-01-10 13:37:30', '2024-01-10 13:37:30', 1),
+(4, 1, 12, 700000, '2024-01-10 13:39:14', '2024-01-10 13:39:14', 1),
+(5, 1, 13, 900000, '2024-01-10 13:46:53', '2024-01-10 13:46:53', 1),
+(6, 1, 12, 1000000, '2024-01-10 13:49:37', '2024-01-10 13:49:37', 1),
+(7, 1, 12, 1500000, '2024-01-10 13:52:08', '2024-01-10 13:52:08', 1),
+(8, 1, 13, 100000, '2024-01-10 14:14:14', '2024-01-10 14:14:14', 1);
 
 -- --------------------------------------------------------
 
@@ -216,6 +241,15 @@ CREATE TABLE `h_tenant` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `h_tenant`
+--
+
+INSERT INTO `h_tenant` (`h_tenant_id`, `user_id`, `penyewa_id`, `total`, `created_at`, `updated_at`, `status`) VALUES
+(1, 1, 24, 700000, '2024-01-10 12:58:07', '2024-01-10 12:58:07', 1),
+(2, 1, 24, 100000, '2024-01-10 13:51:37', '2024-01-10 13:51:37', 1),
+(3, 1, 9, 1000000, '2024-01-10 13:51:55', '2024-01-10 13:51:55', 1);
 
 -- --------------------------------------------------------
 
@@ -372,7 +406,9 @@ CREATE TABLE `tenant` (
 INSERT INTO `tenant` (`tenant_id`, `user_id`, `penyewa_id`, `nama`, `foto`, `harga`, `deskripsi`, `created_at`, `updated_at`, `status`) VALUES
 (1, 1, 9, 'Chaste Drink', 'tenant/drink.jpg', 1000000, 'Refreshing beverage that combines natural ingredients to provide a pure and invigorating taste, perfect for those seeking a delightful and wholesome drink experience.', '2023-12-01 04:52:39', '2023-12-01 04:52:39', 1),
 (2, 1, 10, 'Bakso Bu Gaby', 'tenant/bakso.jpg', 1000000, 'Bakso Bu Gaby offers a delightful culinary experience with its signature meatball soup, showcasing a perfect blend of flavors and textures that captures the essence of Indonesian comfort food.\r\n\r\n', '2023-12-01 04:54:51', '2023-12-01 04:54:51', 1),
-(3, 1, 11, 'Pawon CK', 'tenant/pawon.png', 1000000, 'Changing its menu daily, Pawon CK\'s a unique tenant that adds excitement to your dining experience ensuring a diverse and fresh selection of dishes for customers to savor. From boarding passes to movie tickets, there\'s pretty much nothing you can\'t store.', '2023-12-01 04:55:20', '2023-12-01 04:55:20', 1);
+(3, 1, 11, 'Pawon CK', 'tenant/pawon.png', 1000000, 'Changing its menu daily, Pawon CK\'s a unique tenant that adds excitement to your dining experience ensuring a diverse and fresh selection of dishes for customers to savor. From boarding passes to movie tickets, there\'s pretty much nothing you can\'t store.', '2023-12-01 04:55:20', '2023-12-01 04:55:20', 1),
+(4, 1, 24, 'Lemonade', 'tenant/tenant3.jpg', 900000, 'we serve refreshing drink such as lemonade!', '2024-01-10 11:54:13', '2024-01-10 11:54:13', 1),
+(5, 1, 24, 'Steak', 'tenant/tenant1.jpg', 700000, 'Delicious Steak in town', '2024-01-10 12:57:05', '2024-01-10 12:57:05', 1);
 
 -- --------------------------------------------------------
 
@@ -433,7 +469,8 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `nama`, `ktp`, `foto`, `r
 (10, 'tenant2', '$2y$12$rdlaBl2cS4DcdQ4cal3NguXm/mCs2VB20EgmsyDVXIdPizIwMiBJS', NULL, NULL, NULL, '2', NULL, 'tenant2@gmail.com', '2023-11-30 21:20:52', '2023-11-30 21:20:52', 1),
 (11, 'tenant3', '$2y$12$3RTDgM84.CbGa4qGSUFvs.NrMyfx3RusqoNqaAsshUQhMHW3Kf6pu', NULL, NULL, NULL, '2', NULL, 'tenant3@gmail.com', '2023-11-30 21:21:14', '2023-11-30 21:21:14', 1),
 (12, 'penyewa1', '$2y$12$qHUhpB1g85ivRBlApk1QZu9X.Pqq1/t6WLoKwFZgq82MSspHDgEuW', 'Fransisca', NULL, NULL, '3', NULL, 'penyewa1@gmail.com', '2023-12-08 08:35:12', '2023-12-08 08:35:12', 1),
-(13, 'penyewa2', '$2y$12$TdkcU0z2tdtXXeU6kmKLw.9UvjS062Kzi4Kj67uhwH7MNKeWWlYZK', 'Arensa', NULL, NULL, '3', NULL, 'penyewa2@gmail.com', '2023-12-08 08:35:42', '2023-12-08 08:35:42', 1);
+(13, 'penyewa2', '$2y$12$TdkcU0z2tdtXXeU6kmKLw.9UvjS062Kzi4Kj67uhwH7MNKeWWlYZK', 'Arensa', NULL, NULL, '3', NULL, 'penyewa2@gmail.com', '2023-12-08 08:35:42', '2023-12-08 08:35:42', 1),
+(24, 'Zhizzle', '$2y$12$rWoMKDLhdY9pfe50lOLBS.LJ1j0AQGCP1g3JGAs3khmCE0nbdcQfq', 'Lingga', '1231231231312', NULL, '2', '081234556352', 'lingga@gmail.com', '2024-01-10 05:07:54', '2024-01-10 05:07:54', 1);
 
 -- --------------------------------------------------------
 
@@ -605,7 +642,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `d_bulan`
 --
 ALTER TABLE `d_bulan`
-  MODIFY `d_bulan_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `d_bulan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `d_kamar`
@@ -623,7 +660,7 @@ ALTER TABLE `d_menu`
 -- AUTO_INCREMENT for table `d_tenant`
 --
 ALTER TABLE `d_tenant`
-  MODIFY `d_tenant_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `d_tenant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -635,13 +672,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `h_bulan`
 --
 ALTER TABLE `h_bulan`
-  MODIFY `h_bulan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `h_bulan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `h_kamar`
 --
 ALTER TABLE `h_kamar`
-  MODIFY `h_kamar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `h_kamar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `h_menu`
@@ -653,7 +690,7 @@ ALTER TABLE `h_menu`
 -- AUTO_INCREMENT for table `h_tenant`
 --
 ALTER TABLE `h_tenant`
-  MODIFY `h_tenant_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `h_tenant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `kamar`
@@ -683,7 +720,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `tenant`
 --
 ALTER TABLE `tenant`
-  MODIFY `tenant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `tenant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `testimony`
@@ -695,7 +732,7 @@ ALTER TABLE `testimony`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`

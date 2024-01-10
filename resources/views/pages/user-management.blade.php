@@ -57,9 +57,14 @@
                                         <p class="text-sm font-weight-bold mb-0">Penyewa Kamar</p>
                                     </td>
                                     @endif
+                                    @if($isi->role != 1)
+                                    <td class="align-middle text-center">
+                                            <button class="btn btn-primary"><a href="/user-management/edit/{{$isi->user_id}}" style="text-decoration: none;color: inherit;">Edit Role</a></button>
+                                    </td>
                                     <td class="align-middle">
                                         <button style="background-color: red;" class="btn btn-primary"><a href="/user-management/delete/{{$isi->user_id}}" style="text-decoration: none;color: inherit;">Remove Account</a></button>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>

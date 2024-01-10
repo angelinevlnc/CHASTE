@@ -125,10 +125,17 @@ Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMen
 	Route::post('editKos', [KosController::class, 'changeKos'])->name('edit-kos');
 	Route::get('/kos/edit/{id}', [KosController::class, 'editKos'])->name('editKos');
 	Route::get('/kos/delete/{id}', [KosController::class, 'deleteKos']);
+	Route::get('/user-management/edit/{id}', [UserProfileController::class, 'editRole']);
 	Route::get('/user-management/delete/{id}', [UserProfileController::class, 'deleteUser']);
+	Route::post('editRole', [UserProfileController::class, 'changeRole'])->name('edit-role');
 
 	Route::post('addExpenses', [ReportController::class, 'addExpense'])->name('add-expense');
-	
+	Route::post('addIncome', [ReportController::class, 'addIncome'])->name('add-income');
+
+	Route::post('editExpense', [ReportController::class, 'editExpense'])->name('editExpense');
+	Route::get('/pengeluaranOwner/edit/{id}', [ReportController::class, 'changeExpense'])->name('edit-expense');
+	Route::get('/pengeluaranOwner/delete/{id}', [ReportController::class, 'deleteExpense']);
+
 });
 
 
