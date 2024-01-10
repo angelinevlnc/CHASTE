@@ -83,7 +83,7 @@ class HomeController extends Controller
             'status' => 3,
         ]);
 
-        return redirect()->route('report.tenant')->with('success', 'Pengeluaran berhasil ditambahkan.');
+        //return view('pages.reporttenant');    
     }
 
     public function kalkulasiduit($tenantId, $bulan, $tahun)
@@ -102,16 +102,24 @@ class HomeController extends Controller
         ->whereYear('created_at', $tahun)
         ->sum('total');
         
-        $totalKerugian = $totalPengeluaran-$totalPendapatan;
+        
+        $totalKerugian = $totalPengeluaran - $totalPendapatan;
+        $totalKeuntungan = $totalPendapatan - $totalPengeluaran;
 
-
-        $totalKeuntungan = $totalPendapatan-$totalKerugian;
+        if ($totalKerugian < 0) {
+            $totalKerugian = 0;
+        }
+        
+        if ($totalKeuntungan < 0) {
+            $totalKeuntungan = 0;
+        }
 
         return [
             'totalKerugian' => $totalKerugian,
             'totalPendapatan' => $totalPendapatan,
             'totalKeuntungan' => max(0, $totalKeuntungan),
             'totalPengeluaran' => $totalPengeluaran,
+            
         ];
     }
 
@@ -194,6 +202,50 @@ class HomeController extends Controller
         }
         return view('pages.ordersTenant', compact('orders'));
 
+    }
+
+    public function editPengeluaran($id)
+    {
+        $pengeluaran = H_Bulan::find($id);
+
+        if (!$pengeluaran) {
+            return redirect()->route('report.tenant')->with('error', 'Pengeluaran tidak ditemukan.');
+        }
+
+        return view('pages.editPengeluaran', compact('pengeluaran'));
+    }
+
+    public function updatePengeluaran(Request $request, $id)
+    {
+        $request->validate([
+            'keterangan' => 'required|string',
+            'nominal' => 'required|numeric',
+        ]);
+
+        $pengeluaran = H_Bulan::find($id);
+
+        if (!$pengeluaran) {
+            return redirect()->route('report.tenant')->with('error', 'Pengeluaran tidak ditemukan.');
+        }
+
+        $pengeluaran->update([
+            'keterangan' => $request->keterangan,
+            'total' => $request->nominal,
+        ]);
+
+        return redirect()->route('report.tenant')->with('success', 'Pengeluaran berhasil diperbarui.');
+    }
+
+    public function deletePengeluaran($id)
+    {
+        $pengeluaran = H_Bulan::find($id);
+
+        if ($pengeluaran) {
+            $pengeluaran->delete();
+            return redirect()->route('report.tenant')->with('success', 'Pengeluaran berhasil dihapus.');
+        }
+
+        return redirect()->route('report.tenant')->with('error', 'Pengeluaran tidak ditemukan.');
     }
 
     
