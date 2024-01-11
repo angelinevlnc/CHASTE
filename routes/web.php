@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\Guest;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,12 +35,11 @@ use App\Http\Controllers\TenantController;
 
 Route::get('/', [FoodController::class, 'getLanding']);
 
-// Cart
-
-// Route::get('/food-midtrans', function () {
-//     return view('food-midtrans');
-// });
-// Route::post('/payment', [MidtransController::class, 'payment'])->name('payment');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/login', [LoginController::class, 'show'])->name('login')->middleware([Guest::class]);
+Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
+Route::get('/register', [RegisterController::class, 'create'])->name('register')->middleware([Guest::class]);
+Route::post('/register', [RegisterController::class, 'store'])->name('register.perform');
 
 Route::post('/food-midtrans', [MidtransController::class, 'foodMidtrans'])->name('food-midtrans');
 Route::get('/food-midtrans/success', [MidtransController::class, 'food_payment_success']);
@@ -63,35 +63,26 @@ Route::get('/kos-invoice', function () {
 });
 
 
+Route::middleware('authen:user')->group(function () {
+	Route::get('/user', [PageController::class, 'dashboard'])->name('user');
+	
+	Route::get('/user/history/kamar', [PageController::class, 'user_history'])->name('search-history');
+	Route::get('/user/history/kamar/{id}', [PageController::class, 'user_history_detail']);
+	Route::get('/user/history/food', [PageController::class, 'user_history_food'])->name('search-history-food');
+	Route::get('/user/history/food/{id}', [PageController::class, 'user_history_detail_food']);
 
-Route::get('/user', [PageController::class, 'dashboard'])->name('user');
+	Route::post('/payment', [MidtransController::class, 'payment'])->name('payment');
+	Route::get('/payment/success', [MidtransController::class, 'payment_success']);
+	Route::get('/payment/failed', [MidtransController::class, 'payment_fail']);
+	// Route::post('/payment-notif', [MidtransController::class, 'payment_notif'])->name('payment-notif');
+});
 
-Route::get('/user/history/kamar', [PageController::class, 'user_history'])->name('search-history');
-Route::get('/user/history/kamar/{id}', [PageController::class, 'user_history_detail']);
-Route::get('/user/history/food', [PageController::class, 'user_history_food'])->name('search-history-food');
-Route::get('/user/history/food/{id}', [PageController::class, 'user_history_detail_food']);
 
-Route::post('/payment', [MidtransController::class, 'payment'])->name('payment');
-Route::get('/payment/success', [MidtransController::class, 'payment_success']);
-Route::get('/payment/failed', [MidtransController::class, 'payment_fail']);
-// Route::post('/payment-notif', [MidtransController::class, 'payment_notif'])->name('payment-notif');
-
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout'); //Ini tolong jangan dipindah, aku tahu double. Tp kalo nggak ada ini, gamau jalan logout di user.
-Route::get('/login', [LoginController::class, 'show'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
-Route::get('/register', [RegisterController::class, 'create'])->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.perform');
-
-Route::get('/admin', function () {return redirect('/dashboard');})->middleware('auth');
-	Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest')->name('reset-password');
-	Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
-	Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
-	Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
-	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
-	Route::get('/hlmnTenant', [HomeController::class, 'showtenant'])->name('showtenant')->middleware('auth');
-	Route::get('/reportTenant', [HomeController::class, 'showReportTenant'])->name('showReportTenant')->middleware('auth');
-	Route::get('/ordersTenant', [HomeController::class, 'showOrders'])->name('showOrders')->middleware('auth');
-	Route::post('/orders/filter', [HomeController::class, 'filter'])->name('orders.filter')->middleware('auth');
+Route::middleware('authen:tenant')->group(function () {
+	Route::get('/hlmnTenant', [HomeController::class, 'showtenant'])->name('showtenant');
+	Route::get('/reportTenant', [HomeController::class, 'showReportTenant'])->name('showReportTenant');
+	Route::get('/ordersTenant', [HomeController::class, 'showOrders'])->name('showOrders');
+	Route::post('/orders/filter', [HomeController::class, 'filter'])->name('orders.filter');
 	Route::post('/orders/terima/{id}', [HomeController::class, 'terimaOrder'])->name('orders.terima');
 	Route::post('/orders/tolak/{id}', [HomeController::class, 'tolakOrder'])->name('orders.tolak');
 	Route::get('/pengeluaran', [HomeController::class, 'showPengeluaran'])->name('pengeluaran.show');
@@ -104,14 +95,21 @@ Route::get('/admin', function () {return redirect('/dashboard');})->middleware('
 	Route::get('/edit-menu/{id}', [MenuController::class, 'showEditMenu'])->name('edit.menu');
 	Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMenu'])->name('updateStatus.menu');
 	Route::put('/update-menu/{id}', [MenuController::class, 'updateMenu'])->name('update.menu');
-Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMenu'])->name('updateStatus.menu');Route::group(['middleware' => 'auth'], function () {
+	Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMenu'])->name('updateStatus.menu');
+	Route::get('/profileTenant', [PageController::class, 'profileTenant'])->name('profileTenant');
+	Route::put('/update', [PageController::class, 'update'])->name('profile.update');
+});
+
+
+Route::middleware('authen:admin')->group(function () {
+	Route::get('/admin', function () {return redirect('/dashboard');});
+	Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
+
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
 	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static');
-	Route::get('/profileTenant', [PageController::class, 'profileTenant'])->name('profileTenant');
-	Route::put('/update', [PageController::class, 'update'])->name('profile.update');
 	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static');
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
@@ -120,13 +118,14 @@ Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMen
 	Route::post('editTenant', [TenantController::class, 'changeTenant'])->name('edit-tenant');
 	Route::get('/tenant/edit/{id}', [TenantController::class, 'editTenant'])->name('editTenant');
 	Route::get('/tenant/delete/{id}', [TenantController::class, 'deleteTenant']);
-
+	
 	Route::post('addKos', [KosController::class, 'addKos'])->name('add-kos');
 	Route::post('editKos', [KosController::class, 'changeKos'])->name('edit-kos');
 	Route::get('/kos/edit/{id}', [KosController::class, 'editKos'])->name('editKos');
 	Route::get('/kos/delete/{id}', [KosController::class, 'deleteKos']);
 	Route::get('/user-management/edit/{id}', [UserProfileController::class, 'editRole']);
 	Route::get('/user-management/delete/{id}', [UserProfileController::class, 'deleteUser']);
+
 	Route::post('editRole', [UserProfileController::class, 'changeRole'])->name('edit-role');
 
 	Route::post('addExpenses', [ReportController::class, 'addExpense'])->name('add-expense');
@@ -139,3 +138,7 @@ Route::post('/update-status-menu/{id}', [MenuController::class, 'updateStatusMen
 });
 
 
+Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest')->name('reset-password');
+Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
+Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
+Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');

@@ -32,18 +32,24 @@ class LoginController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role'=> 1])) {
             $request->session()->regenerate();
+
+            Session::put('middleware', 'admin');
             
             return redirect()->intended('dashboard');
         }
         elseif (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 2])) {
             $user = Auth::user();
             $request->session()->regenerate();
+
+            Session::put('middleware', 'tenant');
+
             return redirect()->intended('hlmnTenant');
         }
         elseif (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 3])) {
             $user = Auth::user();
             $request->session()->regenerate();
 
+            Session::put('middleware', 'user');
             Session::put('login_username', $user->username);
             Session::put('login_id', $user->user_id);
 
