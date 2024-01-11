@@ -210,7 +210,7 @@ class HomeController extends Controller
         $pengeluaran = H_Bulan::find($id);
 
         if (!$pengeluaran) {
-            return redirect()->route('report.tenant')->with('error', 'Pengeluaran tidak ditemukan.');
+            return redirect()->route('showReportTenant')->with('error', 'Pengeluaran tidak ditemukan.');
         }
 
         return view('pages.editPengeluaran', compact('pengeluaran'));
@@ -226,7 +226,7 @@ class HomeController extends Controller
         $pengeluaran = H_Bulan::find($id);
 
         if (!$pengeluaran) {
-            return redirect()->route('report.tenant')->with('error', 'Pengeluaran tidak ditemukan.');
+            return redirect()->route('showReportTenant')->with('error', 'Pengeluaran tidak ditemukan.');
         }
 
         $pengeluaran->update([
@@ -234,7 +234,7 @@ class HomeController extends Controller
             'total' => $request->nominal,
         ]);
 
-        return redirect()->route('report.tenant')->with('success', 'Pengeluaran berhasil diperbarui.');
+        return redirect()->route('showReportTenant')->with('success', 'Pengeluaran berhasil diperbarui.');
     }
 
     public function deletePengeluaran($id)
@@ -243,10 +243,10 @@ class HomeController extends Controller
 
         if ($pengeluaran) {
             $pengeluaran->delete();
-            return redirect()->route('report.tenant')->with('success', 'Pengeluaran berhasil dihapus.');
+            return redirect()->route('showReportTenant')->with('success', 'Pengeluaran berhasil dihapus.');
         }
 
-        return redirect()->route('report.tenant')->with('error', 'Pengeluaran tidak ditemukan.');
+        return redirect()->route('showReportTenant')->with('error', 'Pengeluaran tidak ditemukan.');
     }
 
     
