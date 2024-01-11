@@ -87,8 +87,8 @@ Route::middleware('authen:tenant')->group(function () {
 	Route::post('/orders/tolak/{id}', [HomeController::class, 'tolakOrder'])->name('orders.tolak');
 	Route::get('/pengeluaran', [HomeController::class, 'showPengeluaran'])->name('pengeluaran.show');
 	Route::post('/pengeluaran/store', [HomeController::class, 'storePengeluaran'])->name('pengeluaran.store');
-	Route::post('/report/tenant', [HomeController::class, 'showReportTenant'])->name('report.tenant');
-	Route::get('/edit-pengeluaran/{id}', [HomeController::class, 'editPengeluaran'])->name('pengeluaran.edit');
+	Route::get('/report/tenant', [HomeController::class, 'showReportTenant'])->name('showReportTenant');
+	Route::post('/edit-pengeluaran/{id}', [HomeController::class, 'editPengeluaran'])->name('pengeluaran.edit');
 	Route::put('/update-pengeluaran/{id}', [HomeController::class, 'updatePengeluaran'])->name('pengeluaran.update');
 	Route::delete('/delete-pengeluaran/{id}', [HomeController::class, 'deletePengeluaran'])->name('pengeluaran.delete');
 	Route::post('/insertmenu', [MenuController::class, 'insertmenu'])->name('insertmenu');

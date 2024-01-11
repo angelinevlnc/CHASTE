@@ -8,7 +8,7 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <h6>Laporan Laba Rugi</h6>
-                        <form action="{{ route('report.tenant') }}" method="post">
+                        <form action="{{ route('showReportTenant') }}" method="get">
                             @csrf
                             <div class="form-group">
                                 <label for="bulan">Bulan</label>
@@ -66,7 +66,10 @@
                                             <td>{{ $item->keterangan }}</td>
                                             <td>Rp {{ number_format($item->total, 0, ',', '.') }}</td>
                                             <td>
-                                                <a href="{{ route('pengeluaran.edit', ['id' => $item->h_bulan_id]) }}" class="btn btn-secondary">Edit</a>
+                                                <form action="{{ route('pengeluaran.edit', ['id' => $item->h_bulan_id]) }}" method="post" style="display: inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-secondary">Edit</button>
+                                                </form>
                                                 <form action="{{ route('pengeluaran.delete', ['id' => $item->h_bulan_id]) }}" method="post" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
