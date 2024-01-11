@@ -40,7 +40,7 @@
                         <p class="text-uppercase text-sm">User Information</p>
                         <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            @method('PUT')
+                            {{-- @method('PUT') --}}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
