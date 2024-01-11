@@ -4,9 +4,10 @@
     @include('layouts.navbars.auth.topnav', ['title' => 'Edit Tenant'])
     @php
         use App\Models\Tenant;
+        use App\Models\User;
         $tenantId = request()->query('tenant_id');
         $Tenant = Tenant::where('tenant_id', $tenantId)->get();
-        
+        $listUser= User::where('role', 2)->get();
     @endphp
     <div class="container-fluid py-4">
         <div class="row">
@@ -29,8 +30,19 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Price</label>
-                                <input class="form-control" type="text" id="" name="price" value="{{ $isi->harga }}">
+                                <input class="form-control" type="number" id="" name="price" value="{{ $isi->harga }}">
                             </div>
+                            @if($isi->penyewa_id==NULL)
+                            <div class="mb-3">
+                                <label class="form-label">Tenant Owner</label>
+                                <select class="form-select" aria-label="Default select example" name="penyewa">
+                                    <option selected>Select tenant owner</option>
+                                    @foreach ($listUser as $key=>$isi)
+                                    <option value="{{$isi->user_id}}">{{$isi->username}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @endif
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="Leave a description here" name="desc" id="floatingTextarea2" style="height: 100px" value="">{{ $isi->deskripsi }}</textarea>
                                 <label for="floatingTextarea2">Description</label>

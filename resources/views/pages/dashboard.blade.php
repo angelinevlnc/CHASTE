@@ -10,13 +10,16 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
+                                    @php
+                                        use App\Models\User;
+                                        $totalUser = User::count();
+                                    @endphp
                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
                                     <h5 class="font-weight-bolder">
-                                        1
+                                        {{ $totalUser }}
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+3%</span>
-                                        since last week
+                                        people
                                     </p>
                                 </div>
                             </div>
@@ -35,13 +38,20 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
+                                    @php
+                                        $currentYear = date('Y');
+                                        $currentMonth = date('m');
+
+                                        $usersCreatedThisMonth = User::whereYear('created_at', $currentYear)
+                                            ->whereMonth('created_at', $currentMonth)
+                                            ->count();
+                                    @endphp
                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
                                     <h5 class="font-weight-bolder">
-                                        1
+                                        {{ $usersCreatedThisMonth }}
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-danger text-sm font-weight-bolder">0%</span>
-                                        since last quarter
+                                        this month
                                     </p>
                                 </div>
                             </div>
@@ -60,9 +70,20 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
+                                    @php
+                                        use App\Models\H_Tenant;
+                                        use App\Models\H_Kamar;
+                                        $currentMonthAngka = date('n');
+                                        $totalPemasukanHTenant = H_Tenant::whereMonth('created_at', $currentMonthAngka)
+                                        ->whereYear('created_at', $currentYear)
+                                        ->sum('total');
+                                        $totalPemasukanHKamar = H_Kamar::whereMonth('created_at', $currentMonthAngka)
+                                        ->whereYear('created_at', $currentYear)
+                                        ->sum('total');
+                                    @endphp
                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Sales</p>
-                                    <h5 class="font-weight-bolder">
-                                        5.000.000
+                                    <h5 class="font-weight-bold">
+                                        Rp{{ number_format($totalPemasukanHTenant+$totalPemasukanHKamar, 0, ',', '.') }}
                                     </h5>
                                     <p class="mb-0">
                                         this month
@@ -85,8 +106,6 @@
                     <div class="card-header pb-0 pt-3 bg-transparent">
                         <h6 class="text-capitalize">Sales overview</h6>
                         <p class="text-sm mb-0">
-                            <i class="fa fa-arrow-up text-success"></i>
-                            <span class="font-weight-bold">4% more</span> in 2021
                         </p>
                     </div>
                     <div class="card-body p-3">
@@ -104,7 +123,25 @@
 @push('js')
     <script src="./assets/js/plugins/chartjs.min.js"></script>
     <script>
+        <?php 
+        $currentYear = date('Y');
+        $totalSewa = [];
+        $totalSewaTenant = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $totalSewa[$month] = H_Kamar::whereMonth('created_at', $month)
+                ->whereYear('created_at', $currentYear)
+                ->count();
+            $totalSewaTenant[$month] = H_Tenant::whereMonth('created_at', $month)
+            ->whereYear('created_at', $currentYear)
+            ->count();
+        }
+        ?>
         var ctx1 = document.getElementById("chart-line").getContext("2d");
+        var jArray= <?php echo json_encode($totalSewa ); ?>;
+        var valuesArray = Object.values(jArray);
+
+        var jArray2= <?php echo json_encode($totalSewaTenant ); ?>;
+        var valuesArray2 = Object.values(jArray2);
 
         var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
 
@@ -114,9 +151,9 @@
         new Chart(ctx1, {
             type: "line",
             data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: ["Jan","Feb","Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 datasets: [{
-                    label: "Mobile apps",
+                    label: "Sewa Kamar",
                     tension: 0.4,
                     borderWidth: 0,
                     pointRadius: 0,
@@ -124,10 +161,22 @@
                     backgroundColor: gradientStroke1,
                     borderWidth: 3,
                     fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                    data: valuesArray,
                     maxBarThickness: 6
 
-                }],
+                },{
+                    label: "Sewa Tenant",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    pointRadius: 0,
+                    borderColor: "blue",
+                    backgroundColor: gradientStroke1,
+                    borderWidth: 3,
+                    fill: true,
+                    data: valuesArray2,
+                    maxBarThickness: 6
+
+                }]
             },
             options: {
                 responsive: true,
@@ -187,3 +236,4 @@
         });
     </script>
 @endpush
+
