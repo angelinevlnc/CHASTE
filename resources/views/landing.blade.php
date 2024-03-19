@@ -256,7 +256,7 @@
                 AC Room
               </h3>
               <p class="mt-3 text-gray-800">
-                Produce professional, reliable streams easily leveraging Preline's innovative broadcast studio
+                Escape the heat and experience ultimate comfort in our AC room, where cool breezes and relaxation await you
               </p>
               <p class="mt-5 inline-flex items-center gap-x-1 text-blue-600 decoration-2 group-hover:underline font-medium">
                 View More
@@ -277,7 +277,7 @@
                 Non-AC Room
               </h3>
               <p class="mt-3 text-gray-800">
-                Optimize your in-person experience with best-in-class capabilities like badge printing and lead retrieval
+                Embrace the natural charm of our cozy room, perfect for those seeking a lower cost room
               </p>
               <p class="mt-5 inline-flex items-center gap-x-1 text-blue-600 decoration-2 group-hover:underline font-medium">
                 View More
@@ -293,65 +293,6 @@
 <!-- End Card Blog -->
 
 {{-- food order  --}}
-<div>
-    <!-- Icon Blocks -->
-    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <!-- Grid -->
-        <div class="grid md:grid-cols-2 gap-12">
-        <div class="lg:w-3/4">
-            <h2 class="text-3xl text-gray-800 font-bold lg:text-4xl">
-            Make orders to our FNB tenants
-            </h2>
-            <p class="mt-3 text-gray-800">
-                Residents and visitors alike can effortlessly order their favorite meals and drinks through our website, connecting them to a selection of Food and Beverage options for a hassle-free dining experience.
-            </p>
-            <p class="mt-5">
-
-            <!-- Buttons -->
-            <div class="mt-7 grid gap-3 w-full sm:inline-flex">
-                <a class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="/food">
-                Make Orders
-                <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                </a>
-            </div>
-            <!-- End Buttons -->
-            </p>
-        </div>
-        <!-- End Col -->
-
-        <!-- Start FoodController -->
-        <div class="space-y-6 lg:space-y-10">
-          @foreach ($listTenant as $index=>$tenant)
-            @php
-                if($index==3){
-                  break;
-                }
-            @endphp
-            <!-- Icon Block -->
-            <div class="flex">
-            <!-- Icon -->
-            <span class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm mx-auto">
-                <img src="{{ Storage::url("$tenant->foto") }}" alt="">
-            </span>
-            <div class="ms-5 sm:ms-8">
-                <h3 class="text-base sm:text-lg font-semibold text-gray-800">
-                  {{ $tenant->nama }}
-                </h3>
-                <p class="mt-1 text-gray-600">
-                  {{ $tenant->deskripsi }}
-                </p>
-            </div>
-            </div>
-            <!-- End Icon Block -->
-          @endforeach
-        </div>
-        <!-- End Col -->
-        <!-- End FoodController -->
-        </div>
-        <!-- End Grid -->
-    </div>
-  <!-- End Icon Blocks -->
-</div>
 {{-- end of food order  --}}
 
 {{-- testimonials  --}}

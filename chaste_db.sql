@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 10, 2024 at 04:32 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Host: localhost
+-- Generation Time: Mar 19, 2024 at 09:50 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -426,9 +426,9 @@ CREATE TABLE `testimony` (
 --
 
 INSERT INTO `testimony` (`testimony_id`, `customer_id`, `nama`, `isi`, `created_at`, `updated_at`, `status`) VALUES
-(1, 12, 'Fransisca', 'We found amazing food service with a superior staff! The cuisine was gorgeous! We recommend turkey dinners with desert  and hot chocolate!', '2023-12-08 08:40:58', '2023-12-08 08:40:58', 1),
-(2, 13, 'Arensa', 'From the moment I arrived, I felt like I was being treated like royalty. The front desk staff was incredibly friendly and helpful, and they went out of their way to make sure I had a smooth check-in process.', '2023-12-08 08:44:59', '2023-12-08 08:44:59', 1),
-(5, NULL, 'Guest', 'I met the owner who was very nice and helpful. The food was amazing and it’s well worth the money.', '2023-12-08 08:46:14', '2023-12-08 08:46:14', 1);
+(1, 12, 'Fransisca', 'We found amazing service with a superior staff! We recommend the AC rooms!', '2023-12-08 08:40:58', '2023-12-08 08:40:58', 1),
+(2, 13, 'Arensa', 'From the moment I arrived, I felt like I was being treated very well. The staff was incredibly friendly and helpful.', '2023-12-08 08:44:59', '2023-12-08 08:44:59', 1),
+(5, 25, 'Stenlie', 'I met the owner who was very nice and helpful. The room here is well worth the money!', '2023-12-08 08:46:14', '2023-12-08 08:46:14', 1);
 
 -- --------------------------------------------------------
 
@@ -464,7 +464,8 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `nama`, `ktp`, `foto`, `r
 (11, 'tenant3', '$2y$12$3RTDgM84.CbGa4qGSUFvs.NrMyfx3RusqoNqaAsshUQhMHW3Kf6pu', NULL, NULL, NULL, '2', NULL, 'tenant3@gmail.com', '2023-11-30 21:21:14', '2023-11-30 21:21:14', 1),
 (12, 'penyewa1', '$2y$12$qHUhpB1g85ivRBlApk1QZu9X.Pqq1/t6WLoKwFZgq82MSspHDgEuW', 'Fransisca', NULL, NULL, '3', NULL, 'penyewa1@gmail.com', '2023-12-08 08:35:12', '2023-12-08 08:35:12', 1),
 (13, 'penyewa2', '$2y$12$TdkcU0z2tdtXXeU6kmKLw.9UvjS062Kzi4Kj67uhwH7MNKeWWlYZK', 'Arensa', NULL, NULL, '3', NULL, 'penyewa2@gmail.com', '2023-12-08 08:35:42', '2023-12-08 08:35:42', 1),
-(24, 'Zhizzle', '$2y$12$rWoMKDLhdY9pfe50lOLBS.LJ1j0AQGCP1g3JGAs3khmCE0nbdcQfq', 'Lingga', '1231231231312', NULL, '2', '081234556352', 'lingga@gmail.com', '2024-01-10 05:07:54', '2024-01-10 05:07:54', 1);
+(24, 'Zhizzle', '$2y$12$rWoMKDLhdY9pfe50lOLBS.LJ1j0AQGCP1g3JGAs3khmCE0nbdcQfq', 'Lingga', '1231231231312', NULL, '2', '081234556352', 'lingga@gmail.com', '2024-01-10 05:07:54', '2024-01-10 05:07:54', 1),
+(25, 'penyewa3', '$2y$12$RwDQrya/eJku3SuX9kbT7.Tbl7rifTFgRcxUjE4ACg3hdhajkvhJ.', 'Stenlie', '1234567890123456', NULL, '3', '12345678', 'penyewa3@gmail.com', '2024-03-19 01:44:30', '2024-03-19 01:44:30', 1);
 
 -- --------------------------------------------------------
 
@@ -726,7 +727,7 @@ ALTER TABLE `testimony`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `users`

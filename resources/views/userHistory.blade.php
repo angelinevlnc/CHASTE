@@ -11,12 +11,6 @@
     <div class="mb-5 pb-5 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
         <div>
         <h2 class="text-4xl font-semibold text-gray-800" style="display:inline-block; padding-right:20px;">History Pembayaran</h2>
-        <a class="py-2 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-yellow-800 text-white disabled:opacity-50 disabled:pointer-events-none" disabled>
-          Kamar
-        </a>
-        <a class="py-2 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-yellow-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="/user/history/food">
-          Food
-        </a>
         </div>
     </div>
 
@@ -25,12 +19,6 @@
 
           <!-- Content -->
           <div class="space-y-5 md:space-y-8">
-
-            <blockquote class="">
-              <p class="text-2xl font-semibold mt-5 text-gray-800 md:text-2xl md:leading-normal xl:text-2xl xl:leading-normal ">
-                Kamar
-              </p>
-            </blockquote>
 
             <form action="{{ route('search-history') }}" method="GET" style="float:right;">
               <input type="text" name="search" value="{{ $search }}" placeholder="Search..." style="background-color:rgb(223, 223, 223); padding:10px; border-radius:10px;">
